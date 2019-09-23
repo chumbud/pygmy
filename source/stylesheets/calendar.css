@@ -1,0 +1,40 @@
+
+#calendar-container {
+
+}
+#calendar-frame {
+
+}
+.calendar {
+	font-size: 1.6rem;
+	display: flex;
+	flex-flow: column;
+	padding: 1.6rem;
+	width: 100%;
+}
+.month {
+	padding: .8rem;
+	margin-bottom: 0;
+	text-transform: lowercase;
+}
+.days-of-the-week {
+	display: flex;
+	flex-flow: row;
+}
+.day-title {
+	text-transform: uppercase;
+	padding: .8rem;
+	font-weight: 700;
+	text-align: center;
+}
+.number {
+	padding: .8rem;
+	text-align: center;
+}
+.days-of-the-month {
+	display: flex;
+	flex-flow: row;
+}
+a.disabled {
+	opacity: .5;
+}

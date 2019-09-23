@@ -333,10 +333,7 @@ nav ul li::before {
   background-image: url('../assets/img/text-settings.svg');
 }
 
-.st1,
-.st2,
-.st3,
-.st4 {
+.dot {
   fill: #fff;
   stroke: #d2c8ad;
 }

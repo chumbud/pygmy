@@ -5,55 +5,39 @@ const helper_prompt = document.getElementsByClassName('helper-prompt')[0]
 const input_controls = document.getElementsByClassName('input-controls')[0]
 const input_comment = document.getElementsByClassName('comment')[0]
 
-let ch1 = 50
-let ch2 = 100
-let ch3 = 150
-let ch4 = 200
-
-
 //typing actions: textarea focus, character changing
+const brown = '#D2C8AD'
+const white = '#fff'
+const greens = ['#D4FFE5', '#B6FFD3', '#88FFB8', '#4FFD95']
+const sayings = ['short', 'medium', 'typical', 'above average']
+const benchmarks = [100, 200, 350, 500] //to be replaced with actual averages from previous entry counts
+const dots = document.getElementsByClassName('dot')
+const comment = document.querySelector('.comment')
 const keyActions = function() {
   journal_input.onkeyup = function(e) {
-    if (journal_input.value != 0) {
+    if (journal_input.value.length != 0) {
       journal_input.classList.add('focused')
       helper_prompt.classList.add('sendToBottom')
       input_controls.classList.add('focused')
     } else {
       journal_input.classList.remove('focused')
     }
-
-    if (journal_input.value.length > ch1) {
-      document.getElementsByClassName('st1')[0].style.fill = '#D4FFE5'
-      document.getElementsByClassName('st1')[0].style.stroke = '#D4FFE5'
-      document.getElementsByClassName('st2')[0].style.fill = '#FFF'
-      //input_comment.innerHTML = 'nice'
-      if (journal_input.value.length > ch2) {
-        document.getElementsByClassName('st2')[0].style.fill = '#B6FFD3'
-        document.getElementsByClassName('st2')[0].style.stroke = '#B6FFD3'
-        document.getElementsByClassName('st3')[0].style.fill = '#FFF'
-        //input_comment.innerHTML = 'keep it up!'
-        if (journal_input.value.length > ch3) {
-          document.getElementsByClassName('st3')[0].style.fill = '#88FFB8'
-          document.getElementsByClassName('st3')[0].style.stroke = '#88FFB8'
-          document.getElementsByClassName('st4')[0].style.fill = '#FFF'
-          //input_comment.innerHTML = 'above average'
-          if (journal_input.value.length > ch4) {
-            document.getElementsByClassName('st4')[0].style.fill = '#4FFD95'
-            document.getElementsByClassName('st4')[0].style.stroke = '#4FFD95'
-            //input_comment.innerHTML = 'whoa!'
-          }
-        }
+    //tracks character count and manages dots
+    let currentBenchmark = -1;
+    for (var i = dots.length - 1; i >= 0; i--) {
+      if(journal_input.value.length >= benchmarks[i]) {
+        dots[i].style.fill = greens[i]
+        dots[i].style.stroke = greens[3]
+        currentBenchmark++
+      } else {
+        dots[i].style.fill = white
+        dots[i].style.stroke = brown
       }
+    }
+    if(currentBenchmark != -1) {
+      comment.innerHTML = " " + sayings[currentBenchmark]
     } else {
-      document.getElementsByClassName('st1')[0].style.fill = '#FFF'
-      document.getElementsByClassName('st2')[0].style.fill = '#FFF'
-      document.getElementsByClassName('st3')[0].style.fill = '#FFF'
-      document.getElementsByClassName('st4')[0].style.fill = '#FFF'
-
-      document.getElementsByClassName('st1')[0].style.stroke = '#D2C8AD'
-      document.getElementsByClassName('st2')[0].style.stroke = '#D2C8AD'
-      document.getElementsByClassName('st3')[0].style.stroke = '#D2C8AD'
-      document.getElementsByClassName('st4')[0].style.stroke = '#D2C8AD'
+      comment.innerHTML = " "
     }
   }
 }
@@ -124,7 +108,7 @@ const setDate = function() {
   date.innerHTML = months[(realDate.getMonth())] + " " + realDate.getDate() + " " + realDate.getFullYear()
 }
 
-setDate();
+setDate()
 
 //shuffles prompts
 let prompts = []
