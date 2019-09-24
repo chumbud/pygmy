@@ -249,7 +249,7 @@ nav ul li:hover {
   color: #000;
   line-height: 2;
 }
-nav ul li::before {
+nav ul li a::before {
   content: '';
   background-repeat: no-repeat;
   background-position: center;
@@ -323,7 +323,7 @@ nav ul li::before {
 .latest-entry::before {
   background-image: url('../assets/img/latest-entry.svg');
 }
-.calendar::before {
+.calendar-page::before {
   background-image: url('../assets/img/calendar.svg');
 }
 .search::before {
