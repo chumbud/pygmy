@@ -98,6 +98,23 @@ emojiList.forEach(emoji => {
   })
 })
 
+//checks the box
+let allEmojis = document.querySelectorAll("input")
+console.log(allEmojis)
+
+allEmojis.forEach(emoji => {
+    console.log(emoji)
+    emoji.addEventListener("click", function() {
+        console.log(emoji)
+        allEmojis.forEach(emoji => {
+            emoji.checked = false 
+            console.log(emoji)
+        })
+        this.checked = true
+        console.log(this.checked);
+    })
+})
+
 //sets the time for the current entry
 const date = document.getElementById('date')
 const months = ["January", "February", "March", "April", "May", "June",
