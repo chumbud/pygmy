@@ -1,0 +1,24 @@
+{
+  "name": "pygmy",
+  "version": "1.0.0",
+  "description": "small journal app i'm working on. goal is to get a high fidelity prototype done for testing purposes, but the real goal is getting it published on extension stores for actual use on a new tab page.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "hoodie",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/de-Mote/pygmy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/de-Mote/pygmy/issues"
+  },
+  "homepage": "https://github.com/de-Mote/pygmy#readme",
+  "dependencies": {
+    "hoodie": "^28.2.9"
+  }
+}

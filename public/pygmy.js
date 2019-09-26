@@ -72,61 +72,6 @@ expand_switch.addEventListener('click', function() {
   areaExpand()
 })
 
-//mood board toggle
-const mood_board_switch = document.getElementsByClassName('mood-select')[0]
-const mood_board = document.getElementsByClassName('mood-board')[0]
-const openEmojiPanel = function() {
-  mood_board.classList.toggle("open")
-}
-
-mood_board_switch.addEventListener('click', function() {
-  openEmojiPanel()
-})
-
-//mood board toggle via click off
-document.addEventListener("click", function(event) {
-  if(event.target.closest(".mood-board") || event.target.closest(".mood-select")) return
-    mood_board.classList.remove("open")
-})
-
-//mood board emoji selection
-const emojiList = document.querySelectorAll('.mood-board ul li')
-emojiList.forEach(emoji => {
-  emoji.addEventListener("click", function() {    
-    mood_board_switch.innerHTML = "<img src='assets/img/"+ this.querySelector("input").value +".png'>"
-    console.log(this.querySelector("input").value)
-  })
-})
-
-//checks the box
-let allEmojis = document.querySelectorAll("input")
-console.log(allEmojis)
-
-allEmojis.forEach(emoji => {
-    console.log(emoji)
-    emoji.addEventListener("click", function() {
-        console.log(emoji)
-        allEmojis.forEach(emoji => {
-            emoji.checked = false 
-            console.log(emoji)
-        })
-        this.checked = true
-        console.log(this.checked);
-    })
-})
-
-//sets the time for the current entry
-const date = document.getElementById('date')
-const months = ["January", "February", "March", "April", "May", "June",
-"July", "August", "September", "October", "November", "December"
-];
-const realDate = new Date()
-const setDate = function() {
-  date.innerHTML = months[(realDate.getMonth())] + " " + realDate.getDate() + " " + realDate.getFullYear()
-}
-
-setDate()
-
 //shuffles prompts
 let prompts = []
 const prompt = document.querySelector(".prompt")

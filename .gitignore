@@ -8,3 +8,4 @@ build/
 *.psd
 .bat
 node_modules
+.hoodie
