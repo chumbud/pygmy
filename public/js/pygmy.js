@@ -1,7 +1,7 @@
 const journal_input = document.querySelector('textarea')
-const helper_prompt = document.getElementsByClassName('helper-prompt')[0]
-const input_controls = document.getElementsByClassName('input-controls')[0]
-const input_comment = document.getElementsByClassName('comment')[0]
+const helper_prompt = document.querySelector('.helper-prompt')
+const input_controls = document.querySelector('.input-controls')
+const input_comment = document.querySelector('.comment')
 
 //typing actions: textarea focus, character changing
 const brown = '#D2C8AD'
@@ -9,10 +9,11 @@ const white = '#fff'
 const greens = ['#D4FFE5', '#B6FFD3', '#88FFB8', '#4FFD95']
 const sayings = ['short', 'medium', 'typical', 'above average']
 const benchmarks = [100, 200, 350, 500] //to be replaced with actual averages from previous entry counts
-const dots = document.getElementsByClassName('dot')
+const dots = document.querySelectorAll('.dot')
 const comment = document.querySelector('.comment')
+
 const keyActions = function() {
-  journal_input.onkeyup = function(e) {
+  journal_input.onkeydown = function(e) {
     if (journal_input.value.length != 0) {
       journal_input.classList.add('focused')
       helper_prompt.classList.add('sendToBottom')
@@ -20,25 +21,28 @@ const keyActions = function() {
     } else {
       journal_input.classList.remove('focused')
     }
-    //tracks character count and manages dots
-    let currentBenchmark = -1;
-    for (var i = dots.length - 1; i >= 0; i--) {
-      if(journal_input.value.length >= benchmarks[i]) {
-        dots[i].style.fill = greens[i]
-        dots[i].style.stroke = greens[3]
-        currentBenchmark++
-      } else {
-        dots[i].style.fill = white
-        dots[i].style.stroke = brown
-      }
-    }
-    if(currentBenchmark != -1) {
-      comment.innerHTML = " " + sayings[currentBenchmark]
-    } else {
-      comment.innerHTML = " "
-    }
+    checkLength()
   }
 }
+const checkLength = function() {
+  //tracks character count and manages dots
+  let currentBenchmark = -1;
+  for (var i = dots.length - 1; i >= 0; i--) {
+    if(journal_input.value.length >= benchmarks[i]) {
+      dots[i].style.fill = greens[i]
+      dots[i].style.stroke = greens[3]
+      currentBenchmark++
+    } else {
+      dots[i].style.fill = white
+      dots[i].style.stroke = brown
+    }
+  }
+  if(currentBenchmark != -1) {
+    comment.innerHTML = " " + sayings[currentBenchmark]
+  } else {
+    comment.innerHTML = " "
+  }
+} 
 journal_input.addEventListener('click', keyActions())
 
 //helper prompt box toggle

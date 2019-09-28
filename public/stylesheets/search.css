@@ -1,14 +1,27 @@
 #results {
 	margin-top: 2.4rem;
+	max-width: 80rem;
+	margin: 0 auto;
 }
-#results ul li {
+.listEntry {
 	display: flex;
 	align-items: flex-start;
-	margin-bottom: 3.2rem;
+	padding: 1.6rem;
+	margin-bottom: 0;
+	transition: var(--easeOutCubic)
 }
 .listEntry img {
-	min-width: 4rem;
-	max-width: 4rem;
+	min-width: 4.8rem;
+	max-width: 4.8rem;
+	padding: .4rem;
+	transition: var(--easeOutCubic)
+}
+.listEntry:hover {
+	background-color: #faf6ee;
+	cursor: pointer;
+}
+.listEntry:hover img {
+	padding: 0;
 }
 h3 {
 	font-weight: 700;
@@ -20,11 +33,16 @@ h3 {
 	align-items: flex-start;
 }
 .search-container {
-	margin: 3.6rem 0 1.6rem 0;
-	display: inline-block;
+	margin: 4rem 0 1.6rem 0;
+	display: flex;
+    align-items: center;
+    flex-flow: row;
+}
+.search-container select {
+	margin: .8rem
 }
 .search-entry-info {
-	margin-left: 1.6rem;
+	margin-left: 2.4rem;
 	min-width: 0;
 	flex: 1;
 }
@@ -33,8 +51,15 @@ h3 {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	padding-bottom: .8rem;
 }
 .mood-select {
-	margin-right: 2rem;
+	margin-right: 4rem;
+	margin-left: .8rem;
 	left: unset;
+}
+.mood-board {
+	left: unset;
+	top: 8rem;
+	margin: 0;
 }

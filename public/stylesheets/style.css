@@ -102,7 +102,7 @@ a:hover {
 .mood-select:hover img {
 }
 .entry-header {
-  margin-top: 3.6rem;
+  margin-top: 4rem;
   margin-bottom: 1.6rem;
 }
 .entry-header .header {
@@ -164,6 +164,9 @@ a:hover {
   cursor: pointer;
   background-color: #faf6ee;
 }
+#entry-form {
+  height: 100%; 
+}
 .journal-section {
   font-size: 1.4rem;
   max-width: 60rem;
@@ -186,7 +189,7 @@ a:hover {
   border: 1px solid #e8deda;
   box-shadow: 0px 0px 0px 5px #fff;
   transition: var(--easeOutCubic);
-  margin-top: 35vh;
+  margin-top: 30vh;
 }
 .journal-input textarea.focused,
 .journal-input textarea:focus {
@@ -214,6 +217,13 @@ a:hover {
   font-size: 1.8rem;
   line-height: 1.4;
   font-style: italic;
+  text-align: center;
+  white-space: nowrap;
+  width: 100%;
+  transition: var(--easeOutCubic)
+}
+.journal-section textarea:focus::placeholder {
+  text-align: left;
 }
 .journal-input {
   display: flex;
@@ -257,8 +267,8 @@ nav ul li a::before {
   display: block;
   height: 2.4rem;
   width: 2.4rem;
-  margin: 0 auto;
-  padding: 1rem 0rem;
+  margin: 0 auto -.5rem;
+  padding: 1rem;
 }
 .input-controls {
   display: flex;

@@ -4,28 +4,38 @@ const months = ["January", "February", "March", "April", "May", "June",
 "July", "August", "September", "October", "November", "December"
 ];
 const realDate = new Date()
+const textarea = document.querySelector('textarea')
 const setDate = function() {
 	date.innerHTML = months[(realDate.getMonth())] + " " + realDate.getDate() + " " + realDate.getFullYear()
 }
 setDate();
+//if being redirected from search, checks for an entry id for editing and turns on expanded mode
 
-const form = document.querySelector('form')
-const textarea = form.querySelector('textarea')
-
-function checkForEntry() {
-	var passedId = sessionStorage.getItem('_id')
-	console.log(passedId)
-	if(passedId.length != 0) {
-		hoodie.store.find(passedId).then(response => {
-			console.log(response)
-			textarea.value = response.entry
-		})
-		sessionStorage.clear()
-	}
-	checkForEntry()
+let currentSession = null
+if(sessionStorage.getItem('_id') != null) {
+	hoodie.store.find(sessionStorage.getItem('_id')).then(response => {
+		console.log(response)
+		currentSession = response
+		document.querySelector('textarea').value = response.entry
+		document.querySelector('.mood-select').innerHTML = "<img src='assets/img/" + response.selectedEmoji + ".png'>"
+		document.querySelector('input[value=' + response.selectedEmoji + ']').checked = true
+		document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ' ' + response.year
+	})
+	document.querySelector('.expand').click()
+	textarea.classList.toggle('focused')
+	document.querySelector('.input-controls').classList.toggle('focused')
+	sessionStorage.clear()
 }
+
+let form = document.querySelector('form')
 form.addEventListener("submit", (event) => {
 	event.preventDefault()
+
+	let entry = textarea.value
+	let length = textarea.value.length
+	let month = realDate.getMonth()+1
+	let day = realDate.getDate()
+	let year = realDate.getFullYear()
 	let selectedEmoji = ''
 	let emojis = form.querySelectorAll('input')
 	emojis.forEach(emoji => {
@@ -33,18 +43,30 @@ form.addEventListener("submit", (event) => {
 			selectedEmoji = emoji.value
 		}
 	})
+	//new session
+	if(currentSession == null) {
 
-	let entry = textarea.value
-	let length = textarea.value.length
-	let month = realDate.getMonth()+1
-	let day = realDate.getDate()
-	let year = realDate.getFullYear()
+		entry = textarea.value
+		length = textarea.value.length
+		month = realDate.getMonth()+1
+		day = realDate.getDate()
+		year = realDate.getFullYear()
 
-	if(selectedEmoji == '') {
-		selectedEmoji = "empty"
+		if(selectedEmoji == '')
+			selectedEmoji = "empty"
+		if(!entry) return
+			hoodie.store.add({selectedEmoji, entry, length, month, day, year})
+	} else {
+	//editing session
+		entry = textarea.value
+		length = textarea.value.length
+		month = currentSession.month
+		day = currentSession.day
+		year = currentSession.year
+		if(!entry) return
+			hoodie.store.update(currentSession._id, {selectedEmoji, entry, length, month, day, year})		
 	}
 
-	if(!entry) return
-		hoodie.store.add({selectedEmoji, entry, length, month, day, year})
 	window.location.replace("/search.html")
 })
+

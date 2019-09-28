@@ -1,7 +1,7 @@
 //populate mood board
 let emojiList = []
 let emojiRoster = []
-const mood_board = document.getElementsByClassName('mood-board')[0]
+const mood_board = document.querySelector('.mood-board')
 fetch('json/emoji.json')
 .then(emojiListResponse => emojiListResponse.json())
 .then(jsonData => {
@@ -25,7 +25,7 @@ fetch('json/emoji.json')
 })
 
 //mood board toggle
-const mood_board_switch = document.getElementsByClassName('mood-select')[0]
+const mood_board_switch = document.querySelector('.mood-select')
 mood_board_switch.addEventListener('click', function() {
   mood_board.classList.toggle("open")
 })

@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="stylesheets/_base.css"/>
   <link rel="stylesheet" href="stylesheets/_fonts.css"/>
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:700&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://rsms.me/raster/raster.css?v=6"/>
   <link rel="stylesheet" href="stylesheets/style.css"/>
   <script src="/hoodie/client.js"></script>
@@ -12,18 +13,18 @@
 <body> 
   <grid class="main-wrapper" columns=7>
     <c span=2-6 span-s=row>
-      <form action="/search.html" method="POST">
+      <form id="entry-form" action="/search.html" method="POST">
         <div class="journal-section">
           <grid columns=7 class="entry-header">
             <c span=1><a class="prev" href="#">prev</a></c>
-            <c class="header" span=2-6><h2 id="date">march 13 2019</h2>
+            <c class="header" span=2-6><h2 id="date">june 12 1994</h2>
               <a class="mood-select" href="#">add icon</a>
               <div class="mood-board">
                 <ul>
                 </ul>
               </div>
             </c>
-            <c span=7..><a class="next" href="#">next</a></c>
+            <c span=7..><a style="display: none;" class="next" href="#">next</a></c>
           </grid>
           <div class="journal-input">
             <textarea name="entry" placeholder="What happened today?"></textarea>
@@ -62,7 +63,7 @@
       <a class="expand" href="#">expand</a>
       <button class="button" type="submit" href="/search.html">finish</button>
     </div>
-    <a class="helper-prompt" href="#">nothing to write?</a>
+    <a class="helper-prompt" href="#">not sure what to write?</a>
     <div class="helper-prompt-box">
       try out this prompt if you're stuck
       <a href="" class="exit">
@@ -98,7 +99,7 @@
 </c>
 </grid>
 </body>
-<script src="pygmy.js"></script>
-<script type="text/javascript" src="./js/entry-manager.js"></script>
+<script type="text/javascript" src="./js/pygmy.js"></script>
 <script type="text/javascript" src="./js/mood-board.js"></script>
+<script type="text/javascript" src="./js/entry-manager.js"></script>
 </html>
