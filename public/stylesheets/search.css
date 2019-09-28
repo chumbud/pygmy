@@ -1,0 +1,40 @@
+#results {
+	margin-top: 2.4rem;
+}
+#results ul li {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 3.2rem;
+}
+.listEntry img {
+	min-width: 4rem;
+	max-width: 4rem;
+}
+h3 {
+	font-weight: 700;
+	font-size: 1.6rem;
+}
+#search-form {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+.search-container {
+	margin: 3.6rem 0 1.6rem 0;
+	display: inline-block;
+}
+.search-entry-info {
+	margin-left: 1.6rem;
+	min-width: 0;
+	flex: 1;
+}
+.search-entry-info .entry {
+	font-size: 1.8rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.mood-select {
+	margin-right: 2rem;
+	left: unset;
+}

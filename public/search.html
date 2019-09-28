@@ -8,19 +8,28 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:700&display=swap" rel="stylesheet"> 
 	<link rel="stylesheet" href="https://rsms.me/raster/raster.css?v=6"/>
 	<link rel="stylesheet" href="stylesheets/style.css"/>
+	<link rel="stylesheet" href="stylesheets/search.css"/>
 	<script src="/hoodie/client.js"></script>
 </head>
 <body>
 	<grid class="main-wrapper" columns=7>
-		<c span=2-6 span-s=row>
-			<div class="search-container">
-				<a href="">mood</a>
-				<a class="mood-select" href="#">add icon</a>
-				<div class="mood-board">
-					<ul>
-					</ul>
+		<c span=2-6 span-s=row style="min-width: 0">
+			<form id="search-form" action="" method="POST">
+				<div class="search-container">
+					<span>search: </span>
+					<a class="mood-select" href="#">add icon</a>
+					<label for="year-select">year</label>
+					<select id="year-select"></select>
+					<label for="month-select">month</label>
+					<select id="month-select"></select>
+					<label for="day-select">day</label>
+					<select id="day-select"></select>
+					<div class="mood-board">
+						<ul>
+						</ul>
+					</div>
 				</div>
-			</div>
+			</form>
 			<div id="results">
 				<ul>
 				</ul>
@@ -29,7 +38,7 @@
 		<c span=7.. span-s=row>
 			<nav>
 				<ul>
-					<li><a class="latest-entry" href="index.html">latest entry</a></li>
+					<li><a class="latest-entry" href="/">latest entry</a></li>
 					<li><a class="calendar-page" href="calendar.html">calendar</a></li>
 					<li><a class="search" href="search.html">search</a></li>
 				</ul>

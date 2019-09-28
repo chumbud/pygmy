@@ -103,7 +103,7 @@ a:hover {
 }
 .entry-header {
   margin-top: 3.6rem;
-  position: sticky;
+  margin-bottom: 1.6rem;
 }
 .entry-header .header {
   text-align: center;
@@ -186,7 +186,7 @@ a:hover {
   border: 1px solid #e8deda;
   box-shadow: 0px 0px 0px 5px #fff;
   transition: var(--easeOutCubic);
-  margin-top: 60%;
+  margin-top: 35vh;
 }
 .journal-input textarea.focused,
 .journal-input textarea:focus {
@@ -224,6 +224,7 @@ nav {
   height: 100%;
   display: flex;
   flex-flow: column;
+  position: sticky;
 }
 nav ul {
   padding: 0;
@@ -287,6 +288,7 @@ nav ul li a::before {
   border-radius: 0.8rem;
   text-decoration: none;
   line-height: 1;
+  cursor: pointer;
   transition: var(--easeOutCubic);
 }
 .button:hover {

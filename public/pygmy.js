@@ -1,5 +1,3 @@
-//hi sorry this code is garbo, im in the process of making it better
-
 const journal_input = document.querySelector('textarea')
 const helper_prompt = document.getElementsByClassName('helper-prompt')[0]
 const input_controls = document.getElementsByClassName('input-controls')[0]
@@ -59,7 +57,7 @@ document.getElementsByClassName('exit')[0].addEventListener('click', showPrompt(
 
 //switches view mode
 const expand_switch = document.getElementsByClassName('expand')[0]
-const areaExpand = function() {
+expand_switch.addEventListener('click', function() {
   if (!journal_input.classList.contains('expanded')) {
     journal_input.classList.toggle('expanded')
     expand_switch.innerHTML = 'minimize'
@@ -67,9 +65,6 @@ const areaExpand = function() {
     journal_input.classList.toggle('expanded')
     expand_switch.innerHTML = 'expand'
   }
-}
-expand_switch.addEventListener('click', function() {
-  areaExpand()
 })
 
 //shuffles prompts
