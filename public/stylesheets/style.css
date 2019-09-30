@@ -410,6 +410,7 @@ nav ul li a::before {
   border-radius: 0.8rem;
   text-align: center;
   margin: 1.6rem;
+  text-transform: unset;
 }
 .new-prompt {
   margin: 1rem;

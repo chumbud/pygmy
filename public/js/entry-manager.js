@@ -24,6 +24,7 @@ if(sessionStorage.getItem('_id') != null) {
 	document.querySelector('.expand').click()
 	textarea.classList.toggle('focused')
 	document.querySelector('.input-controls').classList.toggle('focused')
+	document.querySelector('button').innerHTML = "save changes"
 	sessionStorage.clear()
 }
 
@@ -39,13 +40,11 @@ form.addEventListener("submit", (event) => {
 	let selectedEmoji = ''
 	let emojis = form.querySelectorAll('input')
 	emojis.forEach(emoji => {
-		if(emoji.checked) {
+		if(emoji.checked)
 			selectedEmoji = emoji.value
-		}
 	})
 	//new session
 	if(currentSession == null) {
-
 		entry = textarea.value
 		length = textarea.value.length
 		month = realDate.getMonth()+1
@@ -58,15 +57,20 @@ form.addEventListener("submit", (event) => {
 			hoodie.store.add({selectedEmoji, entry, length, month, day, year})
 	} else {
 	//editing session
-		entry = textarea.value
-		length = textarea.value.length
-		month = currentSession.month
-		day = currentSession.day
-		year = currentSession.year
-		if(!entry) return
-			hoodie.store.update(currentSession._id, {selectedEmoji, entry, length, month, day, year})		
-	}
+	entry = textarea.value
+	length = textarea.value.length
+	month = currentSession.month
+	day = currentSession.day
+	year = currentSession.year
+	emojis.forEach(emoji => {
+		if(emoji.checked)
+			selectedEmoji = emoji.value
+	})
+	if(!entry) return
+		hoodie.store.update(currentSession._id, {selectedEmoji, entry, length, month, day, year})		
+}
 
-	window.location.replace("/search.html")
+window.location.replace("/search.html")
 })
+
 

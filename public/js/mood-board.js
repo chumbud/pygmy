@@ -17,9 +17,15 @@ fetch('json/emoji.json')
 
       //checks the emoji for submission and unchecks all others if changed
       document.querySelectorAll('.mood-board ul li').forEach(emoji => {
-        emoji.querySelector('input').checked = false 
+        emoji.querySelector('input').checked = false
       })
       this.querySelector('input').checked = true
+
+      //triggers input event for search
+      var event = document.createEvent("HTMLEvents");
+      event.initEvent("input", true, true);
+      event.eventName = "input";
+      this.dispatchEvent(event)
     })
   })  
 })
