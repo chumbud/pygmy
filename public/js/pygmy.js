@@ -12,6 +12,7 @@ const benchmarks = [100, 200, 350, 500] //to be replaced with actual averages fr
 const dots = document.querySelectorAll('.dot')
 const comment = document.querySelector('.comment')
 
+
 const keyActions = function() {
   journal_input.onkeydown = function(e) {
     if (journal_input.value.length != 0) {
@@ -21,7 +22,8 @@ const keyActions = function() {
     } else {
       journal_input.classList.remove('focused')
     }
-    checkLength()
+    input_controls.querySelector('.length-tracker').innerHTML = journal_input.value.length
+    //checkLength()
   }
 }
 const checkLength = function() {

@@ -19,13 +19,15 @@ if(sessionStorage.getItem('_id') != null) {
 		currentSession = response
 		document.querySelector('textarea').value = response.entry
 		document.querySelector('.mood-select').innerHTML = "<img src='assets/img/" + response.selectedEmoji + ".png'>"
-		document.querySelector('input[value=' + response.selectedEmoji + ']').checked = true
 		document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ' ' + response.year
+		document.querySelector('.input-controls .length-tracker').innerHTML = response.length
+		document.querySelector('input[value=' + response.selectedEmoji + ']').checked = true
 	})
 	document.querySelector('.expand').click()
 	textarea.classList.toggle('focused')
 	document.querySelector('.input-controls').classList.toggle('focused')
 	document.querySelector('button').innerHTML = "save changes"
+
 
 	if (sessionStorage.getItem("edit-mode") == null) {
 		form.classList.add("read-only")
