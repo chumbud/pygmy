@@ -1,4 +1,5 @@
 //sets the time for the current entry
+let form = document.querySelector('form')
 const date = document.getElementById('date')
 const months = ["January", "February", "March", "April", "May", "June",
 "July", "August", "September", "October", "November", "December"
@@ -25,10 +26,24 @@ if(sessionStorage.getItem('_id') != null) {
 	textarea.classList.toggle('focused')
 	document.querySelector('.input-controls').classList.toggle('focused')
 	document.querySelector('button').innerHTML = "save changes"
-	sessionStorage.clear()
+
+	if (sessionStorage.getItem("edit-mode") == null) {
+		form.classList.add("read-only")
+		document.querySelector('textarea').setAttribute("readonly", true)
+		document.querySelector('#date').innerHTML += '<a class="edit">edit</a>'
+		document.querySelector('h2 a.edit').addEventListener("click", function() {
+			form.classList.toggle("read-only")
+			if(this.innerHTML == "edit")
+				this.innerHTML = "cancel"
+			else
+				this.innerHTML = "edit"
+		})
+	}
+
+	sessionStorage.removeItem("edit-mode")
+	sessionStorage.removeItem("_id")
 }
 
-let form = document.querySelector('form')
 form.addEventListener("submit", (event) => {
 	event.preventDefault()
 

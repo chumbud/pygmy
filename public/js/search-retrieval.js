@@ -13,7 +13,7 @@ function renderItems () {
 			const item = document.createElement("li")
 			item.setAttribute('data-id', entry._id)
 			item.setAttribute('data-date', entry.hoodie.createdAt)
-			item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ' ' + entry.year + '</h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
+			item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ' ' + entry.year + '<a class="edit">edit</a><a class="delete">delete</a></h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
 			item.classList.add("listEntry")
 			console.log(item)
 			//for sorting after
@@ -26,6 +26,9 @@ function renderItems () {
 			sortedResults[i].addEventListener("click", function () {
 				sessionStorage.setItem('_id', this.getAttribute("data-id"))
 				window.location.replace("/")
+			})
+			sortedResults[i].querySelector(".edit").addEventListener("click", function() {
+				sessionStorage.setItem('edit-mode', true)
 			})
 			results.appendChild(sortedResults[i])
 		}
@@ -63,6 +66,7 @@ function generateSearchConstraints(entries) {
 	})
 }
 
+//search & sort
 document.addEventListener('input', function(event) {
 	console.log(event.target.value)
 	let newResults = []
@@ -86,20 +90,20 @@ document.addEventListener('input', function(event) {
 			(entry.day == day || day == '') &&
 			(entry.selectedEmoji == selectedEmoji || selectedEmoji == ''))
 			newResults.push(entry)
-		})
+	})
 
-			console.log(newResults)
-		newResults.forEach(entry => {
-			const item = document.createElement("li")
-			item.setAttribute('data-id', entry._id)
-			item.setAttribute('data-date', entry.hoodie.createdAt)
-			item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ' ' + entry.year + '</h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
-			item.classList.add("listEntry")
+	console.log(newResults)
+	newResults.forEach(entry => {
+		const item = document.createElement("li")
+		item.setAttribute('data-id', entry._id)
+		item.setAttribute('data-date', entry.hoodie.createdAt)
+		item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ' ' + entry.year + '</h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
+		item.classList.add("listEntry")
 			//for sorting after
 			unsortedRefresh.push(item)
 		})
 
-		newResults = sortEntries(unsortedRefresh)
+	newResults = sortEntries(unsortedRefresh)
 	//adding event listeners for entry retrieval
 	for (var i = newResults.length - 1; i >= 0; i--) {
 		newResults[i].addEventListener("click", function () {

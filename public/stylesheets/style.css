@@ -48,6 +48,7 @@ a:hover {
 .mood-select {
   left: -5px;
   display: inline-block;
+  transition: var(--easeOutCubic)
 }
 .prev {
   right: -17px;
@@ -422,4 +423,28 @@ nav ul li a::before {
   font-size: 2.1rem;
   margin: 1.5rem;
   line-height: 0.4;
+}
+
+/*view mode*/
+.read-only {
+
+}
+.read-only .helper-prompt, .read-only .input-controls.focused, .read-only .mood-select::before {
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--easeOutCubic)
+}
+.read-only .mood-select {
+  pointer-events: none;
+  left: 0;
+}
+#date .edit {
+  color: red;
+  margin-left: .8rem;
+  font-weight: 400;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.read-only #date .edit {
+  color: black;
 }
