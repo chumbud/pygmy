@@ -35,6 +35,7 @@ function renderItems () {
 		arrayList = [...list]
 
 		console.log(list)
+		sessionStorage.setItem('avg', getAvgEntryLength(list))
 		generateSearchConstraints(list)
 	})
 }
@@ -97,7 +98,7 @@ document.addEventListener('input', function(event) {
 		const item = document.createElement("li")
 		item.setAttribute('data-id', entry._id)
 		item.setAttribute('data-date', entry.hoodie.createdAt)
-		item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ' ' + entry.year + '</h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
+		item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ' ' + entry.year + '<a class="edit">edit</a><a class="delete">delete</a></h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
 		item.classList.add("listEntry")
 			//for sorting after
 			unsortedRefresh.push(item)
@@ -110,8 +111,21 @@ document.addEventListener('input', function(event) {
 			sessionStorage.setItem('_id', this.getAttribute("data-id"))
 			window.location.replace("/")
 		})
+		sortedResults[i].querySelector(".edit").addEventListener("click", function() {
+			sessionStorage.setItem('edit-mode', true)
+		})
 		results.appendChild(newResults[i])
 	}
 	if(results.innerHTML == '')
 		results.innerHTML = 'no results :('
 })
+
+function getAvgEntryLength(ar) {
+	let avg = 0
+	let i
+	for (i = 0; i <= ar.length - 1 || i == 15; i++) {
+		avg += ar[i].length
+	}
+	avg = avg / (i + 1)
+	return avg
+}
