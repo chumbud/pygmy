@@ -76,7 +76,7 @@ document.querySelector(".new-prompt").addEventListener("click", function() {
 //sets the time for the current entry
 let form = document.querySelector('#entry-form')
 const date = document.getElementById('date')
-const months = ["January", "February", "March", "April", "May", "June",
+let months = ["January", "February", "March", "April", "May", "June",
 "July", "August", "September", "October", "November", "December"
 ]
 const realDate = new Date()
@@ -95,11 +95,10 @@ if(sessionStorage.getItem('_id') != null) {
     currentSession = response
     document.querySelector('textarea').value = response.entry
     document.querySelector('.mood-select').innerHTML = "<img src='assets/img/" + response.selectedEmoji + ".png'>"
-    //document.querySelector('input[value=' + response.selectedEmoji + ']').checked = true
     document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ' ' + response.year
     document.querySelector('.length-tracker').setAttribute('data-length-status', sessionStorage.getItem('avg'))
+    document.querySelector('.length-tracker').innerHTML += response.length
     if (sessionStorage.getItem("edit-mode") == null) {
-      console.log("wtf")
       form.classList.add("read-only")
       document.querySelector('textarea').setAttribute("readonly", true)
       document.querySelector('#date').innerHTML += '<a class="edit">edit</a>'
@@ -110,15 +109,14 @@ if(sessionStorage.getItem('_id') != null) {
         else
           this.innerHTML = "edit"
       })
-    } 
+    }
+    sessionStorage.removeItem("edit-mode")
+    sessionStorage.removeItem("_id")
   })
   document.querySelector('.expand').click()
   textarea.classList.toggle('focused')
   document.querySelector('.input-controls').classList.toggle('focused')
   document.querySelector('button').innerHTML = "save changes"
-
-  sessionStorage.removeItem("edit-mode")
-  sessionStorage.removeItem("_id")
 }
 
 form.addEventListener("submit", (event) => {

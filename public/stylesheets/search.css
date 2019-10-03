@@ -47,7 +47,8 @@ h3 a.delete {
 #search-form {
 	display: flex;
 	justify-content: center;
-	align-items: flex-start;
+	align-items: center;
+	flex-flow: column;
 }
 .search-container {
 	margin: 4rem 0 1.6rem 0;
@@ -69,6 +70,10 @@ h3 a.delete {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	padding-bottom: .8rem;
+}
+.clear {
+	text-align: center;
+	cursor: pointer;
 }
 .mood-select {
 	margin-right: 4rem;

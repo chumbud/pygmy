@@ -1,5 +1,5 @@
 const results = document.querySelector('#results ul')
-const months = ["January", "February", "March", "April", "May", "June",
+let months = ["January", "February", "March", "April", "May", "June",
 "July", "August", "September", "October", "November", "December"
 ];
 const unsorted = []
@@ -15,7 +15,6 @@ function renderItems () {
 			item.setAttribute('data-date', entry.hoodie.createdAt)
 			item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ' ' + entry.year + '<a class="edit">edit</a><a class="delete">delete</a></h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
 			item.classList.add("listEntry")
-			console.log(item)
 			//for sorting after
 			unsorted.push(item)
 		})
@@ -34,9 +33,15 @@ function renderItems () {
 		}
 		arrayList = [...list]
 
-		console.log(list)
 		sessionStorage.setItem('avg', getAvgEntryLength(list))
 		generateSearchConstraints(list)
+	})
+	//TODO: Add way to show all entries
+	document.querySelector(".clear").addEventListener("click", function() {
+		mood_board_switch.innerHTML = "add icon"
+		document.querySelectorAll('.mood-board ul li input').forEach(emoji => {
+			emoji.checked = false
+		})
 	})
 }
 

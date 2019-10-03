@@ -7,11 +7,12 @@ fetch('json/emoji.json')
 .then(jsonData => {
   emojiRoster = jsonData
   emojiRoster.forEach(emoji => {
+    //creates emoji in list element and adds it to the ul
     const option = document.createElement("li")
     option.innerHTML = "<input name=\"emoji\" type=\"radio\" value=\"" + emoji.value + "\"/><img src=\"assets/img/" + emoji.value + ".png\">"
     mood_board.querySelector("ul").appendChild(option)
-    
-    emojiList += option
+    //emojiList += option
+
     option.addEventListener("click", function() {    
       mood_board_switch.innerHTML = "<img src='assets/img/"+ this.querySelector("input").value +".png'>"
 
@@ -22,12 +23,15 @@ fetch('json/emoji.json')
       this.querySelector('input').checked = true
 
       //triggers input event for search
-      var event = document.createEvent("HTMLEvents");
-      event.initEvent("input", true, true);
-      event.eventName = "input";
+      var event = document.createEvent("HTMLEvents")
+      event.initEvent("input", true, true)
+      event.eventName = "input"
       this.dispatchEvent(event)
     })
-  })  
+  })
+  if(sessionStorage.getItem('_id') != null) {
+    document.querySelector('input[value=' + response.selectedEmoji + ']').checked = true
+  }  
 })
 
 //mood board toggle
