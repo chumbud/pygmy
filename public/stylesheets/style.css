@@ -331,6 +331,14 @@ nav ul li a::before {
   margin-right: auto;
   padding-left: 0;
 }
+.length-tracker::before {
+  content: attr(data-length-status);
+  opacity: 0;
+  transition: var(--easeOutCubic)
+}
+.length-tracker:hover::before {
+  opacity: 1
+}
 .text-settings {
 }
 .latest-entry::before {

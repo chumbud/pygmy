@@ -30,7 +30,9 @@ fetch('json/emoji.json')
     })
   })
   if(sessionStorage.getItem('_id') != null) {
-    document.querySelector('input[value=' + response.selectedEmoji + ']').checked = true
+    hoodie.store.find(sessionStorage.getItem('_id')).then(response => {
+      document.querySelector('input[value=' + response.selectedEmoji + ']').checked = true
+    })
   }  
 })
 
