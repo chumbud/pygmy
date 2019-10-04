@@ -85,24 +85,68 @@ let months = ["January", "February", "March", "April", "May", "June",
 const realDate = new Date()
 const textarea = document.querySelector('textarea')
 const setDate = function() {
-  date.innerHTML = months[(realDate.getMonth())] + " " + realDate.getDate() + " " + realDate.getFullYear()
+  let today = months[(realDate.getMonth())] + " " + realDate.getDate() + " " + realDate.getFullYear()
+  date.setAttribute("data-date", today)
+  date.innerHTML = today
 }
 const comments = ['short', 'medium', 'typical', 'above average']
-setDate();
 //if being redirected from search, checks for an entry id for editing and turns on expanded mode
+const getAdjacentEntry = function() {
+  let prev = document.querySelector(".prev")
+  let next = document.querySelector(".next")
+
+  let entryDate = new Date(date.getAttribute("data-date"))
+  let prevId = null
+  let nextId = null
+  hoodie.store.findAll().then(list => {
+    let s = list.sort(function(a, b) {
+      var dateA = new Date(a.hoodie.createdAt), dateB = new Date(b.hoodie.createdAt)
+      return dateA - dateB
+    })
+    if(prev != null) {
+      for (var i = s.length - 1; i >= 0; i--) {
+        let cur = new Date(s[i].hoodie.createdAt)
+        if(cur < entryDate) {
+          prevId = s[i]._id
+          prev.addEventListener("click", function() {
+            sessionStorage.setItem("_id", prevId)
+            window.location.replace("/")
+          })
+          break
+        }
+      }
+      if(prevId == null)
+        prev.style.display = "none"
+    }
+    if(next != null) {
+      for (var i = 0; i <= s.length - 1; i++) {
+        let cur = new Date(s[i].hoodie.createdAt)
+        if(cur > entryDate) {
+          nextId = s[i]._id
+          next.addEventListener("click", function() {
+            sessionStorage.setItem("_id", nextId)
+            window.location.replace("/")
+          })
+          break
+        }
+      }
+      if(nextId == null)
+        next.style.display = "none"
+    }
+  })
+}
 
 let currentSession = null
 //retrieves entry but keeps in view-only
 if(sessionStorage.getItem('_id') != null) {
   hoodie.store.find(sessionStorage.getItem('_id')).then(response => {
-    console.log(response)
     currentSession = response
     document.querySelector('textarea').value = response.entry
     document.querySelector('.mood-select').innerHTML = "<img src='assets/img/" + response.selectedEmoji + ".png'>"
     document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ' ' + response.year
     document.querySelector('h2').setAttribute("data-date", response.hoodie.createdAt)
-    document.querySelector('.length-tracker').setAttribute('data-length-status', getComment(response.length, sessionStorage.getItem("avg")))
     document.querySelector('.length-tracker').innerHTML += response.length
+    document.querySelector('.length-tracker').setAttribute('data-length-status', getComment(response.length, sessionStorage.getItem("avg")))
 
     //checks if edit more is clicked first
     if (sessionStorage.getItem("edit-mode") == null) {
@@ -117,6 +161,9 @@ if(sessionStorage.getItem('_id') != null) {
           this.innerHTML = "edit"
       })
     }
+    if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
+      getAdjacentEntry()
+    }
     sessionStorage.removeItem("edit-mode")
     sessionStorage.removeItem("_id")
   })
@@ -124,6 +171,10 @@ if(sessionStorage.getItem('_id') != null) {
   textarea.classList.toggle('focused')
   document.querySelector('.input-controls').classList.toggle('focused')
   document.querySelector('button').innerHTML = "save changes"
+} else {
+  setDate()
+  getAdjacentEntry()
+  document.querySelector('.next').style.display = "none"
 }
 
 form.addEventListener("submit", (event) => {
@@ -181,51 +232,4 @@ const getComment = function (entryLength, userLengthAvg) {
   if(entryLength > userLengthAvg)
     return sayings[3]
   return "whoa"
-}
-
-const getAdjacentEntry = function(prevOrNot) {
-  let entryDate = new Date(date.getAttribute("data-date"))
-  let id
-  hoodie.store.findAll().then(list => {
-    let s = list.sort(function(a, b) {
-      var dateA = new Date(a.hoodie.createdAt), dateB = new Date(b.hoodie.createdAt)
-      return dateA - dateB
-    })
-    console.log(s)
-    if(prevOrNot) {
-      for (var i = s.length - 1; i >= 0; i--) {
-        let cur = new Date(s[i].hoodie.createdAt)
-        console.log(cur > entryDate)
-        if(cur > entryDate) {
-          continue
-        } else if(cur < entryDate) {
-          id = s[i]._id
-          console.log(id)
-          return id
-        }
-      }
-      //disable prev
-    } else {
-      for (var i = 0; i < s.length - 1; i++) {
-        let cur = new Date(s[i].hoodie.createdAt)
-        if(cur < entryDate) {
-          continue
-        } else if(cur > entryDate) {
-          id = s[i]._id
-          console.log(id)
-          return id
-        }
-      }
-      //disable next
-    }
-  })
-}
-
-if(document.querySelector(".prev") != null) {
-   console.log(getAdjacentEntry(true))
-  document.querySelector(".prev").setAttribute("entryId", getAdjacentEntry(true))
-}
-
-if(document.querySelector(".next") != null) {
-  document.querySelector(".next").setAttribute("entryId", getAdjacentEntry(false))
 }

@@ -20,6 +20,9 @@ function renderItems () {
 		document.querySelectorAll('.mood-board ul li input').forEach(emoji => {
 			emoji.checked = false
 		})
+		document.querySelectorAll('select').forEach(select => {
+			select.options[0].selected = true
+		})
 		renderResults(resultsArray)
 	})
 }
@@ -53,7 +56,6 @@ function generateSearchConstraints(entries) {
 
 //search & sort
 document.addEventListener('input', function(event) {
-	console.log(event.target.value)
 	let filteredResults = []
 
 	resultsArray.forEach(entry => {
@@ -66,7 +68,6 @@ document.addEventListener('input', function(event) {
 			if(emoji.checked)
 				selectedEmoji = emoji.value
 		})
-		console.log(selectedEmoji)
 		if((entry.year == year || year == '') 
 			&& (entry.month == month || month == '')
 			&& (entry.day == day || day == '')
@@ -79,7 +80,7 @@ document.addEventListener('input', function(event) {
 function getAvgEntryLength(ar) {
 	let avg = 0
 	let i
-	for (i = 0; i <= ar.length - 1 || i == 15; i++) {
+	for (i = 0; i <= ar.length - 1 || i == 30; i++) {
 		avg += ar[i].length
 	}
 	avg = avg / (i + 1)
