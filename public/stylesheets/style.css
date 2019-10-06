@@ -237,6 +237,7 @@ nav {
   display: flex;
   flex-flow: column;
   position: fixed;
+  right: 0;
 }
 nav ul {
   padding: 0;
@@ -254,7 +255,7 @@ nav ul li {
   list-style: none;
   text-align: center;
   font-size: 1.2rem;
-  color: #fff;
+  color: #000;
   line-height: 2;
   transition: var(--easeInOut);
 }
@@ -342,6 +343,7 @@ nav ul li a::before {
   background-color: #faf6ee;
   padding: .8rem;
   position: absolute;
+  white-space: pre;
   transform: translateY(-5px);
   transition: var(--easeOutCubic)
 }
@@ -473,4 +475,17 @@ nav ul li a::before {
 }
 .read-only #date .edit {
   color: black;
-}d
+}
+
+[data-show] > * {
+  display: none;
+}
+[data-show="signin"] .signin,
+[data-show="signup"] .signup,
+[data-show="password-reset"] .password-reset,
+[data-show="options"] .options,
+[data-show="change-email"] .change-email,
+[data-show="change-password"] .change-password,
+[data-show="delete-account"] .delete-account {
+  display: block;
+}
