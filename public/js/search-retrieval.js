@@ -14,7 +14,6 @@ function renderItems () {
 		sessionStorage.setItem('avg', getAvgEntryLength(resultsArray))
 		generateSearchConstraints(resultsArray)
 	})
-	//TODO: Add way to show all entries
 	document.querySelector(".clear").addEventListener("click", function() {
 		mood_board_switch.innerHTML = "add icon"
 		document.querySelectorAll('.mood-board ul li input').forEach(emoji => {
@@ -103,12 +102,19 @@ function renderResults(a) {
 	resultNodes = sortEntries(resultNodes)
 	//adding event listeners for entry retrieval
 	for (var i = resultNodes.length - 1; i >= 0; i--) {
-		resultNodes[i].addEventListener("click", function () {
+		resultNodes[i].addEventListener("click", function (event) {
 			sessionStorage.setItem('_id', this.getAttribute("data-id"))
-			window.location.replace("/")
-		})
-		resultNodes[i].querySelector(".edit").addEventListener("click", function() {
-			sessionStorage.setItem('edit-mode', true)
+			console.log("1")
+			if(event.target.classList.contains('delete')) { 
+				hoodie.store.remove(sessionStorage.getItem('_id'))
+				sessionStorage.removeItem("_id")
+				renderItems()
+			} else if(event.target.classList.contains('edit')) {
+				sessionStorage.setItem('edit-mode', true)
+				window.location.replace("/")
+			} else {
+				window.location.replace("/")
+			}
 		})
 		results.appendChild(resultNodes[i])
 	}
