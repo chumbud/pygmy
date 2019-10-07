@@ -3,6 +3,7 @@
 <head>
   <title>Entry 📓</title>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="stylesheets/_base.css"/>
   <link rel="stylesheet" href="stylesheets/_fonts.css"/>
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:700&display=swap" rel="stylesheet"> 
@@ -12,7 +13,8 @@
   <script src="/hoodie/client.js"></script>
 
 </head>
-<body> 
+<!--<body data-account-state="signed-out" data-store-state="not-empty">-->
+  <body> 
   <grid class="main-wrapper" columns=7>
     <c span=2-6 span-s=row>
       <form id="entry-form" action="/search.html" method="POST">
@@ -67,12 +69,13 @@
     </ul>
     <ul>
       <!--<li class="text-settings">text settings</li>-->
-      <li><a class="account" href="account.html">login/signup</a></li>
+      <!--<li><a class="account" href="account.html" data-value="username">login/signup</a></li>-->
     </ul>
   </nav>  
 </c>
 </grid>
 </body>
+<!--<script type="text/javascript" src="./js/common.js"></script>-->
 <script type="text/javascript" src="./js/pygmy.js"></script>
 <script type="text/javascript" src="./js/mood-board.js"></script>
 </html>

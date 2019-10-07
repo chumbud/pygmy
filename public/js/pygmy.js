@@ -133,7 +133,7 @@ const getAdjacentEntry = function() {
       if(nextId == null)
         next.style.display = "none"
     }
-  })
+  }).catch(handleError)
 }
 
 let currentSession = null
@@ -159,6 +159,8 @@ if(sessionStorage.getItem('_id') != null) {
           this.innerHTML = "cancel"
         else
           this.innerHTML = "edit"
+        document.querySelector('textarea').removeAttribute("readonly")
+        document.querySelector('textarea').focus()
       })
     }
     if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
@@ -166,7 +168,7 @@ if(sessionStorage.getItem('_id') != null) {
     }
     sessionStorage.removeItem("edit-mode")
     sessionStorage.removeItem("_id")
-  })
+  }).catch(handleError)
   document.querySelector('.expand').click()
   textarea.classList.toggle('focused')
   document.querySelector('.input-controls').classList.toggle('focused')
@@ -232,4 +234,8 @@ const getComment = function (entryLength, userLengthAvg) {
   if(entryLength > userLengthAvg)
     return sayings[3]
   return "whoa"
+}
+
+function handleError (error) {
+  alert(error)
 }

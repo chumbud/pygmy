@@ -3,6 +3,7 @@
 <head>
 	<title>Search 🔍</title>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="stylesheets/_base.css"/>
 	<link rel="stylesheet" href="stylesheets/_fonts.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:700&display=swap" rel="stylesheet">
@@ -12,95 +13,97 @@
 	<link rel="stylesheet" href="stylesheets/search.css"/>
 	<script src="/hoodie/client.js"></script>
 </head>
-<body>
-	<grid class="main-wrapper" columns=7>
-		<c span=2-6 span-s=row style="min-width: 0">
-			<form id="search-form" action="" method="POST">
-				<div class="search-container">
-					<span>search: </span>
-					<a class="mood-select" href="#">add icon</a>
-					<label for="year-select">year</label>
-					<select id="year-select">
-						<option value=""></option>
-					</select>
-					<label for="month-select">month</label>
-					<select id="month-select">
-						<option value=""></option>
-						<option value="1">January</option>
-						<option value="2">February</option>
-						<option value="3">March</option>
-						<option value="4">April</option>
-						<option value="5">May</option>
-						<option value="6">June</option>
-						<option value="7">July</option>
-						<option value="8">August</option>
-						<option value="9">September</option>
-						<option value="10">October</option>
-						<option value="11">November</option>
-						<option value="12">December</option>
-					</select>
-					<label for="day-select">day</label>
-					<select id="day-select">
-						<option value=""></option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-						<option value="13">13</option>
-						<option value="14">14</option>
-						<option value="15">15</option>
-						<option value="16">16</option>
-						<option value="17">17</option>
-						<option value="18">18</option>
-						<option value="19">19</option>
-						<option value="20">20</option>
-						<option value="21">21</option>
-						<option value="22">22</option>
-						<option value="23">23</option>
-						<option value="24">24</option>
-						<option value="25">25</option>
-						<option value="26">26</option>
-						<option value="27">27</option>
-						<option value="28">28</option>
-						<option value="29">29</option>
-						<option value="30">30</option>
-						<option value="31">31</option>
-					</select>
-					<div class="mood-board">
-						<ul>
-						</ul>
+<!--<body data-account-state="signed-out" data-store-state="not-empty">-->
+	<body>
+		<grid class="main-wrapper" columns=7>
+			<c span=2-6 span-s=row style="min-width: 0">
+				<form id="search-form" action="" method="POST">
+					<div class="search-container">
+						<span>search: </span>
+						<a class="mood-select" href="#">add icon</a>
+						<label for="year-select">year</label>
+						<select id="year-select">
+							<option value=""></option>
+						</select>
+						<label for="month-select">month</label>
+						<select id="month-select">
+							<option value=""></option>
+							<option value="1">January</option>
+							<option value="2">February</option>
+							<option value="3">March</option>
+							<option value="4">April</option>
+							<option value="5">May</option>
+							<option value="6">June</option>
+							<option value="7">July</option>
+							<option value="8">August</option>
+							<option value="9">September</option>
+							<option value="10">October</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+						</select>
+						<label for="day-select">day</label>
+						<select id="day-select">
+							<option value=""></option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30">30</option>
+							<option value="31">31</option>
+						</select>
+						<div class="mood-board">
+							<ul>
+							</ul>
+						</div>
 					</div>
+					<a class="clear">clear filters</a>
+				</form>
+				<div id="results">
+					<ul>
+					</ul>
 				</div>
-				<a class="clear">clear filters</a>
-			</form>
-			<div id="results">
-				<ul>
-				</ul>
-			</div>
-		</c>
-		<c span=7.. span-s=row>
-			<nav>
-				<ul>
-					<li><a class="latest-entry" href="/">today's entry</a></li>
-					<li><a style="opacity: .3; pointer-events: none;" class="calendar-page" href="">calendar</a></li>
-					<li><a class="search" href="search.html">archive</a></li>
-				</ul>
-				<ul>
-					<!--<li class="text-settings">text settings</li>-->
-					<li><a class="account" href="account.html">login/signup</a></li>
-				</ul>
-			</nav>  
-		</c>
-	</grid>
-	<script type="text/javascript" src="./js/mood-board.js"></script>
-	<script type="text/javascript" src="./js/search-retrieval.js"></script>
-</body>
-</html>
+			</c>
+			<c span=7.. span-s=row>
+				<nav>
+					<ul>
+						<li><a class="latest-entry" href="/">today's entry</a></li>
+						<li><a style="opacity: .3; pointer-events: none;" class="calendar-page" href="">calendar</a></li>
+						<li><a class="search" href="search.html">archive</a></li>
+					</ul>
+					<ul>
+						<!--<li class="text-settings">text settings</li>-->
+						<!--<li><a class="account" href="account.html" data-value="username">login/signup</a></li>-->
+					</ul>
+				</nav>  
+			</c>
+		</grid>
+		<!--<script type="text/javascript" src="./js/common.js"></script>-->
+		<script type="text/javascript" src="./js/mood-board.js"></script>
+		<script type="text/javascript" src="./js/search-retrieval.js"></script>
+	</body>
+	</html>

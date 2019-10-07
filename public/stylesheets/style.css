@@ -480,6 +480,7 @@ nav ul li a::before {
 [data-show] > * {
   display: none;
 }
+
 [data-show="signin"] .signin,
 [data-show="signup"] .signup,
 [data-show="password-reset"] .password-reset,
@@ -488,4 +489,21 @@ nav ul li a::before {
 [data-show="change-password"] .change-password,
 [data-show="delete-account"] .delete-account {
   display: block;
+}
+
+/* toggle content based on account & store status */
+[data-account-state] {
+  display: none;
+}
+[data-account-state='signed-in'],
+[data-account-state='signed-out'] {
+  display: block;
+}
+[data-store-state='empty'] [data-hide-if="store-empty"],
+[data-store-state='not-empty'] [data-hide-if="store-not-empty"] {
+  display: none;
+}
+[data-account-state='signed-in'] [data-hide-if="signed-in"],
+[data-account-state='signed-out'] [data-hide-if="signed-out"] {
+  display: none;
 }
