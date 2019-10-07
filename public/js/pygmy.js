@@ -175,7 +175,9 @@ if(sessionStorage.getItem('_id') != null) {
   document.querySelector('button').innerHTML = "save changes"
 } else {
   setDate()
-  getAdjacentEntry()
+  if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
+    getAdjacentEntry()
+  }
   document.querySelector('.next').style.display = "none"
 }
 
