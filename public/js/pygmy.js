@@ -10,6 +10,7 @@ const greens = ['#D4FFE5', '#B6FFD3', '#88FFB8', '#4FFD95']
 const sayings = ['short', 'medium', 'typical', 'above average']
 const benchmarks = [100, 200, 350, 500] //to be replaced with actual averages from previous entry counts
 
+
 const keyActions = function() {
   journal_input.onkeydown = function(e) {
     if (journal_input.value.length != 0) {
@@ -20,6 +21,7 @@ const keyActions = function() {
       journal_input.classList.remove('focused')
     }
     input_controls.querySelector('.length-tracker').innerHTML = journal_input.value.length
+    document.querySelector('.length-tracker').setAttribute('data-length-status', getComment(journal_input.value.length, sessionStorage.getItem("avg")))
   }
 }
 journal_input.addEventListener('click', keyActions())
@@ -227,17 +229,14 @@ window.location.replace("/search.html")
 
 const getComment = function (entryLength, userLengthAvg) {
 
-  if(entryLength < (userLengthAvg * 1/4))
+  if(entryLength <= (userLengthAvg*.25))
     return sayings[0]
-  if(entryLength < (userLengthAvg * 2/4))
+  if(entryLength <= (userLengthAvg*.5))
     return sayings[1]
-  if(entryLength < (userLengthAvg * 3/4))
+  if(entryLength <= (userLengthAvg*.75))
     return sayings[2]
-  if(entryLength > userLengthAvg)
+  if(entryLength >= (userLengthAvg*.75))
     return sayings[3]
   return "whoa"
 }
 
-function handleError (error) {
-  alert(error)
-}

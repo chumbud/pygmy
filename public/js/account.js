@@ -151,7 +151,3 @@ document.querySelector('[data-action="delete-account"]').addEventListener('click
   event.preventDefault()
   hoodie.account.destroy()
 })
-
-function handleError (error) {
-  alert(error)
-}

@@ -1,3 +1,7 @@
+const handleError = function(error) {
+  console.log(error)
+}
+
 function showSignedIn (username) {
   username = username.split('@')[0]
   username = username.split('.')[0]
@@ -23,7 +27,4 @@ hoodie.account.get(['session', 'username'], {local: true})
   } else {
     hideSignedIn()
   }
-}).catch(handleError)
-function handleError (error) {
-  alert(error)
-}
+})

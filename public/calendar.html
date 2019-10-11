@@ -3,39 +3,38 @@
 <head>
 	<title>Calendar 📅</title>
 	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="stylesheets/_base.css"/>
 	<link rel="stylesheet" href="stylesheets/_fonts.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:700&display=swap" rel="stylesheet"> 
 	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://rsms.me/raster/raster.css?v=6"/>
 	<link rel="stylesheet" href="stylesheets/style.css"/>
-	<link rel="stylesheet" href="stylesheets/calendar.css"/>
 	<script src="/hoodie/client.js"></script>
 </head>
-<!--<body data-account-state="signed-out" data-store-state="not-empty">-->
+<body data-account-state="signed-out" data-store-state="not-empty">
 	<body>
 		<grid class="main-wrapper" columns=7>
-			<c span=2-6 span-s=row>
-				<div id=calendar-container>
-					<a href=""><</a>
-					<div id="calendar-frame">
-						<div class=calendar>
-							<h3 class="month">march 2019</h3>
-							<div class="days-of-the-week">
-								<span class="day-title">S</span>
-								<span class="day-title">M</span>
-								<span class="day-title">T</span>
-								<span class="day-title">W</span>
-								<span class="day-title">T</span>
-								<span class="day-title">F</span>
-								<span class="day-title">S</span>
-							</div>
-							<div class="days-of-the-month">
-								<!-- days go here -->
-							</div>
-						</div>
+			<c span=2-6 span-s=row style="display: flex;align-content: center;justify-content: center;flex-flow: column;">
+				<div class="message">
+				</div>
+				<div class="calendar">
+					<a class="prev-month" href=""> < </a>
+					<div class="calendar-container">
+						<div class="month-year"></div>
+						<ul class="day-header">
+							<li>S</li>
+							<li>M</li>
+							<li>T</li>
+							<li>W</li>
+							<li>T</li>
+							<li>F</li>
+							<li>S</li>
+						</ul>
+						<ul class="days"></ul>
 					</div>
-					<a href="" class="disabled"><</a>
+					<a class="next-month" href="">></a>
 				</div>
 			</div>
 		</c>
@@ -47,11 +46,12 @@
 					<li><a class="search" href="search.html">archive</a></li>
 				</ul>
 				<ul>
-					<!--<li><a class="account" href="account.html" data-value="username">login/signup</a></li>-->
+					<li><a class="account" href="account.html" data-value="username">login/signup</a></li>
 				</ul>
 			</nav>
 		</c>
 	</grid>
+	<script type="text/javascript" src="./js/common.js"></script>
 	<script src="./js/calendar.js"></script>
 </body>
 </html>

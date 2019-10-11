@@ -2,8 +2,9 @@
 <html>
 <head>
 	<title>Search 🔍</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="stylesheets/_base.css"/>
 	<link rel="stylesheet" href="stylesheets/_fonts.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:700&display=swap" rel="stylesheet">
@@ -13,7 +14,7 @@
 	<link rel="stylesheet" href="stylesheets/search.css"/>
 	<script src="/hoodie/client.js"></script>
 </head>
-<!--<body data-account-state="signed-out" data-store-state="not-empty">-->
+<body data-account-state="signed-out" data-store-state="not-empty">
 	<body>
 		<grid class="main-wrapper" columns=7>
 			<c span=2-6 span-s=row style="min-width: 0">
@@ -92,17 +93,17 @@
 				<nav>
 					<ul>
 						<li><a class="latest-entry" href="/">today's entry</a></li>
-						<li><a style="opacity: .3; pointer-events: none;" class="calendar-page" href="">calendar</a></li>
+						<li><a class="calendar-page" href="calendar.html">calendar</a></li>
 						<li><a class="search" href="search.html">archive</a></li>
 					</ul>
 					<ul>
 						<!--<li class="text-settings">text settings</li>-->
-						<!--<li><a class="account" href="account.html" data-value="username">login/signup</a></li>-->
+						<li><a class="account" href="account.html" data-value="username">login/signup</a></li>
 					</ul>
 				</nav>  
 			</c>
 		</grid>
-		<!--<script type="text/javascript" src="./js/common.js"></script>-->
+		<script type="text/javascript" src="./js/common.js"></script>
 		<script type="text/javascript" src="./js/mood-board.js"></script>
 		<script type="text/javascript" src="./js/search-retrieval.js"></script>
 	</body>
