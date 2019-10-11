@@ -4,7 +4,7 @@ const handleError = function(error) {
 
 function showSignedIn (username) {
   username = username.split('@')[0]
-  username = username.split('.')[0]
+  //username = username.split('.')[0]
   document.body.setAttribute('data-account-state', 'signed-in')
   document.querySelector('[data-value=username]').textContent = username
 }
@@ -18,13 +18,12 @@ hoodie.account.on('signin', function (account) {
 })
 
 hoodie.account.on('signout', hideSignedIn)
-
 hoodie.account.get(['session', 'username'], {local: true})
 .then(function (properties) {
-
+  console.log(properties)
   if (properties.session) {
     showSignedIn(properties.username)
   } else {
     hideSignedIn()
   }
-})
+}).catch(handleError)

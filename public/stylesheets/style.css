@@ -557,8 +557,9 @@ nav ul li a::before {
   display: inline-block;
   border-radius: 50%;
   margin: .8rem;
-  width: 4rem;
-  line-height: 4rem;
+  width: 4.2rem;
+  height: 4.2rem;
+  line-height: 4.2rem;
   background-color: white;
   text-decoration: none;
   text-align: center;

@@ -24,16 +24,16 @@ document.querySelector('form.signup').addEventListener('submit', function (event
     password: password
   })
 
-    .then(function () {
-      return hoodie.account.signIn({
-        username: email,
-        password: password
-      })
+  .then(function () {
+    return hoodie.account.signIn({
+      username: email,
+      password: password
     })
+  })
 
-    .then(function () {
+  .then(function () {
     // window.location.href = 'index.html'
-    }).catch(handleError)
+  }).catch(handleError)
 })
 
 document.querySelector('form.signin').addEventListener('submit', function (event) {
@@ -47,9 +47,9 @@ document.querySelector('form.signin').addEventListener('submit', function (event
     password: password
   })
 
-    .then(function () {
-      window.location.href = '/'
-    }).catch(handleError)
+  .then(function () {
+    //window.location.href = '/search.html'
+  }).catch(handleError)
 })
 
 function showOptions () {
@@ -59,7 +59,7 @@ function showOptions () {
 /**
  * Handle change email form submit
  */
-document.querySelector('form.change-email').addEventListener('submit', function (event) {
+ document.querySelector('form.change-email').addEventListener('submit', function (event) {
   event.preventDefault()
 
   var email = this.querySelector('[name=email]').value
@@ -68,16 +68,16 @@ document.querySelector('form.change-email').addEventListener('submit', function 
     username: email
   })
 
-    .then(function () {
-      alert('email updated')
-      showOptions()
-    }).catch(handleError)
+  .then(function () {
+    alert('email updated')
+    showOptions()
+  }).catch(handleError)
 })
 
 /**
  * Handle password reset form submit
  */
-document.querySelector('form.password-reset').addEventListener('submit', function (event) {
+ document.querySelector('form.password-reset').addEventListener('submit', function (event) {
   event.preventDefault()
 
   var email = this.querySelector('[name=email]').value
@@ -87,17 +87,16 @@ document.querySelector('form.password-reset').addEventListener('submit', functio
     username: email
   })
 
-    .then(function () {
-      alert('Email sent to ' + email)
-      document.querySelector('[data-show="password-reset"]').setAttribute('data-show', 'signin')
-      setHashState('signin')
-    }).catch(handleError)
+  .then(function () {
+    alert('Email sent to ' + email)
+    document.querySelector('[data-show="password-reset"]').setAttribute('data-show', 'signin')
+  }).catch(handleError)
 })
 
 /**
  * Handle change password form submit
  */
-document.querySelector('form.change-password').addEventListener('submit', function (event) {
+ document.querySelector('form.change-password').addEventListener('submit', function (event) {
   event.preventDefault()
 
   var $passwordInput = this.querySelector('[name=password]')
@@ -107,17 +106,17 @@ document.querySelector('form.change-password').addEventListener('submit', functi
     password: password
   })
 
-    .then(function () {
-      $passwordInput.value = ''
-      alert('password updated')
-      showOptions()
-    })
+  .then(function () {
+    $passwordInput.value = ''
+    alert('password updated')
+    showOptions()
+  })
 })
 
 /**
  * When clicking on "change username" button, set the input to current username
  */
-document.querySelector('[data-action="show-change-email"]').addEventListener('click', function (event) {
+ document.querySelector('[data-action="show-change-email"]').addEventListener('click', function (event) {
   event.preventDefault()
   hoodie.account.get('username').then(function (username) {
     document.querySelector('#input-change-email').value = username
@@ -128,7 +127,7 @@ document.querySelector('[data-action="show-change-email"]').addEventListener('cl
  * When clicking on "forgot password?" link, preset the email input with what is
  * entered in the sign in username input.
  */
-document.querySelector('[data-action="show-password-reset"]').addEventListener('click', function (event) {
+ document.querySelector('[data-action="show-password-reset"]').addEventListener('click', function (event) {
   event.preventDefault()
   document.querySelector('#input-email-reset').value = document.querySelector('#input-signin-email').value
 })
@@ -137,17 +136,16 @@ document.querySelector('[data-action="show-password-reset"]').addEventListener('
  * handle signout click. This will trigger a "signout" event which is handled
  * in common.js
  */
-document.querySelector('[data-action=signout]').addEventListener('click', function (event) {
+ document.querySelector('[data-action=signout]').addEventListener('click', function (event) {
   event.preventDefault()
-  hoodie.account.signOut()
-  window.location.replace("/account.html")
+  hoodie.account.signOut()//.then(window.location.replace("/calendar.html"))
 })
 
 /**
  * handle account destroy click. This will also trigger a "signout" event which
  * is handled in common.js
  */
-document.querySelector('[data-action="delete-account"]').addEventListener('click', function (event) {
+ document.querySelector('[data-action="delete-account"]').addEventListener('click', function (event) {
   event.preventDefault()
   hoodie.account.destroy()
 })
