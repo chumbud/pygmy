@@ -138,14 +138,20 @@ function showOptions () {
  */
  document.querySelector('[data-action=signout]').addEventListener('click', function (event) {
   event.preventDefault()
-  hoodie.account.signOut()//.then(window.location.replace("/calendar.html"))
+  hoodie.account.signOut()
 })
 
 /**
  * handle account destroy click. This will also trigger a "signout" event which
  * is handled in common.js
  */
- document.querySelector('[data-action="delete-account"]').addEventListener('click', function (event) {
+ document.querySelector('form.delete-account').addEventListener('submit', function (event) {
   event.preventDefault()
-  hoodie.account.destroy()
+
+  var $deleteInput = this.querySelector('[name=rusure]')
+  var rusure = $deleteInput.value
+
+  if(rusure === "delete") {
+    hoodie.account.destroy()
+  }
 })

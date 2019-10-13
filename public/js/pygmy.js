@@ -87,10 +87,19 @@ let months = ["January", "February", "March", "April", "May", "June",
 const realDate = new Date()
 const textarea = document.querySelector('textarea')
 const setDate = function() {
-  let today = months[(realDate.getMonth())] + " " + realDate.getDate() + " " + realDate.getFullYear()
-  date.setAttribute("data-date", today)
-  date.innerHTML = today
+  let today = realDate.getFullYear() + "-" + (realDate.getMonth()+1) + "-" + realDate.getDate()
+  if(sessionStorage.getItem("date") == null) {
+    date.setAttribute("data-date", today)
+    today = months[(realDate.getMonth())] + " " + realDate.getDate() + " " + realDate.getFullYear()
+    date.innerHTML = today
+  } else {
+    date.setAttribute("data-date", sessionStorage.getItem("date"))
+    today = sessionStorage.getItem("date").split("-")
+    date.innerHTML = months[(today[1]-1)] + " " + today[2] + " " + today[0]
+    sessionStorage.removeItem("date")
+  }
 }
+
 const comments = ['short', 'medium', 'typical', 'above average']
 //if being redirected from search, checks for an entry id for editing and turns on expanded mode
 const getAdjacentEntry = function() {
@@ -146,7 +155,7 @@ if(sessionStorage.getItem('_id') != null) {
     document.querySelector('textarea').value = response.entry
     document.querySelector('.mood-select').innerHTML = "<img src='assets/img/" + response.selectedEmoji + ".png'>"
     document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ' ' + response.year
-    document.querySelector('h2').setAttribute("data-date", response.hoodie.createdAt)
+    document.querySelector('h2').setAttribute("data-date", response.year + "-" + response.month + "-" + response.day)
     document.querySelector('.length-tracker').innerHTML += response.length
     document.querySelector('.length-tracker').setAttribute('data-length-status', getComment(response.length, sessionStorage.getItem("avg")))
 
@@ -188,9 +197,12 @@ form.addEventListener("submit", (event) => {
 
   let entry = textarea.value
   let length = textarea.value.length
-  let month = realDate.getMonth()+1
-  let day = realDate.getDate()
-  let year = realDate.getFullYear()
+
+  let journalDate = document.querySelector("#date").getAttribute("data-date").split("-")
+  let year = journalDate[0]
+  let month = journalDate[1]
+  let day = journalDate[2]
+
   let selectedEmoji = ''
   let emojis = form.querySelectorAll('input')
   emojis.forEach(emoji => {
@@ -201,10 +213,6 @@ form.addEventListener("submit", (event) => {
   if(currentSession == null) {
     entry = textarea.value
     length = textarea.value.length
-    month = realDate.getMonth()+1
-    day = realDate.getDate()
-    year = realDate.getFullYear()
-
     if(selectedEmoji == '')
       selectedEmoji = "empty"
     if(!entry) return
@@ -213,9 +221,7 @@ form.addEventListener("submit", (event) => {
   //editing session
   entry = textarea.value
   length = textarea.value.length
-  month = currentSession.month
-  day = currentSession.day
-  year = currentSession.year
+
   emojis.forEach(emoji => {
     if(emoji.checked)
       selectedEmoji = emoji.value

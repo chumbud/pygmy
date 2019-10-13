@@ -20,7 +20,7 @@
     <grid class="main-wrapper" columns=7>
       <c span=2-6 span-s=row>
         <grid columns=7>
-          <c span=3-5>
+          <c span=3-5 id="account-settings">
             <div data-show="signin" data-hide-if="signed-in">
               <form class="signup" action="signup">
                 <h2>Sign up</h2>
@@ -42,11 +42,10 @@
 
               <form class="signin" action="signin">
                 <div class="signup-link">
-                  <h3>New account?</h3>
-                  <a href="#" class="btn" data-action="show-signup">
-                    <span class="sr-only">Need an account?</span>
+                  <h2>New account?</h2>
+                  <button href="#" class="primary" data-action="show-signup">
                     Sign up!
-                  </a>
+                  </button>
                 </div>
 
                 <h2>Log in</h2>
@@ -86,7 +85,7 @@
               </form><!-- .password-reset -->
             </div>
             <div data-hide-if="signed-out">
-              <h3>Account settings</h3>
+              <h2>Account settings</h2>
               <div data-show="options">
                 <div class="options">
                   <button class="default" data-action="show-change-email">Change email</button>
@@ -122,13 +121,16 @@
                   </p>
                 </form><!-- /.change-password -->
 
-                <div class="delete-account">
+                <form class="delete-account">
                   <p>Are you sure you want to delete your account?</p>
-                  <button data-action="delete-account" class="danger">Delete account</button>
+                  <p>All your entries will be permanently deleted.</p>
+                  <label for="delete-confirmation">Write out "delete" as confirmation.</label>
+                  <input id="delete-confirmation" type="text" name="rusure" required="">
+                  <button class="danger" type="submit">Delete account</button>
                   <small>
                     <a href="#" class="btn-link" data-action="show-options">Cancel</a>
                   </small>
-                </div><!-- /.delete-account -->
+                </form><!-- /.delete-account -->
               </div>
               <div class="signout-container">
                 <button class="small" data-action="signout">Sign out</button>

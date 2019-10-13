@@ -22,16 +22,41 @@ function populateCalendar(year, month) {
     }
   }
 
-  for (var i = 1; i < lastDay + 1; i++) {
+  for (var i = 1; i < lastDay; i++) {
     let newDay = document.createElement("li")
-    newDay.innerHTML = "<a href=\"\">" + i + "</a>"
+    newDay.innerHTML = "<a href=\"/\">" + i + "</a>"
+
+    let today = new Date()
+    today.setHours(0,0,0,0)
+    let currentDate = new Date(year + "-" + (month+1) + "-" + (i+1))
+    currentDate.setHours(0,0,0,0)
+
+    if(currentDate <= today) {
+      newDay.setAttribute("data-date", year + "-" + (month+1) + "-" + i)
+      newDay.addEventListener("click", function(event) {
+        event.preventDefault()
+        sessionStorage.setItem("date", this.getAttribute("data-date"))
+        window.location.replace("/")
+      })
+      if(currentDate.getFullYear() === today.getFullYear() 
+        && currentDate.getMonth() === today.getMonth() 
+        && currentDate.getDate() == today.getDate()) {
+        newDay.classList.add("today")
+      }
+    } else {
+      newDay.classList.add("disabled")
+    }
     calendar.appendChild(newDay)
   }
+
+  
 }
 populateCalendar(y, m)
 
 if(sessionStorage.getItem('_id') == null) {
-	document.querySelector(".message").innerHTML = "<img src=\"./assets/img/star.png\"><p>today's a new day!</p><button class=\"button\" href=\"/\">write a new entry</button>"
+ document.querySelector(".message").innerHTML = "<img src=\"./assets/img/shining-star.png\"><p>today's a new day!</p><a class=\"button\" href=\"/\">write a new entry</a>"
+} else {
+  document.querySelector(".message").innerHTML = "<p>good job!</p><p>you're all good for today</p><a class=\"button\" href=\"/\">edit today's entry</a>"
 }
 
 document.querySelector(".prev-month").addEventListener("click", function(e) {

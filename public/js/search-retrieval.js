@@ -13,6 +13,7 @@ function renderItems () {
 		renderResults(resultsArray)
 		sessionStorage.setItem('avg', getAvgEntryLength(resultsArray))
 		generateSearchConstraints(resultsArray)
+		console.log(resultsArray)
 	})
 	document.querySelector(".clear").addEventListener("click", function() {
 		mood_board_switch.innerHTML = "add icon"
@@ -93,7 +94,7 @@ function renderResults(a) {
 	a.forEach(entry => {
 		const item = document.createElement("li")
 		item.setAttribute('data-id', entry._id)
-		item.setAttribute('data-date', entry.hoodie.createdAt)
+		item.setAttribute('data-date', entry.year + "-" + entry.month + "-" + entry.day)
 		item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ' ' + entry.year + '<a class="edit">edit</a><a class="delete">delete</a></h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
 		item.classList.add("listEntry")
 			//for sorting after
@@ -104,11 +105,11 @@ function renderResults(a) {
 	for (var i = resultNodes.length - 1; i >= 0; i--) {
 		resultNodes[i].addEventListener("click", function (event) {
 			sessionStorage.setItem('_id', this.getAttribute("data-id"))
-			console.log("1")
 			if(event.target.classList.contains('delete')) { 
-				hoodie.store.remove(sessionStorage.getItem('_id'))
-				sessionStorage.removeItem("_id")
-				renderItems()
+				hoodie.store.remove(sessionStorage.getItem('_id')).then(function() {
+					sessionStorage.removeItem("_id")
+					renderItems()
+				})
 			} else if(event.target.classList.contains('edit')) {
 				sessionStorage.setItem('edit-mode', true)
 				window.location.replace("/")

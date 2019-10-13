@@ -40,6 +40,16 @@ a:hover {
   color: black;
   text-decoration: underline;
 }
+select {
+  border: 1px solid #e8deda;
+  padding: .8rem;
+}
+select > option {
+  padding: .8rem;
+}
+select > option:hover {
+    background-color: #b6ffd3;
+}
 .prev,
 .next,
 .mood-select {
@@ -302,7 +312,7 @@ nav ul li a::before {
   text-decoration: none;
   line-height: 1;
   cursor: pointer;
-  padding: 0.8rem 2.4rem;
+  padding: .8rem 2.4rem;
   transition: var(--easeOutCubic);
 }
 .button:hover {
@@ -515,6 +525,7 @@ nav ul li a::before {
   align-items: center;
   justify-content: center;
   margin: 2.4rem;
+  margin-bottom: 20vh;
 }
 .prev-month,
 .next-month {
@@ -533,6 +544,9 @@ nav ul li a::before {
   font-size: 1.6rem;
   margin: 2.4rem;
 }
+.calendar-container > * {
+  padding-left: unset;
+}
 .calendar-container .day-header,
 .calendar-container .days {
   display: grid;
@@ -540,12 +554,11 @@ nav ul li a::before {
   grid-template-rows: auto;
 }
 .day-header {
-
+  color: #e8deda;
 }
 .month-year { 
   text-transform: lowercase;
   padding: 2.4rem;
-  padding-left: 4.2rem;
 }
 .calendar-container .day-header li,
 .calendar-container .days li {
@@ -553,13 +566,19 @@ nav ul li a::before {
   text-align: center;
   margin-bottom: 0;
 }
+.calendar-container .day-header li {
+  margin-bottom: 0;
+}
+
+.calendar-container .days li {
+  padding: .8rem;
+}
 .calendar-container .days li:not(.empty) a {
   display: inline-block;
   border-radius: 50%;
-  margin: .8rem;
-  width: 4.2rem;
-  height: 4.2rem;
-  line-height: 4.2rem;
+  width: 4rem;
+  height: 4rem;
+  line-height: 4rem;
   background-color: white;
   text-decoration: none;
   text-align: center;
@@ -568,11 +587,15 @@ nav ul li a::before {
   transition: var(--easeOutCubic);
 }
 .calendar-container .days li:not(.empty) a:hover,
-.calendar-container .days li:not(.empty).today {
+.calendar-container .days li:not(.empty).today a {
   border: 1px black solid;
 }
-.calendar-container .days li:not(.empty).completed a, {
+.calendar-container .days li:not(.empty).completed a {
   background-color: #b6ffd3;
+}
+.calendar-container .days li:not(.empty).disabled a {
+  color: #e8deda;
+  pointer-events: none;
 }
 .message {
   margin: 4rem;
@@ -584,6 +607,74 @@ nav ul li a::before {
 }
 .message p {
   font-size: 1.8rem;
-  margin: 3.2rem;
+  margin-top: 2.4rem;
   margin-bottom: 5.6rem;
+}
+/*accounts*/
+[data-show="options"] .options {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+}
+#account-settings {
+  margin: 3.6rem;
+}
+#account-settings h2 {
+  margin-bottom: 1.6rem;
+}
+#account-settings button {
+  margin-bottom: 2.4rem;
+  text-transform: lowercase;
+  border: 1px solid #000;
+  background-color: #fff;
+  text-decoration: none;
+  line-height: 1;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  transition: var(--easeOutCubic);
+}
+#account-settings button:hover {
+  background-color: #b6ffd3;
+  border-color: #b6ffd3;
+  color: #000;
+  text-decoration: none;
+}
+#account-settings button.small {
+  font-size: 1.4rem;
+}
+#account-settings button.danger {
+  border: 1px solid red;
+  color: red;
+}
+#account-settings button.danger:hover {
+  background-color: red;
+  color: white;
+}
+#delete-confirmation {
+  margin-top: 20vh;
+  margin-bottom: 3.2rem;
+}
+#account-settings a {
+  margin-left: .8rem;
+}
+#account-settings input {
+  padding: 1.6rem;
+  margin: 1.6rem 0;
+  border: 1px solid #e8deda;
+  transition: var(--easeOutCubic);
+}
+#account-settings input:focus {
+  border: 1px solid #000
+}
+#account-settings label {
+  display: block;
+}
+#delete-confirmation {
+  display: block;
+}
+.signup-link {
+  margin-bottom: 2.4rem;
+}
+.sr-only {
+  display: block;
 }
