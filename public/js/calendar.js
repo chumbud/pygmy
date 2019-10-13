@@ -7,13 +7,21 @@ let months = ["January", "February", "March", "April", "May", "June",
 
 let y = new Date().getFullYear()
 let m = new Date().getMonth()
+let calResults = []
+hoodie.store.findAll().then(list => {
+  calResults = [...list]
+}).then(function() {
+  populateCalendar(y, m)
+})
 
 function populateCalendar(year, month) {
   let firstDay = new Date(year, month).getDay()
   let lastDay = 32 - new Date(year, month, 32).getDate()
   calendar.innerHTML = ''
   header.innerHTML = (months[month]) + ' ' +  year
+  sessionStorage.removeItem("date")
 
+  //places empty list elements to position the first day
   if (firstDay != 0) {
     for (var j = 0; j < firstDay; j++) {
       let emptyDay = document.createElement("li")
@@ -22,6 +30,7 @@ function populateCalendar(year, month) {
     }
   }
 
+  //creates days and compares them to the array of existing entries to mark them as completed with accompanied id and date 
   for (var i = 1; i < lastDay; i++) {
     let newDay = document.createElement("li")
     newDay.innerHTML = "<a href=\"/\">" + i + "</a>"
@@ -36,22 +45,28 @@ function populateCalendar(year, month) {
       newDay.addEventListener("click", function(event) {
         event.preventDefault()
         sessionStorage.setItem("date", this.getAttribute("data-date"))
+        if(this.getAttribute("_id") != null) {
+          sessionStorage.setItem("_id", this.getAttribute("_id"))
+        }
         window.location.replace("/")
       })
-      if(currentDate.getFullYear() === today.getFullYear() 
-        && currentDate.getMonth() === today.getMonth() 
-        && currentDate.getDate() == today.getDate()) {
+      for (var j = calResults.length - 1; j >= 0; j--) {
+        if(calResults[j].year == currentDate.getFullYear() && (calResults[j].month-1) == currentDate.getMonth() && calResults[j].day == currentDate.getDate()) {
+          newDay.classList.add("completed")
+          newDay.setAttribute("_id", calResults[j]._id)
+          break
+        }
+      }
+      if(currentDate.getFullYear() === today.getFullYear() && currentDate.getMonth() === today.getMonth() && currentDate.getDate() == today.getDate()) {
         newDay.classList.add("today")
       }
+      //disables all future days
     } else {
       newDay.classList.add("disabled")
     }
     calendar.appendChild(newDay)
   }
-
-  
 }
-populateCalendar(y, m)
 
 if(sessionStorage.getItem('_id') == null) {
  document.querySelector(".message").innerHTML = "<img src=\"./assets/img/shining-star.png\"><p>today's a new day!</p><a class=\"button\" href=\"/\">write a new entry</a>"

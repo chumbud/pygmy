@@ -12,7 +12,7 @@ const benchmarks = [100, 200, 350, 500] //to be replaced with actual averages fr
 
 
 const keyActions = function() {
-  journal_input.onkeydown = function(e) {
+  journal_input.onkeyup = function(e) {
     if (journal_input.value.length != 0) {
       journal_input.classList.add('focused')
       helper_prompt.classList.add('sendToBottom')

@@ -41,14 +41,14 @@ a:hover {
   text-decoration: underline;
 }
 select {
-  border: 1px solid #e8deda;
+  border: 1px solid #cec6af;
   padding: .8rem;
 }
 select > option {
   padding: .8rem;
 }
 select > option:hover {
-    background-color: #b6ffd3;
+  background-color: #b6ffd3;
 }
 .prev,
 .next,
@@ -133,7 +133,7 @@ select > option:hover {
   margin-left: -14rem;
   max-width: 28rem;
   border-radius: 0.8rem;
-  border: 1px solid #e8deda;
+  border: 1px solid #cec6af;
   overflow: hidden;
   transition: var(--easeOutCubic);
   position: absolute;
@@ -197,7 +197,7 @@ select > option:hover {
   line-height: 1.6;
   resize: none;
   overflow: hidden;
-  border: 1px solid #e8deda;
+  border: 1px solid #cec6af;
   box-shadow: 0px 0px 0px 5px #fff;
   transition: var(--easeOutCubic);
   margin-top: 30vh;
@@ -224,8 +224,10 @@ select > option:hover {
   font-size: 2.1rem;
   flex: 1;
 }
+
 .journal-section textarea::placeholder {
   color: #cfb9b0;
+  opacity: 1;
   font-size: 1.8rem;
   line-height: 1.4;
   font-style: italic;
@@ -236,6 +238,7 @@ select > option:hover {
 }
 .journal-section textarea:focus::placeholder {
   text-align: left;
+  opacity: 1;
 }
 .journal-input {
   display: flex;
@@ -352,10 +355,12 @@ nav ul li a::before {
   top: -100%;
   opacity: 0;
   background-color: #faf6ee;
-  padding: .8rem;
+  border: 1px solid #cec6af;
+  padding: 1rem;
   position: absolute;
   white-space: pre;
-  transform: translateY(-5px);
+  line-height: 1;
+  transform: translateY(-10px);
   transition: var(--easeOutCubic)
 }
 .length-tracker::after {
@@ -367,7 +372,7 @@ nav ul li a::before {
   padding: 3.2rem;
 }
 .length-tracker:hover::before {
-  transform: translateY(5px);
+  transform: translateY(-3px);
   opacity: 1
 }
 .text-settings {
@@ -442,7 +447,7 @@ nav ul li a::before {
 .prompt {
   color: grey;
   background-color: white;
-  border: 1px solid #e8deda;
+  border: 1px solid #cec6af;
   font-style: italic;
   padding: 1.6rem;
   display: block;
@@ -554,7 +559,7 @@ nav ul li a::before {
   grid-template-rows: auto;
 }
 .day-header {
-  color: #e8deda;
+  color: #cec6af;
 }
 .month-year { 
   text-transform: lowercase;
@@ -584,6 +589,7 @@ nav ul li a::before {
   text-align: center;
   color: black;
   border: 1px white solid;
+  position: relative;
   transition: var(--easeOutCubic);
 }
 .calendar-container .days li:not(.empty) a:hover,
@@ -594,8 +600,39 @@ nav ul li a::before {
   background-color: #b6ffd3;
 }
 .calendar-container .days li:not(.empty).disabled a {
-  color: #e8deda;
+  color: #cec6af;
   pointer-events: none;
+}
+.calendar-container .days li:not(.empty):not(.completed) a:before {
+  content: 'write an entry';
+  position: absolute;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #fff;
+  background-color: #000;
+  left: -76%;
+  top: -95%;
+  line-height: 1;
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+.calendar-container .days li:not(.empty):not(.completed) a:after {
+  content: '';
+  width: 1.6rem;
+  height: 1.6rem;
+  background-color: #000;
+  transform: rotate(-45deg);
+  position: absolute;
+  left: 31%;
+  top: -36%;
+  z-index: 9;
+  opacity: 0;
+}
+.calendar-container .days li:not(.empty):not(.completed) a:hover:before,
+.calendar-container .days li:not(.empty):not(.completed) a:hover:after {
+  opacity: 1;
 }
 .message {
   margin: 4rem;
@@ -660,7 +697,7 @@ nav ul li a::before {
 #account-settings input {
   padding: 1.6rem;
   margin: 1.6rem 0;
-  border: 1px solid #e8deda;
+  border: 1px solid #cec6af;
   transition: var(--easeOutCubic);
 }
 #account-settings input:focus {
