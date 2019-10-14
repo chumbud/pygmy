@@ -68,10 +68,10 @@ function populateCalendar(year, month) {
   }
 }
 
-if(sessionStorage.getItem('_id') == null) {
- document.querySelector(".message").innerHTML = "<img src=\"./assets/img/shining-star.png\"><p>today's a new day!</p><a class=\"button\" href=\"/\">write a new entry</a>"
-} else {
+if(document.cookie.split(';').filter((item) => item.trim().startsWith('todayId=')).length) {
   document.querySelector(".message").innerHTML = "<p>good job!</p><p>you're all good for today</p><a class=\"button\" href=\"/\">edit today's entry</a>"
+} else {
+ document.querySelector(".message").innerHTML = "<img src=\"./assets/img/shining-star.png\"><p>today's a new day!</p><a class=\"button\" href=\"/\">write a new entry</a>"
 }
 
 document.querySelector(".prev-month").addEventListener("click", function(e) {
