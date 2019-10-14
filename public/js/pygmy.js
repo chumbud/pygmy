@@ -106,11 +106,14 @@ const getAdjacentEntry = function() {
   let prev = document.querySelector(".prev")
   let next = document.querySelector(".next")
 
-  let entryDate = new Date(date.getAttribute("data-date"))
+  let entryDate = document.querySelector("#date").getAttribute("data-date").split("-")
+  entryDate = new Date([entryDate[0], entryDate[1], entryDate[2]])
+
   let prevId = null
   let nextId = null
   hoodie.store.findAll().then(list => {
     let s = list.sort(function(a, b) {
+      //TODO FIX TO CURRENT DATE SYSTEM WITH YYYY MM DD
       var dateA = new Date(a.hoodie.createdAt), dateB = new Date(b.hoodie.createdAt)
       return dateA - dateB
     })
@@ -151,45 +154,74 @@ let currentSession = null
 //retrieves entry but keeps in view-only
 if(sessionStorage.getItem('_id') != null) {
   hoodie.store.find(sessionStorage.getItem('_id')).then(response => {
-    currentSession = response
-    document.querySelector('textarea').value = response.entry
-    document.querySelector('.mood-select').innerHTML = "<img src='assets/img/" + response.selectedEmoji + ".png'>"
-    document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ' ' + response.year
-    document.querySelector('h2').setAttribute("data-date", response.year + "-" + response.month + "-" + response.day)
-    document.querySelector('.length-tracker').innerHTML += response.length
-    document.querySelector('.length-tracker').setAttribute('data-length-status', getComment(response.length, sessionStorage.getItem("avg")))
+    getEntry(response)
 
     //checks if edit more is clicked first
     if (sessionStorage.getItem("edit-mode") == null) {
-      form.classList.add("read-only")
-      document.querySelector('textarea').setAttribute("readonly", true)
-      document.querySelector('#date').innerHTML += '<a class="edit">edit</a>'
-      document.querySelector('h2 a.edit').addEventListener("click", function() {
-        form.classList.toggle("read-only")
-        if(this.innerHTML == "edit")
-          this.innerHTML = "cancel"
-        else
-          this.innerHTML = "edit"
-        document.querySelector('textarea').removeAttribute("readonly")
-        document.querySelector('textarea').focus()
-      })
-    }
-    if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
-      getAdjacentEntry()
+      openInViewOnly()
     }
     sessionStorage.removeItem("edit-mode")
     sessionStorage.removeItem("_id")
   }).catch(handleError)
-  document.querySelector('.expand').click()
-  textarea.classList.toggle('focused')
-  document.querySelector('.input-controls').classList.toggle('focused')
-  document.querySelector('button').innerHTML = "save changes"
+  openEntry()
+//if it's today's entry
+} else if(document.cookie.split(';').filter((item) => item.trim().startsWith('todayId=')).length) {
+  var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)todayId\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+  hoodie.store.find(cookieValue).then(response => {
+    getEntry(response)
+    openInViewOnly()
+  }).catch(function () {
+    //if the entry for today is deleted
+    setDate()
+    if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
+      getAdjacentEntry()
+    }
+    document.querySelector('.next').style.display = "none"
+  })
+  openEntry()
+  //new entry for the day
 } else {
   setDate()
   if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
     getAdjacentEntry()
   }
   document.querySelector('.next').style.display = "none"
+}
+
+function getEntry(response) {
+  currentSession = response
+  document.querySelector('textarea').value = response.entry
+  document.querySelector('.mood-select').innerHTML = "<img src='assets/img/" + response.selectedEmoji + ".png'>"
+  document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ' ' + response.year
+  document.querySelector('h2').setAttribute("data-date", response.year + "-" + response.month + "-" + response.day)
+  document.querySelector('.length-tracker').innerHTML += response.length
+  document.querySelector('.length-tracker').setAttribute('data-length-status', getComment(response.length, sessionStorage.getItem("avg")))
+
+  if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
+    getAdjacentEntry()
+  }
+}
+
+function openEntry() {
+  document.querySelector('.expand').click()
+  textarea.classList.toggle('focused')
+  document.querySelector('.input-controls').classList.toggle('focused')
+  document.querySelector('button').innerHTML = "save changes"
+}
+
+function openInViewOnly () {
+  form.classList.add("read-only")
+  document.querySelector('textarea').setAttribute("readonly", true)
+  document.querySelector('#date').innerHTML += '<a class="edit">edit</a>'
+  document.querySelector('h2 a.edit').addEventListener("click", function() {
+    form.classList.toggle("read-only")
+    if(this.innerHTML == "edit")
+      this.innerHTML = "cancel"
+    else
+      this.innerHTML = "edit"
+    document.querySelector('textarea').removeAttribute("readonly")
+    document.querySelector('textarea').focus()
+  })
 }
 
 form.addEventListener("submit", (event) => {
@@ -215,8 +247,25 @@ form.addEventListener("submit", (event) => {
     length = textarea.value.length
     if(selectedEmoji == '')
       selectedEmoji = "empty"
+
+    let today = new Date()
+    let submittedJournalDate = new Date(document.querySelector("#date").getAttribute("data-date"))
+    console.log(submittedJournalDate)
     if(!entry) return
-      hoodie.store.add({selectedEmoji, entry, length, month, day, year})
+      hoodie.store.add({selectedEmoji, entry, length, month, day, year}).then(function (properties) {
+        if(submittedJournalDate.getFullYear() == today.getFullYear() && submittedJournalDate.getMonth() == today.getMonth() && (submittedJournalDate.getDate()+1) == today.getDate()) {
+
+          var expire = new Date();
+          expire.setFullYear(today.getFullYear());
+          expire.setMonth(today.getMonth());
+          expire.setDate(today.getDate()+1);
+          expire.setHours(0);
+          expire.setMinutes(0);
+
+          document.cookie = "todayId=" + properties._id + "; expires=" + expire.toString()
+
+        }
+      })
   } else {
   //editing session
   entry = textarea.value
