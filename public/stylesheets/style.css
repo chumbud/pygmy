@@ -538,7 +538,19 @@ nav ul li a::before {
   font-family: "Inter UI";
   font-size: 2.4rem;
   font-weight: 700;
-  color: black
+  color: black;
+  padding: 1.6rem;
+  transition: var(--easeOutCubic);
+}
+.prev-month:hover,
+.next-month:hover {
+  text-decoration: none;
+}
+.prev-month:hover {
+  transform: translateX(-5px);
+}
+.next-month:hover {
+  transform: translateX(5px);
 }
 .calendar-container {
   display: grid;
@@ -547,7 +559,7 @@ nav ul li a::before {
   font-family: "Inter UI";
   font-weight: 600;
   font-size: 1.6rem;
-  margin: 2.4rem;
+  margin: 1.6rem;
 }
 .calendar-container > * {
   padding-left: unset;
