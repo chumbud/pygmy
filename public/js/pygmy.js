@@ -86,8 +86,8 @@ let months = ["January", "February", "March", "April", "May", "June",
 ]
 const realDate = new Date()
 const textarea = document.querySelector('textarea')
+let today = realDate.getFullYear() + "-" + (realDate.getMonth()+1) + "-" + realDate.getDate()
 const setDate = function() {
-  let today = realDate.getFullYear() + "-" + (realDate.getMonth()+1) + "-" + realDate.getDate()
   if(sessionStorage.getItem("date") == null) {
     date.setAttribute("data-date", today)
     today = months[(realDate.getMonth())] + " " + realDate.getDate() + " " + realDate.getFullYear()
@@ -165,8 +165,9 @@ if(sessionStorage.getItem('_id') != null) {
   }).catch(handleError)
   openEntry()
 //if it's today's entry
-} else if(document.cookie.split(';').filter((item) => item.trim().startsWith('todayId=')).length) {
-  var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)todayId\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+} else if(document.cookie.split(';').filter((item) => item.trim().startsWith('todayId=')).length && today == sessionStorage.getItem("date")) {
+  var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)todayId\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+
   hoodie.store.find(cookieValue).then(response => {
     getEntry(response)
     openInViewOnly()
@@ -250,7 +251,6 @@ form.addEventListener("submit", (event) => {
 
     let today = new Date()
     let submittedJournalDate = new Date(document.querySelector("#date").getAttribute("data-date"))
-    console.log(submittedJournalDate)
     if(!entry) return
       hoodie.store.add({selectedEmoji, entry, length, month, day, year}).then(function (properties) {
         if(submittedJournalDate.getFullYear() == today.getFullYear() && submittedJournalDate.getMonth() == today.getMonth() && (submittedJournalDate.getDate()+1) == today.getDate()) {

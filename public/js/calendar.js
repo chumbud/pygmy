@@ -19,7 +19,6 @@ function populateCalendar(year, month) {
   let lastDay = 32 - new Date(year, month, 32).getDate()
   calendar.innerHTML = ''
   header.innerHTML = (months[month]) + ' ' +  year
-  sessionStorage.removeItem("date")
 
   //places empty list elements to position the first day
   if (firstDay != 0) {
@@ -68,10 +67,15 @@ function populateCalendar(year, month) {
   }
 }
 
-if(sessionStorage.getItem('_id') == null) {
- document.querySelector(".message").innerHTML = "<img src=\"./assets/img/shining-star.png\"><p>today's a new day!</p><a class=\"button\" href=\"/\">write a new entry</a>"
-} else {
+if(document.cookie.split(';').filter((item) => item.trim().startsWith('todayId=')).length) {
   document.querySelector(".message").innerHTML = "<p>good job!</p><p>you're all good for today</p><a class=\"button\" href=\"/\">edit today's entry</a>"
+  
+  //sets the sessionstorage date as today for reference to check to see if the clicked cal date is today to retieve actually today's entry. this is done so "edit today's entry" and "latest entry" work without much change needed
+  let realDate = new Date()
+  let today = realDate.getFullYear() + "-" + (realDate.getMonth()+1) + "-" + realDate.getDate()
+  sessionStorage.setItem("date", today)
+} else {
+ document.querySelector(".message").innerHTML = "<img src=\"./assets/img/shining-star.png\"><p>today's a new day!</p><a class=\"button\" href=\"/\">write a new entry</a>"
 }
 
 document.querySelector(".prev-month").addEventListener("click", function(e) {
