@@ -30,15 +30,6 @@ fetch('json/emoji.json')
 	})
 })
 	
-	let date = document.querySelector("#date").getAttribute("data-date").split("/")
-	let year = date[0]
-	let month = date[1]
-	let day = date[2]
-	console.log(date + " " + year + " " + month + " " + day)
-	hoodie.store.find([year, month, day]).then(response => {
-		console.log(response)
-	})
-	
 	if(sessionStorage.getItem('_id') != null) {
 		hoodie.store.find(sessionStorage.getItem('_id')).then(response => {
 			document.querySelector('input[value="' + response.selectedEmoji + '"]').checked = true

@@ -30,11 +30,11 @@ journal_input.addEventListener('click', keyActions())
 const helper_prompt_box = document.getElementsByClassName('helper-prompt-box')[0]
 const showPrompt = function() {
 	helper_prompt.onmousedown = function(e) {
-	 helper_prompt_box.classList.toggle('open')
- }
- document.getElementsByClassName('exit')[0].onmousedown = function(e) {
-	helper_prompt_box.classList.toggle('open')
-}
+		helper_prompt_box.classList.toggle('open')
+	}
+	document.getElementsByClassName('exit')[0].onmousedown = function(e) {
+		helper_prompt_box.classList.toggle('open')
+	}
 }
 
 helper_prompt.addEventListener('click', showPrompt())
@@ -169,8 +169,8 @@ if(sessionStorage.getItem('_id') != null) {
 	}).catch(handleError)
 	openEntry()
 //if it's today's entry
-} else if(hoodie.store.find(year, month, day) && today == sessionStorage.getItem("date")) {
-		hoodie.store.find(year, month, day).then(response => {
+} else if(false) {
+	hoodie.store.find(hoodie.account.profile.get('latestId')).then(response => {
 		getEntry(response)
 		openInViewOnly()
 	}).catch(function () {
@@ -182,6 +182,7 @@ if(sessionStorage.getItem('_id') != null) {
 	})
 	openEntry()
 } else {
+
 	setDate()
 	if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
 		getAdjacentEntry()
@@ -249,10 +250,12 @@ form.addEventListener("submit", (event) => {
 			selectedEmoji = "empty"
 
 		let today = new Date()
+		today.setHours(0,0,0,0)
 		let submittedJournalDate = new Date(document.querySelector("#date").getAttribute("data-date"))
 		if(!entry) return
-			hoodie.store.on("add", function() { window.location.replace("/search.html") })
-			hoodie.store.add({selectedEmoji, entry, length, month, day, year})
+		hoodie.store.on("add", function() { window.location.replace("/search.html") })
+		hoodie.store.add({selectedEmoji, entry, length, month, day, year})
+
 	} else {
 	//editing session
 	entry = textarea.value
@@ -264,9 +267,16 @@ form.addEventListener("submit", (event) => {
 	})
 	if(!entry) return
 		hoodie.store.on("update", function() { window.location.replace("/search.html") })
-		hoodie.store.update(currentSession._id, {selectedEmoji, entry, length, month, day, year})   
+	hoodie.store.update(currentSession._id, {selectedEmoji, entry, length, month, day, year})   
 }
 })
+Date.prototype.isSameDateAs = function(pDate) {
+  return (
+    this.getFullYear() === pDate.getFullYear() &&
+    this.getMonth() === pDate.getMonth() &&
+    this.getDate() === pDate.getDate()
+  );
+}
 
 const getComment = function (entryLength, userLengthAvg) {
 
@@ -280,3 +290,11 @@ const getComment = function (entryLength, userLengthAvg) {
 		return sayings[3]
 	return "whoa"
 }
+/*
+function getTodaysEntry() {
+		hoodie.store.findAll()
+	return
+}
+
+get them all and find the latest...
+*/
