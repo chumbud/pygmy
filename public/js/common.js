@@ -1,3 +1,12 @@
+//sets calendar icon position and day
+let i = new Date()
+document.querySelector(".icon-date").innerHTML = i.getDate()
+if(i.getDate() >= 10)
+document.querySelector(".icon-date").setAttribute("transform", "translate(5.25 19.5)")
+else
+document.querySelector(".icon-date").setAttribute("transform", "translate(8.5 19.5)")
+
+
 const handleError = function(error) {
 	console.log(error)
 }
@@ -19,7 +28,6 @@ hoodie.account.on('signin', function (account) {
 hoodie.account.on('signout', hideSignedIn)
 hoodie.account.get(['session', 'username'], {local: true})
 .then(function (properties) {
-	console.log(properties)
 	if (properties.session) {
 		showSignedIn(properties.username)
 	} else {

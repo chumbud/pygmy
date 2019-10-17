@@ -1,5 +1,5 @@
 //results DOM object
-const results = document.querySelector('#results ul')
+const DOMresults = document.querySelector('#results ul')
 let months = ["January", "February", "March", "April", "May", "June",
 "July", "August", "September", "October", "November", "December"
 ];
@@ -13,7 +13,6 @@ function renderItems () {
 		renderResults(resultsArray)
 		sessionStorage.setItem('avg', getAvgEntryLength(resultsArray))
 		generateSearchConstraints(resultsArray)
-		console.log(resultsArray)
 	})
 	document.querySelector(".clear").addEventListener("click", function() {
 		mood_board_switch.innerHTML = "add icon"
@@ -43,6 +42,8 @@ function sortEntries(el) {
 
 function generateSearchConstraints(entries) {
 	let years = []
+  document.querySelector("#year-select").innerHTML = ''
+  
 	entries.forEach(entry => {
 		if(!years.includes(entry.year)) {
 			years.push(entry.year)
@@ -89,7 +90,7 @@ function getAvgEntryLength(ar) {
 
 function renderResults(a) {
 	let resultNodes = []
-	results.innerHTML = ''
+	DOMresults.innerHTML = ''
 
 	a.forEach(entry => {
 		const item = document.createElement("li")
@@ -117,8 +118,8 @@ function renderResults(a) {
 				window.location.replace("/")
 			}
 		})
-		results.appendChild(resultNodes[i])
+		DOMresults.appendChild(resultNodes[i])
 	}
-	if(results.innerHTML == '')
-		results.innerHTML = 'no results :('
+	if(DOMresults.innerHTML == '')
+		DOMresults.innerHTML = 'no results :('
 }
