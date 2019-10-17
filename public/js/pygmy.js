@@ -2,15 +2,8 @@ const journal_input = document.querySelector('textarea')
 const helper_prompt = document.querySelector('.helper-prompt')
 const input_controls = document.querySelector('.input-controls')
 const input_comment = document.querySelector('.comment')
-
-//typing actions: textarea focus, character changing
-const brown = '#D2C8AD'
-const white = '#fff'
-const greens = ['#D4FFE5', '#B6FFD3', '#88FFB8', '#4FFD95']
 const sayings = ['short', 'medium', 'typical', 'above average']
-const benchmarks = [100, 200, 350, 500] //to be replaced with actual averages from previous entry counts
-
-
+                        
 const keyActions = function() {
 	journal_input.onkeyup = function(e) {
 		if (journal_input.value.length != 0) {
@@ -80,7 +73,7 @@ document.querySelector(".new-prompt").addEventListener("click", function() {
 
 //sets the time for the current entry
 let form = document.querySelector('#entry-form')
-const date = document.getElementById('date')
+let dateHeader = document.getElementById('date')
 let months = ["January", "February", "March", "April", "May", "June",
 "July", "August", "September", "October", "November", "December"
 ]
@@ -89,14 +82,13 @@ const textarea = document.querySelector('textarea')
 let today = realDate.getFullYear() + "/" + (realDate.getMonth()+1) + "/" + realDate.getDate()
 const setDate = function() {
 	if(sessionStorage.getItem("date") == null) {
-		date.setAttribute("data-date", today)
+		dateHeader.setAttribute("data-date", today)
 		today = months[(realDate.getMonth())] + " " + realDate.getDate() + " " + realDate.getFullYear()
-		date.innerHTML = today
+		dateHeader.innerHTML = today
 	} else {
-		date.setAttribute("data-date", sessionStorage.getItem("date"))
+		dateHeader.setAttribute("data-date", sessionStorage.getItem("date"))
 		today = sessionStorage.getItem("date").split("/")
-		date.innerHTML = months[(today[1]-1)] + " " + today[2] + " " + today[0]
-		sessionStorage.removeItem("date")
+		dateHeader.innerHTML = months[(today[1]-1)] + " " + today[2] + " " + today[0]
 	}
 }
 
@@ -152,9 +144,6 @@ const getAdjacentEntry = function() {
 }
 
 let currentSession = null
-let year = realDate.getFullYear()
-let month = realDate.getMonth()
-let day = realDate.getDay()
 //retrieves entry but keeps in view-only
 if(sessionStorage.getItem('_id') != null) {
 	hoodie.store.find(sessionStorage.getItem('_id')).then(response => {
@@ -169,24 +158,22 @@ if(sessionStorage.getItem('_id') != null) {
 	}).catch(handleError)
 	openEntry()
 //if it's today's entry
-} else if(false) {
-	hoodie.store.find(hoodie.account.profile.get('latestId')).then(response => {
-		getEntry(response)
-		openInViewOnly()
-	}).catch(function () {
-		//if the entry for today is deleted
-		setDate()
-		if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
-			getAdjacentEntry()
-		}
-	})
-	openEntry()
 } else {
-
+  //new entry for the day
 	setDate()
 	if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
 		getAdjacentEntry()
 	}
+  
+  hoodie.store.findAll(function(response) {
+      if(response.year == realDate.getFullYear() &&
+        response.month-1 == realDate.getMonth() && 
+         response.day == realDate.getDate() && sessionStorage.getItem("date") == null) {
+        	getEntry(response)
+        	openInViewOnly()
+          openEntry()
+      }
+  })
 }
 
 function getEntry(response) {
@@ -269,13 +256,15 @@ form.addEventListener("submit", (event) => {
 		hoodie.store.on("update", function() { window.location.replace("/search.html") })
 	hoodie.store.update(currentSession._id, {selectedEmoji, entry, length, month, day, year})   
 }
+  sessionStorage.removeItem("date")
 })
+
 Date.prototype.isSameDateAs = function(pDate) {
   return (
     this.getFullYear() === pDate.getFullYear() &&
     this.getMonth() === pDate.getMonth() &&
     this.getDate() === pDate.getDate()
-  );
+  )
 }
 
 const getComment = function (entryLength, userLengthAvg) {
@@ -290,11 +279,3 @@ const getComment = function (entryLength, userLengthAvg) {
 		return sayings[3]
 	return "whoa"
 }
-/*
-function getTodaysEntry() {
-		hoodie.store.findAll()
-	return
-}
-
-get them all and find the latest...
-*/

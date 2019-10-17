@@ -1,20 +1,25 @@
-<svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0)">
-<path d="M6.62598 4.60608H13.8987" stroke="black" stroke-width="2" stroke-miterlimit="10"/>
-<path d="M16.8076 4.60608H19.3935V23.1919H0.807617V4.60608H3.87832" stroke="black" stroke-width="2" stroke-miterlimit="10"/>
-<path d="M7.09641 2.5565L7.09554 2.57117V2.58586V5.9798C7.09554 7.07739 6.10728 8.06566 5.00969 8.06566C3.9019 8.06566 2.92383 7.14812 2.92383 5.9798V2.58586C2.92383 1.48826 3.91209 0.5 5.00969 0.5C6.20549 0.5 7.15867 1.49805 7.09641 2.5565ZM6.47938 2.58586C6.47938 1.85218 5.87803 1.11616 5.00969 1.11616C4.60465 1.11616 4.24146 1.31365 3.98947 1.56564C3.73748 1.81763 3.53999 2.18082 3.53999 2.58586V6.06061C3.53999 6.98389 4.33792 7.4495 5.00969 7.4495C5.74337 7.4495 6.47938 6.84814 6.47938 5.9798V2.58586Z" fill="black" stroke="black"/>
-<path d="M16.661 2.58586C16.661 2.18082 16.4635 1.81763 16.2115 1.56564C15.9596 1.31365 15.5964 1.11616 15.1913 1.11616C14.7672 1.11616 14.3798 1.29636 14.1105 1.56564C13.8524 1.82371 13.6689 2.20237 13.7216 2.62152V5.9798C13.7216 6.38484 13.9191 6.74803 14.1711 7.00002C14.4231 7.25201 14.7863 7.4495 15.1913 7.4495C15.925 7.4495 16.661 6.84814 16.661 5.9798V2.58586ZM13.1055 2.58586C13.1055 1.47807 14.023 0.5 15.1913 0.5C16.2889 0.5 17.2772 1.48826 17.2772 2.58586V6.06061C17.2772 7.20846 16.3205 8.06566 15.1913 8.06566C14.0835 8.06566 13.1055 7.14812 13.1055 5.9798V2.58586Z" fill="black" stroke="black"/>
-<path d="M4.54004 12.995V11.5707H5.96428V12.995H4.54004Z" fill="black" stroke="black"/>
-<path d="M7.77246 12.995V11.5707H9.1967V12.995H7.77246Z" fill="black" stroke="black"/>
-<path d="M11.0049 12.995V11.5707H12.4291V12.995H11.0049Z" fill="black" stroke="black"/>
-<path d="M14.2373 12.995V11.5707H15.6615V12.995H14.2373Z" fill="black" stroke="black"/>
-<path d="M4.54004 17.2272V15.803H5.96428V17.2272H4.54004Z" fill="black" stroke="black"/>
-<path d="M7.77246 17.2272V15.803H9.1967V17.2272H7.77246Z" fill="black" stroke="black"/>
-<path d="M11.0049 17.2272V15.803H12.4291V17.2272H11.0049Z" fill="black" stroke="black"/>
-</g>
-<defs>
-<clipPath id="clip0">
-<rect width="20.202" height="24" fill="white"/>
-</clipPath>
-</defs>
+<svg id="cal-icon" data-name="cal-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .icon-date {
+        font-size: 12px;
+        font-family: InterUI-Medium, Inter UI;
+        font-weight: 500;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #000;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <title>calendar-1</title>
+  <path d="M22,2V22H2V2H22m2-2H0V24H24V0Z"/>
+  <text class="icon-date" transform="translate(5.25 19.56)">12</text>
+  <g>
+    <circle cx="6.5" cy="4" r="1"/>
+    <circle cx="17.5" cy="4" r="1"/>
+  </g>
+  <line class="cls-2" x1="1.5" y1="7" x2="22.5" y2="7"/>
 </svg>

@@ -1,4 +1,4 @@
-
+sessionStorage.removeItem("date")
 let calendar = document.querySelector(".calendar-container .days")
 let header = document.querySelector(".calendar-container .month-year")
 let months = ["January", "February", "March", "April", "May", "June",
@@ -7,6 +7,7 @@ let months = ["January", "February", "March", "April", "May", "June",
 
 let y = new Date().getFullYear()
 let m = new Date().getMonth()
+let realDate = new Date()
 let calResults = []
 hoodie.store.findAll().then(list => {
 	calResults = [...list]
@@ -67,23 +68,23 @@ function populateCalendar(year, month) {
 }
 }
 
-if(document.cookie.split(';').filter((item) => item.trim().startsWith('todayId=')).length) {
-	document.querySelector(".message").innerHTML = "<p>good job!</p><p>you're all good for today</p><a class=\"button\" href=\"/\">edit today's entry</a>"
-	
-  //sets the sessionstorage date as today for reference to check to see if the clicked cal date is today to retieve actually today's entry. this is done so "edit today's entry" and "latest entry" work without much change needed
-  let realDate = new Date()
-  let today = realDate.getFullYear() + "/" + (realDate.getMonth()+1) + "/" + realDate.getDate()
-  sessionStorage.setItem("date", today)
-} else {
 	document.querySelector(".message").innerHTML = "<img src=\"./assets/img/shining-star.png\"><p>today's a new day!</p><a class=\"button\" href=\"/\">write a new entry</a>"
-}
 
-document.querySelector(".prev-month").addEventListener("click", function(e) {
+hoodie.store.findAll(function(response) {
+      if(response.year == realDate.getFullYear() &&
+        response.month-1 == realDate.getMonth() && 
+         response.day == realDate.getDate()) {
+        	document.querySelector(".message").innerHTML = "<p>you're all set! <br><br> come back tomorrow to write some more.</p><a class=\"button\" href=\"/\">edit today's entry</a>"
+      }
+})
+
+
+document.querySelector(".calendar .prev").addEventListener("click", function(e) {
 	e.preventDefault()
 	m==1 ? (y--, m=11) : m--
 	populateCalendar(y, m)  
 })
-document.querySelector(".next-month").addEventListener("click", function(e) {
+document.querySelector(".calendar .next").addEventListener("click", function(e) {
 	e.preventDefault()
 	m==11 ? (y++, m=0) : m++
 	populateCalendar(y, m)  

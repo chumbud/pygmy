@@ -1,5 +1,12 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="9.5" cy="9.5" r="8.5" stroke="black" stroke-width="2"/>
-<path d="M15.9999 16.0226L22.5424 22.5217L15.9999 16.0226Z" fill="black"/>
-<path d="M15.9999 16.0226L22.5424 22.5217" stroke="black" stroke-width="2"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="24px" height="24px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:2;}
+	.st1{fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;}
+</style>
+<circle class="st0" cx="9.5" cy="9.5" r="8.5"/>
+<path d="M16,16l6.5,6.5L16,16z"/>
+<path class="st1" d="M16.3,16.3l5.3,5.2"/>
 </svg>
