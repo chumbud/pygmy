@@ -180,6 +180,7 @@ function getEntry(response) {
 	currentSession = response
 	document.querySelector('textarea').value = response.entry
 	document.querySelector('.mood-select').innerHTML = "<img src='assets/img/" + response.selectedEmoji + ".png'>"
+  document.querySelector('.mood-select').classList.add("selected")
 	document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ' ' + response.year
 	document.querySelector('h2').setAttribute("data-date", response.year + "/" + response.month + "/" + response.day)
 	document.querySelector('.length-tracker').innerHTML += response.length
@@ -278,4 +279,43 @@ const getComment = function (entryLength, userLengthAvg) {
 	if(entryLength >= (userLengthAvg*.75))
 		return sayings[3]
 	return "whoa"
+}
+
+//slight dom restructure for mobile
+
+let done = false
+window.onresize = function () {  
+  if(window.innerWidth <= 680 && !done) {
+    insertAfter(document.querySelector(".entry-header .next"), document.querySelector(".entry-header .prev"))
+    let left = document.createElement('div')
+    left.className = "to-nav"
+    wrap(document.querySelector(".entry-header .prev"), left)
+    let right = document.createElement('div')
+    right.className = "to-nav"
+    wrap(document.querySelector(".entry-header .next"), right)
+    done = true
+  } else if(window.innerWidth > 680 && done) {
+    document.querySelector(".entry-header c:last-child").appendChild(document.querySelector(".entry-header .next"))
+    document.querySelector(".entry-header c:first-child").appendChild(document.querySelector(".entry-header .prev"))
+    document.querySelectorAll(".to-nav").remove()
+    done = false
+  }
+}
+
+function wrap(el, wrapper) {
+	    el.parentNode.insertBefore(wrapper, el);
+	    wrapper.appendChild(el);
+}
+function insertAfter(el, referenceNode) {
+	    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+}
+Element.prototype.remove = function() {
+    this.parentElement.removeChild(this);
+}
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    for(var i = this.length - 1; i >= 0; i--) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
 }

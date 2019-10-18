@@ -11,11 +11,10 @@ fetch('json/emoji.json')
 	const option = document.createElement("li")
 	option.innerHTML = "<input name=\"emoji\" type=\"radio\" value=\"" + emoji.value + "\"/><img src=\"assets/img/" + emoji.value + ".png\">"
 	mood_board.querySelector("ul").appendChild(option)
-	//emojiList += option
 
 	option.addEventListener("click", function() {    
 		mood_board_switch.innerHTML = "<img src='assets/img/"+ this.querySelector("input").value +".png'>"
-
+    mood_board_switch.classList.add('selected')
 	  //checks the emoji for submission and unchecks all others if changed
 	  document.querySelectorAll('.mood-board ul li').forEach(emoji => {
 	  	emoji.querySelector('input').checked = false

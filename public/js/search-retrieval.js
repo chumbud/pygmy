@@ -16,6 +16,7 @@ function renderItems () {
 	})
 	document.querySelector(".clear").addEventListener("click", function() {
 		mood_board_switch.innerHTML = "add icon"
+    mood_board_switch.classList.remove('selected')
 		document.querySelectorAll('.mood-board ul li input').forEach(emoji => {
 			emoji.checked = false
 		})
@@ -42,7 +43,8 @@ function sortEntries(el) {
 
 function generateSearchConstraints(entries) {
 	let years = []
-  document.querySelector("#year-select").innerHTML = ''
+  document.querySelector("#year-select").innerHTML = '<option value=""></option>'
+
   
 	entries.forEach(entry => {
 		if(!years.includes(entry.year)) {
@@ -106,7 +108,8 @@ function renderResults(a) {
 	for (var i = resultNodes.length - 1; i >= 0; i--) {
 		resultNodes[i].addEventListener("click", function (event) {
 			sessionStorage.setItem('_id', this.getAttribute("data-id"))
-			if(event.target.classList.contains('delete')) { 
+			if(event.target.classList.contains('delete')) {
+        
 				hoodie.store.remove(sessionStorage.getItem('_id')).then(function() {
 					sessionStorage.removeItem("_id")
 					renderItems()
