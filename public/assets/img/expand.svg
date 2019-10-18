@@ -1,4 +1,8 @@
-<svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1 7L5 11L9 7" stroke="black"/>
-<path d="M1 1L5 5L9 1" stroke="black"/>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="10px" height="12.4px" viewBox="0 0 10 12.4" style="enable-background:new 0 0 10 12.4;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;}
+</style>
+<path class="st0" d="M1,7l4,4l4-4"/>
+<path class="st0" d="M1,1l4,4l4-4"/>
 </svg>

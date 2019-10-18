@@ -6,6 +6,10 @@
 ::selection {
   background-color: #b6ffd3;
 }
+*::before,
+*::after {
+  stroke-linecap: round;
+}
 html,
 body {
   height: 100vh;
@@ -53,15 +57,30 @@ select > option:hover {
 ul {
   padding-left: 0;
 }
+
 .prev,
 .next,
 .mood-select {
   position: relative;
 }
 .mood-select {
-  left: -5px;
+  padding: 1rem 3.2rem 1rem 1.6rem;
+  background-color: #faf6ee;
+  border-radius: 0.8rem;
+  border: 1px solid #cec6af;
+  /*
+  padding: .8rem 3.2rem .8rem .8rem;
+  border: 2px solid black; */
   display: inline-block;
-  transition: var(--easeOutCubic);
+  transition: background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.mood-select:hover {
+  background-color: #f5efe5;
+}
+.mood-select.selected {
+  background-color: white;
+  padding: 0 3.2rem 0 0.8rem;
+  border: 1px solid white;
 }
 .prev {
   right: -17px;
@@ -132,12 +151,12 @@ ul {
   bottom: unset;
 }
 .calendar .prev:hover {
-    background-color: #ece9e3;
-  transform: translateX(-.5rem);
+  background-color: #f5efe5;
+  transform: translateX(-0.5rem);
 }
 .calendar .next:hover {
-  background-color: #ece9e3;
-  transform: translateX(.5rem);
+  background-color: #f5efe5;
+  transform: translateX(0.5rem);
 }
 .calendar .prev:active {
   transform: translateX(-1rem);
@@ -151,11 +170,11 @@ ul {
   height: 5px;
   transform: rotate(135deg);
   position: absolute;
-  right: -15px;
+  right: 15px;
   top: 50%;
   margin-top: -5px;
-  border-top: 1px solid #000;
-  border-right: 1px solid #000;
+  border-top: 2px solid #000;
+  border-right: 2px solid #000;
   transition: var(--easeOutCubic);
 }
 
@@ -188,7 +207,7 @@ ul {
   margin-left: -14rem;
   max-width: 28rem;
   border-radius: 0.8rem;
-  border: 2px solid #cec6af;
+  border: 1px solid #cec6af;
   overflow: hidden;
   transition: var(--easeOutCubic);
   position: absolute;
@@ -390,7 +409,9 @@ nav ul li a::before {
   background-repeat: no-repeat;
   background-position: center;
   display: inline-block;
-  height: 1.1rem;
+  height: 1.2rem;
+  position: relative;
+  top: 2px;
   width: 1rem;
   padding: 0rem 1rem;
   transition: var(--easeOutCubic);
@@ -403,7 +424,7 @@ nav ul li a::before {
   transform: rotate(180deg);
 }
 .journal-input textarea.expanded ~ .input-controls .expand:hover::before {
-  transform: rotate(180deg) translateY(5px); 
+  transform: rotate(180deg) translateY(5px);
 }
 .length-tracker {
   margin-right: auto;
@@ -678,7 +699,9 @@ nav ul li a::before {
   position: relative;
   transition: var(--easeOutCubic);
 }
-.calendar-container .days li:not(.empty) a:hover,
+.calendar-container .days li:not(.empty) a:hover {
+  background-color: #f5efe5;
+}
 .calendar-container .days li:not(.empty).today a {
   border: 2px black solid;
 }
@@ -752,6 +775,7 @@ nav ul li a::before {
   background-color: #fff;
   text-decoration: none;
   line-height: 1;
+  border-radius: 0.8rem;
   cursor: pointer;
   padding: 1rem 2rem;
   transition: var(--easeOutCubic);
@@ -805,7 +829,13 @@ nav ul li a::before {
 /*mobile*/
 @media only screen and (max-width: 680px) {
   #entry-form {
-    padding: 0 3.6rem;
+    padding: 0;
+  }
+  .entry-header {
+    margin-top: 0;
+  }
+  .header {
+    margin-top: 1.6rem;
   }
   nav {
     flex-flow: row;
@@ -831,11 +861,18 @@ nav ul li a::before {
   nav ul:not(:last-child) li {
     border-right: 1px solid black;
   }
+  nav ul li:hover {
+    background-color: #eaeaea;
+  }
   .journal-section {
     height: 100vh;
   }
   .journal-input {
     margin-bottom: 9.5rem;
+  }
+  .journal-input textarea.expanded.focused,
+  .journal-input textarea + .input-controls {
+    padding: 0 3.6rem;
   }
   .calendar-container .day-header,
   .calendar-container .days {
@@ -859,5 +896,22 @@ nav ul li a::before {
   }
   .search-container {
     flex-flow: column;
+  }
+  #cal-icon {
+    margin-top: 0.8rem;
+  }
+  .to-nav {
+    width: 50%;
+    padding: 1.6rem;
+    display: inline-block;
+  }
+  .to-nav:first-child {
+    border-right: 1px solid black;
+  }
+  .to-nav:last-child {
+    text-align: right;
+  }
+  .entry-header > c:first-child {
+    border-bottom: 1px solid black;
   }
 }
