@@ -6,36 +6,44 @@ fetch('json/emoji.json')
 .then(emojiListResponse => emojiListResponse.json())
 .then(jsonData => {
 	emojiRoster = jsonData
-	emojiRoster.forEach(emoji => {
-	//creates emoji in list element and adds it to the ul
-	const option = document.createElement("li")
-	option.innerHTML = "<input name=\"emoji\" type=\"radio\" value=\"" + emoji.value + "\"/><img src=\"assets/img/" + emoji.value + ".png\">"
-	mood_board.querySelector("ul").appendChild(option)
+    emojiRoster.forEach(emoji => {
+      //creates emoji in list element and adds it to the ul
+      const option = document.createElement("li")
+      option.innerHTML = "<input name=\"emoji\" type=\"radio\" value=\"" + emoji.value + "\"/><img src=\"assets/img/" + emoji.value + ".png\">"
+      mood_board.querySelector("ul").appendChild(option)
+    })
+  })
+  .then(function() {
+    mood_board.addEventListener("click", function(event) {    
+      if(event.target.closest("li")) {
+      let inputEmoji = event.target.closest("li").firstChild
 
-	option.addEventListener("click", function() {    
-		mood_board_switch.innerHTML = "<img src='assets/img/"+ this.querySelector("input").value +".png'>"
-    mood_board_switch.classList.add('selected')
-	  //checks the emoji for submission and unchecks all others if changed
-	  document.querySelectorAll('.mood-board ul li').forEach(emoji => {
-	  	emoji.querySelector('input').checked = false
-	  })
-	  this.querySelector('input').checked = true
+      mood_board_switch.innerHTML = "<img src='assets/img/"+ inputEmoji.value +".png'>"
+      mood_board_switch.classList.add('selected')
+      //checks the emoji for submission and unchecks all others if changed
+      document.querySelectorAll('.mood-board ul li').forEach(emoji => {
+        emoji.querySelector('input').checked = false
+      })
+      inputEmoji.checked = true
 
-	  //triggers input event for search
-	  var event = document.createEvent("HTMLEvents")
-	  event.initEvent("input", true, true)
-	  event.eventName = "input"
-	  this.dispatchEvent(event)
+      //triggers input event for search
+      var e = document.createEvent("HTMLEvents")
+      e.initEvent("input", true, true)
+      e.eventName = "input"
+      event.target.dispatchEvent(event)
+      }
+    })  
 	})
-})
+  .then(function() {
+    if(sessionStorage.getItem('_id') != null) {
+      hoodie.store.find(sessionStorage.getItem('_id')).then(response => {
+        document.querySelector('input[value="' + response.selectedEmoji + '"]').checked = true
+        console.log('input[value="' + response.selectedEmoji + '"]')
+      })
+    }
+  })
 	
-	if(sessionStorage.getItem('_id') != null) {
-		hoodie.store.find(sessionStorage.getItem('_id')).then(response => {
-			document.querySelector('input[value="' + response.selectedEmoji + '"]').checked = true
-			//console.log('input[value="' + response.selectedEmoji + '"]')
-		})
-	}  
-})
+
 
 //mood board toggle
 const mood_board_switch = document.querySelector('.mood-select')
