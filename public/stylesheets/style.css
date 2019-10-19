@@ -768,6 +768,9 @@ nav ul li a::before {
 #account-settings h2 {
   margin-bottom: 1.6rem;
 }
+#account-settings p {
+  line-height: 1.6;
+}
 #account-settings button {
   margin-bottom: 2.4rem;
   text-transform: lowercase;
@@ -833,9 +836,13 @@ nav ul li a::before {
   }
   .entry-header {
     margin-top: 0;
+    margin-bottom: 0;
   }
-  .header {
-    margin-top: 1.6rem;
+  #date {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 3.6rem;
+    line-height: 1.75;
   }
   nav {
     flex-flow: row;
@@ -858,6 +865,9 @@ nav ul li a::before {
     padding: 0.8rem 1.6rem;
     margin-bottom: 0;
   }
+  nav ul li a::before {
+    display: none;
+  }
   nav ul:not(:last-child) li {
     border-right: 1px solid black;
   }
@@ -868,11 +878,18 @@ nav ul li a::before {
     height: 100vh;
   }
   .journal-input {
-    margin-bottom: 9.5rem;
+    margin-bottom: 4rem;
   }
   .journal-input textarea.expanded.focused,
   .journal-input textarea + .input-controls {
     padding: 0 3.6rem;
+  }
+  .journal-input textarea.expanded.focused {
+    margin-top: 0;
+    font-size: 1.4rem;
+  }
+  .journal-input > .helper-prompt {
+    display: none;
   }
   .calendar-container .day-header,
   .calendar-container .days {
@@ -897,13 +914,15 @@ nav ul li a::before {
   .search-container {
     flex-flow: column;
   }
-  #cal-icon {
-    margin-top: 0.8rem;
+  .calendar-page svg {
+    display: none;
   }
   .to-nav {
     width: 50%;
-    padding: 1.6rem;
+    padding: 0.8rem 1.6rem;
     display: inline-block;
+    font-size: 1.2rem;
+    line-height: 2;
   }
   .to-nav:first-child {
     border-right: 1px solid black;
@@ -913,5 +932,53 @@ nav ul li a::before {
   }
   .entry-header > c:first-child {
     border-bottom: 1px solid black;
+  }
+  .header {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+  }
+  .header .mood-select {
+    order: 1;
+    line-height: 3;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 3.6rem;
+  }
+  .header .mood-board {
+    margin-top: 4.8rem;
+    left: unset;
+    right: 0;
+  }
+  .mood-select.selected {
+    margin-right: 0;
+  }
+  @media only screen and (max-height: 400px) {
+    .to-nav {
+      display: none;
+    }
+    .entry-header {
+      border-bottom: 1px solid black;
+      z-index: 10;
+    }
+    .header h2 {
+      font-size: 1.4rem;
+    }
+    .mood-select.selected img {
+      width: 2.4rem;
+    }
+    .entry-header > c[span="1"],
+    .entry-header > c[span="7.."] {
+      display: none;
+    }
+    .entry-header .header {
+      padding: 0.4rem 2.4rem 0.4rem 0;
+    }
+    #date {
+      line-height: 2;
+    }
+    .journal-input textarea.focused.expanded {
+      padding-top: 1.6rem;
+    }
   }
 }

@@ -97,4 +97,7 @@ h3 a.delete {
   .search-container {
     flex-flow: column;
   }
+  #results {
+    margin-bottom: 4rem;
+  }
 }
