@@ -3,7 +3,9 @@ const helper_prompt = document.querySelector('.helper-prompt')
 const input_controls = document.querySelector('.input-controls')
 const input_comment = document.querySelector('.comment')
 const sayings = ['short', 'medium', 'typical', 'above average']
-                        
+
+const mobile = 680
+
 const keyActions = function() {
 	journal_input.onkeyup = function(e) {
 		if (journal_input.value.length != 0) {
@@ -92,7 +94,6 @@ const setDate = function() {
 	}
 }
 
-const comments = ['short', 'medium', 'typical', 'above average']
 //if being redirected from search, checks for an entry id for editing and turns on expanded mode
 const getAdjacentEntry = function() {
 	let prev = document.querySelector(".prev")
@@ -100,7 +101,6 @@ const getAdjacentEntry = function() {
 
 	let entryDate = document.querySelector("#date").getAttribute("data-date").split("/")
 	entryDate = new Date([entryDate[0], entryDate[1], entryDate[2]])
-	
 	
 	let prevId = null
 	let nextId = null
@@ -143,6 +143,21 @@ const getAdjacentEntry = function() {
 	}).catch(handleError)
 }
 
+//ensure today's entry is actually today
+document.querySelector(".latest-entry").addEventListener("click", function(e) {
+  e.preventDefault()
+  //THIS IS BAD, FIGURE OUT BETTER IMPLEMENTATION
+  hoodie.store.findAll(function(response) {
+      if(response.year == realDate.getFullYear() && 
+         response.month-1 == realDate.getMonth() && 
+         response.day == realDate.getDate()) {
+          sessionStorage.setItem("_id", response._id)
+      }
+  }).then(function() {
+      window.location.replace("/")
+  })
+})
+
 let currentSession = null
 //retrieves entry but keeps in view-only
 if(sessionStorage.getItem('_id') != null) {
@@ -152,7 +167,10 @@ if(sessionStorage.getItem('_id') != null) {
 		//checks if edit more is clicked first
 		if (sessionStorage.getItem("edit-mode") == null) {
 			openInViewOnly()
-		}
+		} else {
+      document.querySelector('.input-controls').classList.add('focused')
+    }
+    
 		sessionStorage.removeItem("edit-mode")
 		sessionStorage.removeItem("_id")
 	}).catch(handleError)
@@ -166,8 +184,8 @@ if(sessionStorage.getItem('_id') != null) {
 	}
   
   hoodie.store.findAll(function(response) {
-      if(response.year == realDate.getFullYear() &&
-        response.month-1 == realDate.getMonth() && 
+      if(response.year == realDate.getFullYear() && 
+         response.month-1 == realDate.getMonth() && 
          response.day == realDate.getDate() && sessionStorage.getItem("date") == null) {
         	getEntry(response)
         	openInViewOnly()
@@ -193,8 +211,8 @@ function getEntry(response) {
 
 function openEntry() {
 	document.querySelector('.expand').click()
-	textarea.classList.toggle('focused')
-	document.querySelector('.input-controls').classList.toggle('focused')
+	textarea.classList.add('focused')
+	textarea.classList.add('expanded')
 	document.querySelector('button').innerHTML = "save changes"
 }
 
@@ -203,11 +221,15 @@ function openInViewOnly () {
 	document.querySelector('textarea').setAttribute("readonly", true)
 	document.querySelector('#date').innerHTML += '<a class="edit">edit</a>'
 	document.querySelector('h2 a.edit').addEventListener("click", function() {
-		form.classList.toggle("read-only")
-		if(this.innerHTML == "edit")
+    form.classList.toggle("read-only")
+		if(this.innerHTML == "edit") {
+      document.querySelector('.input-controls').classList.add('focused')
 			this.innerHTML = "cancel"
-		else
+    } else {
+      document.querySelector('.input-controls').classList.remove('focused')
 			this.innerHTML = "edit"
+    }
+    document.querySelector('.expand').style.display = "none"
 		document.querySelector('textarea').removeAttribute("readonly")
 		document.querySelector('textarea').focus()
 	})
@@ -282,22 +304,42 @@ const getComment = function (entryLength, userLengthAvg) {
 }
 
 //slight dom restructure for mobile
+let done
+window.onload = function() {
+  if(window.innerWidth <= mobile) { done = false }
+  if(window.innerWidth > mobile) { done = true }
+  mobileAdjust()
+}
 
-let done = false
-window.onresize = function () {  
-  if(window.innerWidth <= 680 && !done) {
+window.onresize = function() {
+  mobileAdjust()
+}
+
+function mobileAdjust() { 
+  if(window.innerWidth <= mobile && !done) {
     insertAfter(document.querySelector(".entry-header .next"), document.querySelector(".entry-header .prev"))
+    
     let left = document.createElement('div')
     left.className = "to-nav"
     wrap(document.querySelector(".entry-header .prev"), left)
     let right = document.createElement('div')
     right.className = "to-nav"
     wrap(document.querySelector(".entry-header .next"), right)
+    
+    document.querySelector('.expand').click()
+    document.querySelector('.expand').style.display = "none"
+    textarea.classList.add('focused')
+    textarea.classList.add('expanded')
+    //document.querySelector('.input-controls').classList.add('focused')
+    
     done = true
-  } else if(window.innerWidth > 680 && done) {
+  } else if(window.innerWidth > mobile && done) {
+    
     document.querySelector(".entry-header c:last-child").appendChild(document.querySelector(".entry-header .next"))
     document.querySelector(".entry-header c:first-child").appendChild(document.querySelector(".entry-header .prev"))
     document.querySelectorAll(".to-nav").remove()
+    document.querySelector('.expand').style.display = "block"
+
     done = false
   }
 }

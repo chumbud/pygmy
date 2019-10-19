@@ -108,13 +108,14 @@ function renderResults(a) {
 	for (var i = resultNodes.length - 1; i >= 0; i--) {
 		resultNodes[i].addEventListener("click", function (event) {
 			sessionStorage.setItem('_id', this.getAttribute("data-id"))
-			if(event.target.classList.contains('delete')) {
-        
-				hoodie.store.remove(sessionStorage.getItem('_id')).then(function() {
+			if(event.target.innerHTML == 'delete') {
+        event.target.innerHTML = 'confirm deletion'
+      } else if(event.target.innerHTML == 'confirm deletion') {
+          hoodie.store.remove(sessionStorage.getItem('_id')).then(function() {
 					sessionStorage.removeItem("_id")
 					renderItems()
-				})
-			} else if(event.target.classList.contains('edit')) {
+				  })
+			} else if(event.target.innerHTML == 'edit') {
 				sessionStorage.setItem('edit-mode', true)
 				window.location.replace("/")
 			} else {

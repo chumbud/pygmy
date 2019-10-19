@@ -74,7 +74,7 @@ hoodie.store.findAll(function(response) {
       if(response.year == realDate.getFullYear() &&
         response.month-1 == realDate.getMonth() && 
          response.day == realDate.getDate()) {
-        	document.querySelector(".message").innerHTML = "<p>you're all set! <br><br> come back tomorrow to write some more.</p><a class=\"button\" href=\"/\">edit today's entry</a>"
+        	document.querySelector(".message").innerHTML = "<p>you're all set! <br><br> come back tomorrow to write some more.</p><a class=\"button\" href=\"/\">see today's entry</a>"
       }
 })
 
