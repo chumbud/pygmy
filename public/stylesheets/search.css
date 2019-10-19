@@ -91,11 +91,51 @@ h3 a.delete {
 .mood-select img {
   width: 3.2rem;
 }
-
+.filter-dropdown {
+  padding: 1.3rem;
+  border-bottom: 1px solid black;
+  text-align: center;
+  display: none;
+}
+.filter-dropdown:after{
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-top: 2px solid black;
+  border-right: 2px solid black;
+  transform: rotate(135deg);
+  margin-left: .8rem;
+  top: -3px;
+  position: relative;
+  display: inline-block;
+  transition: var(--easeOutCubic);
+}
+.filter-dropdown:hover:after {
+  top: 1px;
+}
 
 @media only screen and (max-width: 680px) {
+  .filter-dropdown {
+    display: block;
+  }
   .search-container {
-    flex-flow: column;
+    display: none;
+    flex-flow: row;
+    flex-wrap: wrap;
+  }
+  .search-container.show {
+    display: flex;
+    margin: 1.6rem;
+    margin-bottom: 0;
+  }
+  .search-container > span {
+    display: none;
+  }
+  #search-form {
+    margin: 0
+  }
+  .clear {
+    margin: 1.6rem 0;
   }
   #results {
     margin-bottom: 4rem;

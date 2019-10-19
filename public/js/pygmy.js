@@ -13,7 +13,6 @@ const keyActions = function() {
 			helper_prompt.classList.add('sendToBottom')
 			input_controls.classList.add('focused')
 		} else {
-			journal_input.classList.remove('focused')
 		}
 		input_controls.querySelector('.length-tracker').innerHTML = journal_input.value.length
 		document.querySelector('.length-tracker').setAttribute('data-length-status', getComment(journal_input.value.length, sessionStorage.getItem("avg")))
@@ -115,10 +114,18 @@ const getAdjacentEntry = function() {
 				cur.setHours(0)
 				if(cur < entryDate) {
 					prevId = s[i]._id
-					prev.addEventListener("click", function() {
+					prev.onclick = function listener() {
+            hoodie.store.find(prevId).then(response => {
+		        getEntry(response)
+            openInViewOnly()
+            openEntry()
+            })
+            /*
 						sessionStorage.setItem("_id", prevId)
 						window.location.replace("/")
-					})
+            */
+					}
+          prev.style.display = "inline-block"
 					break
 				}
 			}
@@ -130,10 +137,18 @@ const getAdjacentEntry = function() {
 				let cur = new Date(s[i].year  + "/" + s[i].month + "/" + s[i].day)
 				if(cur > entryDate) {
 					nextId = s[i]._id
-					next.addEventListener("click", function() {
+					next.onclick = function listener() {
+            hoodie.store.find(nextId).then(response => {
+		        getEntry(response)
+            openInViewOnly()
+            openEntry()
+          })
+            /*
 						sessionStorage.setItem("_id", nextId)
 						window.location.replace("/")
-					})
+            */
+					}
+          next.style.display = "inline-block"
 					break
 				}
 			}
@@ -142,7 +157,6 @@ const getAdjacentEntry = function() {
 		}
 	}).catch(handleError)
 }
-
 //ensure today's entry is actually today
 document.querySelector(".latest-entry").addEventListener("click", function(e) {
   e.preventDefault()
@@ -201,7 +215,7 @@ function getEntry(response) {
   document.querySelector('.mood-select').classList.add("selected")
 	document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ' ' + response.year
 	document.querySelector('h2').setAttribute("data-date", response.year + "/" + response.month + "/" + response.day)
-	document.querySelector('.length-tracker').innerHTML += response.length
+	document.querySelector('.length-tracker').innerHTML = response.length
 	document.querySelector('.length-tracker').setAttribute('data-length-status', getComment(response.length, sessionStorage.getItem("avg")))
 
 	if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
@@ -319,18 +333,10 @@ function mobileAdjust() {
   if(window.innerWidth <= mobile && !done) {
     insertAfter(document.querySelector(".entry-header .next"), document.querySelector(".entry-header .prev"))
     
-    let left = document.createElement('div')
-    left.className = "to-nav"
-    wrap(document.querySelector(".entry-header .prev"), left)
-    let right = document.createElement('div')
-    right.className = "to-nav"
-    wrap(document.querySelector(".entry-header .next"), right)
-    
     document.querySelector('.expand').click()
     document.querySelector('.expand').style.display = "none"
     textarea.classList.add('focused')
     textarea.classList.add('expanded')
-    //document.querySelector('.input-controls').classList.add('focused')
     
     done = true
   } else if(window.innerWidth > mobile && done) {
@@ -344,10 +350,6 @@ function mobileAdjust() {
   }
 }
 
-function wrap(el, wrapper) {
-	    el.parentNode.insertBefore(wrapper, el);
-	    wrapper.appendChild(el);
-}
 function insertAfter(el, referenceNode) {
 	    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
 }

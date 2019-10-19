@@ -82,44 +82,31 @@ ul {
   padding: 0 3.2rem 0 0.8rem;
   border: 1px solid white;
 }
-.prev {
-  right: -17px;
-}
-.next {
-  right: 17px;
-}
-.next:before {
-  transform: rotate(45deg);
-  right: -15px;
-}
-.prev:before {
-  transform: rotate(-135deg);
-  left: -15px;
-}
 .prev:before,
-.next:before {
+.next:after {
   content: "";
   width: 5px;
   height: 5px;
-  position: absolute;
-  bottom: 5px;
+  position: relative;
+  display: inline-block;
+  bottom: 1px;
   border-top: 2px solid #000;
   border-right: 2px solid #000;
   transition: var(--easeOutCubic);
 }
-.next:hover:before {
-  right: -20px;
+.prev:before {
+  transform: rotate(-135deg);
+  margin-right: 0.8rem;
+}
+.next:after {
+  transform: rotate(45deg);
+  margin-left: 0.8rem;
 }
 .prev:hover:before {
-  left: -20px;
+  transform: rotate(-135deg) translate(3px, -3px);
 }
-.calendar .prev {
-  right: unset;
-  margin-right: 0.8rem;
-}
-.calendar .next {
-  right: unset;
-  margin-right: 0.8rem;
+.next:hover:after {
+  transform: rotate(45deg) translate(3px, -3px);
 }
 .calendar .prev,
 .calendar .next {
@@ -130,25 +117,16 @@ ul {
   position: relative;
   transition: var(--easeOutCubic);
 }
-.calendar .prev:after,
+.calendar .prev:before,
 .calendar .next:after {
-  content: "";
-  padding: 3.2rem;
-  left: -50%;
-  position: absolute;
-  top: -50%;
+  bottom: 10px;
+  margin: 0;
 }
 .calendar .prev:before {
-  left: 45%;
-  top: 40%;
-  bottom: unset;
-  right: unset;
+  left: -1px;
 }
-.calendar .next:before {
-  right: 50%;
-  left: 36%;
-  top: 38%;
-  bottom: unset;
+.calendar .next:after {
+  left: -4px;
 }
 .calendar .prev:hover {
   background-color: #f5efe5;
@@ -158,11 +136,25 @@ ul {
   background-color: #f5efe5;
   transform: translateX(0.5rem);
 }
+.calendar .prev:hover:before {
+  transform: rotate(-135deg);
+}
+.calendar .next:hover:after {
+  transform: rotate(45deg);
+}
 .calendar .prev:active {
   transform: translateX(-1rem);
 }
 .calendar .next:active {
   transform: translateX(1rem);
+}
+.calendar .prev:after,
+.calendar .next:before {
+  content: "";
+  padding: 3.2rem;
+  position: absolute;
+  left: -50%;
+  top: -50%;
 }
 .mood-select:before {
   content: "";
@@ -896,7 +888,14 @@ nav ul li a::before {
     grid-template-columns: auto auto auto auto auto auto auto;
   }
   .calendar-container .days li {
-    padding: 0.4rem;
+    padding: 0.2rem;
+  }
+  .calendar-container .days li:not(.empty) a,
+  .calendar-container .days li:not(.empty).completed a {
+    font-size: 1.2rem;
+    width: 3.4rem;
+    height: 3.4rem;
+    line-height: 3rem;
   }
   .month-year {
     padding: 1.6rem;
@@ -933,6 +932,19 @@ nav ul li a::before {
   .entry-header > c:first-child {
     border-bottom: 1px solid black;
   }
+  .entry-header .prev,
+  .entry-header .next {
+    padding: 1.6rem;
+    display: inline-block;
+    width: 50%;
+  }
+  .entry-header .prev {
+    border-right: 1px solid black;
+  }
+  .entry-header .next {
+    text-align: right;
+  }
+
   .header {
     display: flex;
     flex-flow: row;
@@ -953,6 +965,15 @@ nav ul li a::before {
   .mood-select.selected {
     margin-right: 0;
   }
+  .calendar .prev,
+  .calendar .next {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .calendar .prev:after,
+  .calendar .next:before {
+    content: none;
+  }
   @media only screen and (max-height: 400px) {
     .to-nav {
       display: none;
@@ -967,12 +988,18 @@ nav ul li a::before {
     .mood-select.selected img {
       width: 2.4rem;
     }
+    .mood-select.selected {
+      margin-right: 2rem;
+    }
+    .header .mood-select {
+      line-height: 2;
+    }
     .entry-header > c[span="1"],
     .entry-header > c[span="7.."] {
       display: none;
     }
     .entry-header .header {
-      padding: 0.4rem 2.4rem 0.4rem 0;
+      padding: 0.4rem 0;
     }
     #date {
       line-height: 2;

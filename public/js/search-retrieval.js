@@ -127,3 +127,7 @@ function renderResults(a) {
 	if(DOMresults.innerHTML == '')
 		DOMresults.innerHTML = 'no results :('
 }
+
+document.querySelector(".filter-dropdown").addEventListener("click", function () {
+  document.querySelector(".search-container").classList.toggle("show")
+})
