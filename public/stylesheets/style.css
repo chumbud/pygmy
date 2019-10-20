@@ -5,6 +5,7 @@
 }
 ::selection {
   background-color: #b6ffd3;
+  caret-color: #b6ffd3;
 }
 *::before,
 *::after {
@@ -1096,7 +1097,9 @@ nav ul li a::before {
   background-color: #212226;
   border-color: #4a4e57;
 }
-
+#dark-mode-enabled .mood-board.open li:hover {
+ background-color: #363940;
+}
 #dark-mode-enabled .entry-header,
 #dark-mode-enabled #account-settings a,
 #dark-mode-enabled .journal-input a,
@@ -1137,6 +1140,7 @@ nav ul li a::before {
   border: 2px solid #4a4e57;
   box-shadow: 0px 0px 0px 5px #212226;
 }
+#dark-mode-enabled .journal-input textarea.focused,
 #dark-mode-enabled .journal-input textarea:focus {
   background-color: #212226;
   color: #ddd;
