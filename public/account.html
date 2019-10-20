@@ -12,174 +12,189 @@
 	<link rel="stylesheet" href="stylesheets/raster.css"/>
 	<link rel="stylesheet" href="stylesheets/style.css"/>
 	<script src="/hoodie/client.js"></script>
-
 </head>
 <body data-account-state="">
 	<body>
 		<grid class="main-wrapper" columns=7>
 			<c span=2-6 id="account-settings" span-s=row>
-						<div data-show="signin" data-hide-if="signed-in">
-							<form class="signup" action="signup">
-								<h2>Sign up</h2>
-                <p>
-                  Make an account to sync all your entries. After creating an account, you can sign in through any device to access your entries.
-                </p>
-								<p>
-									<label for="input-signup-email">Email</label>
-									<input id="input-signup-email" name="email" type="email" required="">
-								</p>
+				<div data-show="signin" data-hide-if="signed-in">
+					<form class="signup" action="signup">
+						<h2>Sign up</h2>
+						<p>
+							Make an account to sync all your entries. After creating an account, you can sign in through any device to access your entries.
+						</p>
+						<p>
+							<label for="input-signup-email">Email</label>
+							<input id="input-signup-email" name="email" type="email" required="">
+						</p>
 
-								<p>
-									<label for="input-signup-password">Password</label>
-									<input id="input-signup-password" name="password" type="password" required="">
-								</p>
+						<p>
+							<label for="input-signup-password">Password</label>
+							<input id="input-signup-password" name="password" type="password" required="">
+						</p>
 
-								<p>
-									<button id="signup" type="submit" class="primary">Sign up</button>
-									<a href="#" data-action="show-signin">Log in?</a>
-								</p>
-							</form><!-- .signup -->
+						<p>
+							<button id="signup" type="submit" class="primary">Sign up</button>
+							<a href="#" data-action="show-signin">Log in?</a>
+						</p>
+					</form><!-- .signup -->
 
-							<form class="signin" action="signin">
-								<h2>Log in</h2>
-                <p>
-                  Sign in to access your account's entries. Any entries you have made before logging on will be added to your account when you log in.
-                </p>
-								<p>
-									<label for="input-signin-email">Email</label>
-									<input id="input-signin-email" name="email" type="email" required="">
-								</p>
+					<form class="signin" action="signin">
+						<h2>Log in</h2>
+						<p>
+							Sign in to access your account's entries. Any entries you have made before logging on will be added to your account when you log in.
+						</p>
+						<p>
+							<label for="input-signin-email">Email</label>
+							<input id="input-signin-email" name="email" type="email" required="">
+						</p>
 
-								<p>
-									<label for="input-signin-password">Password</label>
-									<input id="input-signin-password" name="password" type="password" required="">
-								</p>
+						<p>
+							<label for="input-signin-password">Password</label>
+							<input id="input-signin-password" name="password" type="password" required="">
+						</p>
 
-								<p>
-									<button type="submit" class="primary">Log in</button>
-									<small>
-										<a href="#" class="btn-link" data-action="show-password-reset">Forgot password?</a>
-									</small>
-								</p>
-								<div class="signup-link">
-									<h2>New account?</h2>
-									<button href="#" class="primary" data-action="show-signup">
-										Sign up!
-									</button>
-								</div>
-							</form><!-- .signin -->
-
-							<form class="password-reset">
-								<h2>Password reset</h2>
-
-								<p>
-									<label for="input-email-reset">Enter your account's email</label>
-									<input id="input-email-reset" name="email" type="email" required="">
-								</p>
-
-								<p>
-									<button class="primary" type="submit">Send</button>
-									<small>
-										<a href="#" class="btn-link" data-action="show-signin">Cancel</a>
-									</small>
-								</p>
-							</form><!-- .password-reset -->
+						<p>
+							<button type="submit" class="primary">Log in</button>
+							<small>
+								<a href="#" class="btn-link" data-action="show-password-reset">Forgot password?</a>
+							</small>
+						</p>
+						<div class="signup-link">
+							<h2>New account?</h2>
+							<button href="#" class="primary" data-action="show-signup">
+								Sign up!
+							</button>
 						</div>
-						<div data-hide-if="signed-out">
-							<h2>Account settings</h2>
-							<div data-show="options">
-								<div class="options">
-									<button class="default disabled" data-action="show-change-email" disabled>Appearance settings</button>
-									<button class="default" data-action="show-change-email">Change email</button>
-									<button class="default" data-action="show-change-password">Change password</button>
-									<button class="danger" data-action="show-delete-account">Delete account</button>
-								</div><!-- /.options -->
+					</form><!-- .signin -->
 
-								<form class="change-email">
-									<p>
-										<label for="input-change-email">Change email</label>
-										<input id="input-change-email" name="email" type="email" required="">
-									</p>
+					<form class="password-reset">
+						<h2>Password reset</h2>
 
-									<p>
-										<button class="primary" type="submit">Save</button>
-										<small>
-											<a href="#" class="btn-link" data-action="show-options">Cancel</a>
-										</small>
-									</p>
-								</form><!-- /.change-email -->
+						<p>
+							<label for="input-email-reset">Enter your account's email</label>
+							<input id="input-email-reset" name="email" type="email" required="">
+						</p>
 
-								<form class="change-password">
-									<p>
-										<label for="inpute-change-password">Set new password</label>
-										<input id="inpute-change-password" name="password" type="password" required="">
-									</p>
+						<p>
+							<button class="primary" type="submit">Send</button>
+							<small>
+								<a href="#" class="btn-link" data-action="show-signin">Cancel</a>
+							</small>
+						</p>
+					</form><!-- .password-reset -->
+				</div>
+				<div data-hide-if="signed-out">
+					<h2>Account settings</h2>
+					<div data-show="options">
+						<div class="options">
+							<button class="default disabled" data-action="show-change-appearance">Appearance settings</button>
+							<button class="default" data-action="show-change-email">Change email</button>
+							<button class="default" data-action="show-change-password">Change password</button>
+							<button class="danger" data-action="show-delete-account">Delete account</button>
+						</div><!-- /.options -->
 
-									<p>
-										<button class="primary" type="submit">Save</button>
-										<small>
-											<a href="#" class="btn-link" data-action="show-options">Cancel</a>
-										</small>
-									</p>
-								</form><!-- /.change-password -->
+						<form class="change-appearance">
+							<p>
+								<h3>Text Size:</h3>
+								<a href="">small</a>
+								<a href="">medium</a>
+								<a href="">large</a>
+							</p>
+							<p>
+								<h3>Display Mode:</h3>
+								<a href="" mode="light-mode">light mode</a>
+								<a href="" mode="dark-mode">dark mode</a>
+							</p>
+							<p>
+								<button class="default" data-action="show-options">back</button>
+							</p>
+						</form><!-- /.change-appearance -->
+						<form class="change-email">
+							<p>
+								<label for="input-change-email">Change email</label>
+								<input id="input-change-email" name="email" type="email" required="">
+							</p>
 
-								<form class="delete-account">
-									<p>Are you sure you want to delete your account?</p>
-									<p>All your entries will be permanently deleted.</p>
-									<label for="delete-confirmation">Write out "delete" as confirmation.</label>
-									<input id="delete-confirmation" type="text" name="rusure" required="">
-									<button class="danger" type="submit">Delete account</button>
-									<small>
-										<a href="#" class="btn-link" data-action="show-options">Cancel</a>
-									</small>
-								</form><!-- /.delete-account -->
-							</div>
-							<div class="signout-container">
-								<button class="small" data-action="signout">Sign out</button>
-							</div>
+							<p>
+								<button class="primary" type="submit">Save</button>
+								<small>
+									<a href="#" class="btn-link" data-action="show-options">Cancel</a>
+								</small>
+							</p>
+						</form><!-- /.change-email -->
+
+						<form class="change-password">
+							<p>
+								<label for="input-change-password">Set new password</label>
+								<input id="input-change-password" name="password" type="password" required="">
+							</p>
+
+							<p>
+								<button class="primary" type="submit">Save</button>
+								<small>
+									<a href="#" class="btn-link" data-action="show-options">Cancel</a>
+								</small>
+							</p>
+						</form><!-- /.change-password -->
+
+						<form class="delete-account">
+							<p>Are you sure you want to delete your account?</p>
+							<p>All your entries will be permanently deleted.</p>
+							<label for="delete-confirmation">Write out "delete" as confirmation.</label>
+							<input id="delete-confirmation" type="text" name="rusure" required="">
+							<button class="danger" type="submit">Delete account</button>
+							<small>
+								<a href="#" class="btn-link" data-action="show-options">Cancel</a>
+							</small>
+						</form><!-- /.delete-account -->
+						<div class="options signout-container">
+							<button class="small" data-action="signout">Sign out</button>
 						</div>
+					</div>
+				</div>
 			</c>
 			<c span=7.. span-s=row>
 				<nav>
 					<ul>
 						<li><a class="latest-entry" href="/">today's entry</a></li>
-					<li><a class="calendar-page" href="calendar.html">
-            <svg id="cal-icon" data-name="cal-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <defs>
-    <style>
-      .icon-date {
-        font-size: 12px;
-        font-family: InterUI-Medium, Inter UI;
-        font-weight: 500;
-      }
+						<li><a class="calendar-page" href="calendar.html">
+							<svg id="cal-icon" data-name="cal-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+								<defs>
+									<style>
+										.icon-date {
+											font-size: 12px;
+											font-family: InterUI-Medium, Inter UI;
+											font-weight: 500;
+										}
 
-      .cls-2 {
-        fill: none;
-        stroke: #000;
-        stroke-width: 2px;
-      }
-    </style>
-  </defs>
-  <title>calendar-1</title>
-  <path d="M22,2V22H2V2H22m2-2H0V24H24V0Z"/>
-  <text class="icon-date" transform="translate(5.25 18)">12</text>
-  <g>
-    <circle cx="7" cy="4" r="1"/>
-    <circle cx="17" cy="4" r="1"/>
-  </g>
-  <line class="cls-2" x1="1.5" y1="7" x2="22.5" y2="7"/>
-</svg>
-calendar</a>
-          </li>
-						<li><a class="search" href="search.html">archive</a></li>
-					</ul>
-					<ul>
-						<!--<li class="text-settings">text settings</li>-->
-						<li><a class="account" href="account.html" data-value="username">login/signup</a></li>
-					</nav>  
-				</c>
-			</grid>
-		</body>
-		<script type="text/javascript" src="./js/common.js"></script>
-		<script type="text/javascript" src="./js/account.js"></script>
-		</html>
+										.cls-2 {
+											fill: none;
+											stroke: #000;
+											stroke-width: 2px;
+										}
+									</style>
+								</defs>
+								<title>calendar-1</title>
+								<path d="M22,2V22H2V2H22m2-2H0V24H24V0Z"/>
+								<text class="icon-date" transform="translate(5.25 18)">12</text>
+								<g>
+									<circle cx="7" cy="4" r="1"/>
+									<circle cx="17" cy="4" r="1"/>
+								</g>
+								<line class="cls-2" x1="1.5" y1="7" x2="22.5" y2="7"/>
+							</svg>
+						calendar</a>
+					</li>
+					<li><a class="search" href="search.html">archive</a></li>
+				</ul>
+				<ul>
+					<!--<li class="text-settings">text settings</li>-->
+					<li><a class="account" href="account.html" data-value="username">login/signup</a></li>
+				</nav>  
+			</c>
+		</grid>
+	</body>
+	<script type="text/javascript" src="./js/common.js"></script>
+	<script type="text/javascript" src="./js/account.js"></script>
+	</html>

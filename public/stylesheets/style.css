@@ -588,6 +588,7 @@ nav ul li a::before {
 [data-show="signup"] .signup,
 [data-show="password-reset"] .password-reset,
 [data-show="options"] .options,
+[data-show="change-appearance"] .change-appearance,
 [data-show="change-email"] .change-email,
 [data-show="change-password"] .change-password,
 [data-show="delete-account"] .delete-account {
@@ -740,7 +741,7 @@ nav ul li a::before {
   text-align: center;
 }
 .message img {
-  width: 3.2rem;
+  width: 8rem;
   margin: 0 auto;
 }
 .message p {
@@ -820,7 +821,33 @@ nav ul li a::before {
 .sr-only {
   display: block;
 }
-
+#no-results {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-top: 14vh;
+}
+#no-results img {
+  width: 10rem;
+  margin-bottom: 1.6rem;
+}
+#no-results p {
+  text-align: center;
+}
+#account-settings button.default.disabled {
+  border-color: lightgray;
+  color: lightgray;
+  cursor: url("./../assets/img/coming-soon.svg")50 50, not-allowed;
+}
+#account-settings button.default.disabled:hover {
+  border-color: lightgray;
+  color: lightgray;
+  background-color: unset;
+}
+#account-settings > div {
+  max-width: 500px;
+  margin-top: 15vh;
+}
 /*mobile*/
 @media only screen and (max-width: 680px) {
   #entry-form {
@@ -1007,5 +1034,165 @@ nav ul li a::before {
     .journal-input textarea.focused.expanded {
       padding-top: 1.6rem;
     }
+  }
+}
+
+/* dark mode */
+#dark-mode-enabled {
+  background-color: #212226;
+}
+
+#dark-mode-enabled h2,
+#dark-mode-enabled h3 {
+  color: #ddd;
+}
+
+#dark-mode-enabled button,
+#dark-mode-enabled button.button:hover,
+#dark-mode-enabled a.button:hover {
+  border: 2px solid #ddd;
+  background-color: #212226;
+  color: #ddd;
+}
+#dark-mode-enabled button.button {
+  border: 2px solid #212226;
+  background-color: #b6ffd3;
+  color: #212226;
+}
+
+#dark-mode-enabled::selection {
+  color: #313139;
+}
+
+#dark-mode-enabled nav ul li, 
+#dark-mode-enabled .prev:before,
+#dark-mode-enabled .next:after,
+#dark-mode-enabled label,
+#dark-mode-enabled select,
+#dark-mode-enabled option,
+#dark-mode-enabled .month-year,
+#dark-mode-enabled .mood-select,
+#dark-mode-enabled .journal-input a:before,
+#dark-mode-enabled .mood-select.selected:before,
+#dark-mode-enabled .search-container span,
+#dark-mode-enabled p.entry,
+#dark-mode-enabled img[src*="./assets/img/empty.png"],
+#dark-mode-enabled img[src*="assets/img/empty.png"],
+#dark-mode-enabled .message img {
+  filter: invert(.8);
+}
+#dark-mode-enabled .mood-select,
+#dark-mode-enabled .prev:hover:before,
+#dark-mode-enabled .next:hover:after {
+  color: black;
+}
+#dark-mode-enabled .mood-select.selected {
+  filter: invert(0);
+  border-color: #212226;
+  background-color: #212226;
+}
+#dark-mode-enabled .mood-board.open,
+#dark-mode-enabled .mood-board.open ul {
+  background-color: #212226;
+  border-color: #4a4e57;
+}
+
+#dark-mode-enabled .entry-header,
+#dark-mode-enabled #account-settings a,
+#dark-mode-enabled .journal-input a,
+#dark-mode-enabled .read-only #date .edit,
+#dark-mode-enabled a.clear,
+#dark-mode-enabled .message p,
+#dark-mode-enabled .calendar-container .days li a {
+  color: #ddd;
+}
+#dark-mode-enabled .day-header,
+#dark-mode-enabled .calendar-container .days li.disabled a {
+  color: #4a4e57;
+}
+#dark-mode-enabled .calendar-container .days li:not(.disabled):hover a,
+#dark-mode-enabled .calendar-container .days li.today a,
+#dark-mode-enabled .calendar .next:hover,
+#dark-mode-enabled .calendar .prev:hover {
+  background-color: #4a4e57;
+}
+#dark-mode-enabled .calendar-container .days li a {
+  background-color: #212226;
+  border-color: #212226;
+}
+#dark-mode-enabled .calendar-container .days li.completed a {
+  color: #b6ffd3;
+  border-color: #b6ffd3;
+}
+#dark-mode-enabled .calendar-container .days li.completed:hover a {
+  background-color: inherit;
+}
+#dark-mode-enabled a.button,
+#dark-mode-enabled a.completed {
+  color: #212226;
+}
+#dark-mode-enabled .journal-input textarea {
+  background-color: #363940;
+  color: #ddd;
+  border: 2px solid #4a4e57;
+  box-shadow: 0px 0px 0px 5px #212226;
+}
+#dark-mode-enabled .journal-input textarea:focus {
+  background-color: #212226;
+  color: #ddd;
+  border: 2px solid #4a4e57;
+  box-shadow: 0px 0px 0px 5px #363940;
+}
+#dark-mode-enabled .journal-input textarea.focused.expanded {
+  background-color: #212226;
+  border: 2px solid #212226;
+  box-shadow: 0px 0px 0px 5px #212226;
+}
+#dark-mode-enabled .journal-section textarea::placeholder {
+ color: #4a4e57;
+}
+#dark-mode-enabled .helper-prompt-box.open {
+  background-color: #363940;
+  color: #ddd;
+}
+#dark-mode-enabled .helper-prompt-box.open svg {
+  stroke: #ddd;
+}
+#dark-mode-enabled .input-controls.focused {
+  background-color: #212226;
+  color: #ddd;
+}
+#dark-mode-enabled .helper-prompt-box.open span {
+  background-color: #212226;
+  border-color: #4a4e57;
+}
+#dark-mode-enabled .listEntry:hover {
+  background-color: #363940;
+}
+#dark-mode-enabled #account-settings input {
+  background-color: #363940;
+  border-color: #4a4e57;
+  color: #ddd;
+}
+@media only screen and (max-width: 680px) {
+  #dark-mode-enabled nav {
+    background-color: #212226;
+    border-top-color: #323232;
+  }
+  #dark-mode-enabled nav ul:not(:last-child) li {
+    border-right: 1px solid white;
+  }
+  #dark-mode-enabled .entry-header > c:first-child {
+    border-bottom-color: #323232;
+  }
+  #dark-mode-enabled .entry-header .prev {
+    border-right-color: #323232; 
+  }
+  #dark-mode-enabled .filter-dropdown {
+    border-bottom-color: #323232;
+    color: #ddd;
+  }
+  #dark-mode-enabled .filter-dropdown::after {
+    border-color: #ddd;
   }
 }

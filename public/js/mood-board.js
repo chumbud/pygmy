@@ -30,7 +30,7 @@ fetch('json/emoji.json')
       var e = document.createEvent("HTMLEvents")
       e.initEvent("input", true, true)
       e.eventName = "input"
-      event.target.dispatchEvent(event)
+      inputEmoji.dispatchEvent(e)
       }
     })  
 	})
