@@ -86,13 +86,13 @@ ul {
 .prev:before,
 .next:after {
   content: "";
-  width: 5px;
-  height: 5px;
+  width: .5rem;
+  height: .5rem;
   position: relative;
   display: inline-block;
   bottom: 1px;
-  border-top: 2px solid #000;
-  border-right: 2px solid #000;
+  border-top: .2rem solid #000;
+  border-right: .2rem solid #000;
   transition: var(--easeOutCubic);
 }
 .prev:before {
@@ -1071,6 +1071,7 @@ nav ul li a::before {
 #dark-mode-enabled label,
 #dark-mode-enabled select,
 #dark-mode-enabled option,
+#dark-mode-enabled #no-results,
 #dark-mode-enabled .month-year,
 #dark-mode-enabled .mood-select,
 #dark-mode-enabled .journal-input a:before,
@@ -1082,10 +1083,13 @@ nav ul li a::before {
 #dark-mode-enabled .message img {
   filter: invert(.8);
 }
-#dark-mode-enabled .mood-select,
-#dark-mode-enabled .prev:hover:before,
-#dark-mode-enabled .next:hover:after {
+#dark-mode-enabled .mood-select {
   color: black;
+}
+#dark-mode-enabled a.prev:hover:before,
+#dark-mode-enabled a.next:hover:after,
+#dark-mode-enabled .entry-header a:hover {
+  color: #ddd;
 }
 #dark-mode-enabled .mood-select.selected {
   filter: invert(0);
