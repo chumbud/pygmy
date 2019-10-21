@@ -30,12 +30,11 @@ h1 {
   font-weight: 700;
 }
 h2 {
-  /*font-family: "Roboto Mono", monospace;*/
-  font-size: 2.4rem;
+  font-size: 2.8rem;
   font-weight: 500;
   margin: 0;
   margin-bottom: 1.6rem;
-  line-height: 1;
+  line-height: auto;
   letter-spacing: normal;
 }
 a {
@@ -894,6 +893,9 @@ nav ul li a::before {
   nav ul li:hover {
     background-color: #eaeaea;
   }
+  h2 {
+    font-size: 4vw;
+  }
   .journal-section {
     height: 100vh;
   }
@@ -1083,17 +1085,21 @@ nav ul li a::before {
 #dark-mode-enabled .message img {
   filter: invert(.8);
 }
-#dark-mode-enabled .mood-select {
-  color: black;
-}
 #dark-mode-enabled a.prev:hover:before,
 #dark-mode-enabled a.next:hover:after,
-#dark-mode-enabled .entry-header a:hover {
+#dark-mode-enabled .entry-header a:not(.mood-select):hover {
   color: #ddd;
+}
+#dark-mode-enabled .mood-select,
+#dark-mode-enabled .mood-select:hover {
+  color: black;
 }
 #dark-mode-enabled .mood-select.selected {
   filter: invert(0);
   border-color: #212226;
+  background-color: #212226;
+}
+#dark-mode-enabled .input-controls {
   background-color: #212226;
 }
 #dark-mode-enabled .mood-board.open,

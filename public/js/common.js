@@ -34,6 +34,11 @@ document.querySelector(".icon-date").setAttribute("transform", "translate(8.5 19
 
 const handleError = function(error) {
 	console.log(error)
+	if(error.status == 500) {
+		window.location.replace("500.html")
+	} else if (error.status == 404) {
+		window.location.replace("404.html")
+	}
 }
 
 function showSignedIn (username) {
