@@ -3,7 +3,6 @@ const helper_prompt = document.querySelector('.helper-prompt')
 const input_controls = document.querySelector('.input-controls')
 const input_comment = document.querySelector('.comment')
 const sayings = ['short', 'medium', 'typical', 'above average']
-
 const mobile = 680
 
 const keyActions = function() {
@@ -115,17 +114,17 @@ const getAdjacentEntry = function() {
 				if(cur < entryDate) {
 					prevId = s[i]._id
 					prev.onclick = function listener() {
-            hoodie.store.find(prevId).then(response => {
-		        getEntry(response)
-            openInViewOnly()
-            openEntry()
-            })
+						hoodie.store.find(prevId).then(response => {
+							getEntry(response)
+							openInViewOnly()
+							openEntry()
+						})
             /*
 						sessionStorage.setItem("_id", prevId)
 						window.location.replace("/")
-            */
+						*/
 					}
-          prev.style.display = "inline-block"
+					prev.style.display = "inline-block"
 					break
 				}
 			}
@@ -138,17 +137,17 @@ const getAdjacentEntry = function() {
 				if(cur > entryDate) {
 					nextId = s[i]._id
 					next.onclick = function listener() {
-            hoodie.store.find(nextId).then(response => {
-		        getEntry(response)
-            openInViewOnly()
-            openEntry()
-          })
+						hoodie.store.find(nextId).then(response => {
+							getEntry(response)
+							openInViewOnly()
+							openEntry()
+						})
             /*
 						sessionStorage.setItem("_id", nextId)
 						window.location.replace("/")
-            */
+						*/
 					}
-          next.style.display = "inline-block"
+					next.style.display = "inline-block"
 					break
 				}
 			}
@@ -159,17 +158,17 @@ const getAdjacentEntry = function() {
 }
 //ensure today's entry is actually today
 document.querySelector(".latest-entry").addEventListener("click", function(e) {
-  e.preventDefault()
+	e.preventDefault()
   //THIS IS BAD, FIGURE OUT BETTER IMPLEMENTATION
   hoodie.store.findAll(function(response) {
-      if(response.year == realDate.getFullYear() && 
-         response.month-1 == realDate.getMonth() && 
-         response.day == realDate.getDate()) {
-          sessionStorage.setItem("_id", response._id)
-      }
-  }).then(function() {
-      window.location.replace("/")
-  })
+  	if(response.year == realDate.getFullYear() && 
+  		response.month-1 == realDate.getMonth() && 
+  		response.day == realDate.getDate()) {
+  		sessionStorage.setItem("_id", response._id)
+  }
+}).then(function() {
+	window.location.replace("/")
+})
 })
 
 let currentSession = null
@@ -182,9 +181,9 @@ if(sessionStorage.getItem('_id') != null) {
 		if (sessionStorage.getItem("edit-mode") == null) {
 			openInViewOnly()
 		} else {
-      document.querySelector('.input-controls').classList.add('focused')
-    }
-    
+			document.querySelector('.input-controls').classList.add('focused')
+		}
+
 		sessionStorage.removeItem("edit-mode")
 		sessionStorage.removeItem("_id")
 	}).catch(handleError)
@@ -192,27 +191,27 @@ if(sessionStorage.getItem('_id') != null) {
 //if it's today's entry
 } else {
   //new entry for the day
-	setDate()
-	if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
-		getAdjacentEntry()
-	}
+  setDate()
+  if(document.querySelector(".prev") != null || document.querySelector(".next") != null) {
+  	getAdjacentEntry()
+  }
   
   hoodie.store.findAll(function(response) {
-      if(response.year == realDate.getFullYear() && 
-         response.month-1 == realDate.getMonth() && 
-         response.day == realDate.getDate() && sessionStorage.getItem("date") == null) {
-        	getEntry(response)
-        	openInViewOnly()
-          openEntry()
-      }
-  })
+  	if(response.year == realDate.getFullYear() && 
+  		response.month-1 == realDate.getMonth() && 
+  		response.day == realDate.getDate() && sessionStorage.getItem("date") == null) {
+  		getEntry(response)
+  	openInViewOnly()
+  	openEntry()
+  }
+})
 }
 
 function getEntry(response) {
 	currentSession = response
 	document.querySelector('textarea').value = response.entry
 	document.querySelector('.mood-select').innerHTML = "<img src='assets/img/" + response.selectedEmoji + ".png'>"
-  document.querySelector('.mood-select').classList.add("selected")
+	document.querySelector('.mood-select').classList.add("selected")
 	document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ' ' + response.year
 	document.querySelector('h2').setAttribute("data-date", response.year + "/" + response.month + "/" + response.day)
 	document.querySelector('.length-tracker').innerHTML = response.length
@@ -235,15 +234,15 @@ function openInViewOnly () {
 	document.querySelector('textarea').setAttribute("readonly", true)
 	document.querySelector('#date').innerHTML += '<a class="edit">edit</a>'
 	document.querySelector('h2 a.edit').addEventListener("click", function() {
-    form.classList.toggle("read-only")
+		form.classList.toggle("read-only")
 		if(this.innerHTML == "edit") {
-      document.querySelector('.input-controls').classList.add('focused')
+			document.querySelector('.input-controls').classList.add('focused')
 			this.innerHTML = "cancel"
-    } else {
-      document.querySelector('.input-controls').classList.remove('focused')
+		} else {
+			document.querySelector('.input-controls').classList.remove('focused')
 			this.innerHTML = "edit"
-    }
-    document.querySelector('.expand').style.display = "none"
+		}
+		document.querySelector('.expand').style.display = "none"
 		document.querySelector('textarea').removeAttribute("readonly")
 		document.querySelector('textarea').focus()
 	})
@@ -277,7 +276,7 @@ form.addEventListener("submit", (event) => {
 		today.setHours(0,0,0,0)
 		let submittedJournalDate = new Date(document.querySelector("#date").getAttribute("data-date"))
 		if(!entry) return
-		hoodie.store.on("add", function() { window.location.replace("/search.html") })
+			hoodie.store.on("add", function() { window.location.replace("/calendar.html") })
 		hoodie.store.add({selectedEmoji, entry, length, month, day, year})
 
 	} else {
@@ -293,15 +292,15 @@ form.addEventListener("submit", (event) => {
 		hoodie.store.on("update", function() { window.location.replace("/search.html") })
 	hoodie.store.update(currentSession._id, {selectedEmoji, entry, length, month, day, year})   
 }
-  sessionStorage.removeItem("date")
+sessionStorage.removeItem("date")
 })
 
 Date.prototype.isSameDateAs = function(pDate) {
-  return (
-    this.getFullYear() === pDate.getFullYear() &&
-    this.getMonth() === pDate.getMonth() &&
-    this.getDate() === pDate.getDate()
-  )
+	return (
+		this.getFullYear() === pDate.getFullYear() &&
+		this.getMonth() === pDate.getMonth() &&
+		this.getDate() === pDate.getDate()
+		)
 }
 
 const getComment = function (entryLength, userLengthAvg) {
@@ -320,46 +319,46 @@ const getComment = function (entryLength, userLengthAvg) {
 //slight dom restructure for mobile
 let done
 window.onload = function() {
-  if(window.innerWidth <= mobile) { done = false }
-  if(window.innerWidth > mobile) { done = true }
-  mobileAdjust()
-}
+	if(window.innerWidth <= mobile) { done = false }
+		if(window.innerWidth > mobile) { done = true }
+			mobileAdjust()
+	}
 
-window.onresize = function() {
-  mobileAdjust()
-}
+	window.onresize = function() {
+		mobileAdjust()
+	}
 
-function mobileAdjust() { 
-  if(window.innerWidth <= mobile && !done) {
-    insertAfter(document.querySelector(".entry-header .next"), document.querySelector(".entry-header .prev"))
-    
-    document.querySelector('.expand').click()
-    document.querySelector('.expand').style.display = "none"
-    textarea.classList.add('focused')
-    textarea.classList.add('expanded')
-    
-    done = true
-  } else if(window.innerWidth > mobile && done) {
-    
-    document.querySelector(".entry-header c:last-child").appendChild(document.querySelector(".entry-header .next"))
-    document.querySelector(".entry-header c:first-child").appendChild(document.querySelector(".entry-header .prev"))
-    document.querySelectorAll(".to-nav").remove()
-    document.querySelector('.expand').style.display = "block"
+	function mobileAdjust() { 
+		if(window.innerWidth <= mobile && !done) {
+			insertAfter(document.querySelector(".entry-header .next"), document.querySelector(".entry-header .prev"))
 
-    done = false
-  }
-}
+			document.querySelector('.expand').click()
+			document.querySelector('.expand').style.display = "none"
+			textarea.classList.add('focused')
+			textarea.classList.add('expanded')
 
-function insertAfter(el, referenceNode) {
-	    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
-}
-Element.prototype.remove = function() {
-    this.parentElement.removeChild(this);
-}
-NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-    for(var i = this.length - 1; i >= 0; i--) {
-        if(this[i] && this[i].parentElement) {
-            this[i].parentElement.removeChild(this[i]);
-        }
-    }
-}
+			done = true
+		} else if(window.innerWidth > mobile && done) {
+
+			document.querySelector(".entry-header c:last-child").appendChild(document.querySelector(".entry-header .next"))
+			document.querySelector(".entry-header c:first-child").appendChild(document.querySelector(".entry-header .prev"))
+			document.querySelectorAll(".to-nav").remove()
+			document.querySelector('.expand').style.display = "block"
+
+			done = false
+		}
+	}
+
+	function insertAfter(el, referenceNode) {
+		referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+	}
+	Element.prototype.remove = function() {
+		this.parentElement.removeChild(this);
+	}
+	NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+		for(var i = this.length - 1; i >= 0; i--) {
+			if(this[i] && this[i].parentElement) {
+				this[i].parentElement.removeChild(this[i]);
+			}
+		}
+	}

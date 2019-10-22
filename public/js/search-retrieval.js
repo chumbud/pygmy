@@ -125,7 +125,7 @@ function renderResults(a) {
 		DOMresults.appendChild(resultNodes[i])
 	}
 	if(DOMresults.innerHTML == '')
-		DOMresults.innerHTML = 'no results :('
+		DOMresults.innerHTML = '<div id="no-results"><img src="/assets/img/sad-scrap.png"><p>no results</p></div>'
 }
 
 document.querySelector(".filter-dropdown").addEventListener("click", function () {

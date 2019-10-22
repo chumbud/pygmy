@@ -1,3 +1,20 @@
+const setCookie = function(key, value) {
+    document.cookie = key + "=" + value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT"
+}
+
+const getCookie = function(key) {
+	var keyEQ = key + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(keyEQ) == 0) { 
+			return c.substring(keyEQ.length,c.length); 
+		} 
+	}
+	return null;
+}
+
 //sets calendar icon position and day
 let i = new Date()
 document.querySelector(".icon-date").innerHTML = i.getDate()
@@ -6,9 +23,22 @@ document.querySelector(".icon-date").setAttribute("transform", "translate(5.25 1
 else
 document.querySelector(".icon-date").setAttribute("transform", "translate(8.5 19.5)")
 
+//checks for mode
+ if(getCookie("display-mode") == "dark-mode") {
+ 	document.querySelector("html").id = "dark-mode-enabled"
+ }
+ if(getCookie("text-size")) {
+ 	document.querySelector(":root").style.fontSize = getCookie("text-size")
+ }
+
 
 const handleError = function(error) {
 	console.log(error)
+	if(error.status == 500) {
+		window.location.replace("500.html")
+	} else if (error.status == 404) {
+		window.location.replace("404.html")
+	}
 }
 
 function showSignedIn (username) {

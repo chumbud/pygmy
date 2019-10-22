@@ -9,3 +9,5 @@ build/
 .bat
 node_modules
 .hoodie
+shrinkwrap.yaml
+.glitch-assets

@@ -141,6 +141,39 @@ function showOptions () {
  	hoodie.account.signOut()
  })
 
+//turns on dark mode
+ document.querySelector('[mode=dark-mode]').addEventListener('click', function (event) {
+ 	event.preventDefault()
+ 	setCookie("display-mode", "dark-mode")
+ 	document.querySelector("body").id = "dark-mode-enabled"
+ })
+
+//turns on light mode
+ document.querySelector('[mode=light-mode]').addEventListener('click', function (event) {
+ 	event.preventDefault()
+ 	setCookie("display-mode", "light-mode")
+ 	document.querySelector("body").id = ""
+ })
+
+//turns on light mode
+ document.querySelector('[text-size="10"]').addEventListener('click', function (event) {
+ 	event.preventDefault()
+ 	setCookie("text-size", "10px")
+ 	document.querySelector(":root").style.fontSize = "10px"
+ })
+//turns on light mode
+ document.querySelector('[text-size="12.5"]').addEventListener('click', function (event) {
+ 	event.preventDefault()
+ 	setCookie("text-size", "12.5px")
+ 	document.querySelector(":root").style.fontSize = "12.5px"
+ })
+//turns on light mode
+ document.querySelector('[text-size="15"]').addEventListener('click', function (event) {
+ 	event.preventDefault()
+ 	setCookie("text-size", "15px")
+ 	document.querySelector(":root").style.fontSize = "15px"
+ })
+
 /**
  * handle account destroy click. This will also trigger a "signout" event which
  * is handled in common.js

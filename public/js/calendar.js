@@ -68,14 +68,19 @@ function populateCalendar(year, month) {
 }
 }
 
-	document.querySelector(".message").innerHTML = "<img src=\"./assets/img/shining-star.png\"><p>today's a new day!</p><a class=\"button\" href=\"/\">write a new entry</a>"
-
+let found = false
 hoodie.store.findAll(function(response) {
-      if(response.year == realDate.getFullYear() &&
-        response.month-1 == realDate.getMonth() && 
-         response.day == realDate.getDate()) {
-        	document.querySelector(".message").innerHTML = "<p>you're all set! <br><br> come back tomorrow to write some more.</p><a class=\"button\" href=\"/\">see today's entry</a>"
-      }
+  if(response.year == realDate.getFullYear() &&
+    response.month-1 == realDate.getMonth() && 
+    response.day == realDate.getDate()) {
+   found = true
+}
+}).then(function() {
+  if(found) {
+   document.querySelector(".message").innerHTML = "<img src=\"./assets/img/happy-scrap.png\"><p>you're all set! <br><br> come back tomorrow to write some more.</p><a class=\"button\" href=\"/\">see today's entry</a>"
+ } else {
+  document.querySelector(".message").innerHTML = "<img style=\"width:10rem\" src=\"./assets/img/proud-scrap.png\"><p>today's a new day!</p><a class=\"button\" href=\"/\">write a new entry</a>"
+}
 })
 
 
