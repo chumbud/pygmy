@@ -19,7 +19,7 @@ const getCookie = function(key) {
 let i = new Date()
 document.querySelector(".icon-date").innerHTML = i.getDate()
 if(i.getDate() >= 10)
-document.querySelector(".icon-date").setAttribute("transform", "translate(5.25 19.5)")
+document.querySelector(".icon-date").setAttribute("transform", "translate(4.25 19.5)")
 else
 document.querySelector(".icon-date").setAttribute("transform", "translate(8.5 19.5)")
 

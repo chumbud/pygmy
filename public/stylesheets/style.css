@@ -1104,6 +1104,7 @@ nav ul li a::before {
 #dark-mode-enabled .input-controls {
   background-color: #212226;
 }
+
 #dark-mode-enabled .length-tracker::before {
   background-color: #363940;
   border: 2px solid #4a4e57;
