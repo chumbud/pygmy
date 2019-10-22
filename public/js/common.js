@@ -25,7 +25,7 @@ document.querySelector(".icon-date").setAttribute("transform", "translate(8.5 19
 
 //checks for mode
  if(getCookie("display-mode") == "dark-mode") {
- 	document.querySelector("body").id = "dark-mode-enabled"
+ 	document.querySelector("html").id = "dark-mode-enabled"
  }
  if(getCookie("text-size")) {
  	document.querySelector(":root").style.fontSize = getCookie("text-size")

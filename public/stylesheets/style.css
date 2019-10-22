@@ -119,14 +119,16 @@ ul {
 }
 .calendar .prev:before,
 .calendar .next:after {
-  bottom: 10px;
+  width: .7rem;
+  height: .7rem;
+  bottom: 8px;
   margin: 0;
 }
 .calendar .prev:before {
-  left: -1px;
+  left: -2px;
 }
 .calendar .next:after {
-  left: -4px;
+  left: -5px;
 }
 .calendar .prev:hover {
   background-color: #f5efe5;
@@ -158,15 +160,15 @@ ul {
 }
 .mood-select:before {
   content: "";
-  width: 5px;
-  height: 5px;
+  width: .5rem;
+  height: .5rem;
   transform: rotate(135deg);
   position: absolute;
   right: 15px;
   top: 50%;
   margin-top: -5px;
-  border-top: 2px solid #000;
-  border-right: 2px solid #000;
+  border-top: .2rem solid #000;
+  border-right: .2rem solid #000;
   transition: var(--easeOutCubic);
 }
 
@@ -1102,12 +1104,17 @@ nav ul li a::before {
 #dark-mode-enabled .input-controls {
   background-color: #212226;
 }
-#dark-mode-enabled .mood-board.open,
-#dark-mode-enabled .mood-board.open ul {
+
+#dark-mode-enabled .length-tracker::before {
+  background-color: #363940;
+  border: 2px solid #4a4e57;
+}
+#dark-mode-enabled .mood-board,
+#dark-mode-enabled .mood-board ul {
   background-color: #212226;
   border-color: #4a4e57;
 }
-#dark-mode-enabled .mood-board.open li:hover {
+#dark-mode-enabled .mood-board li:hover {
  background-color: #363940;
 }
 #dark-mode-enabled .entry-header,

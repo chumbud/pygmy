@@ -1,3 +1,14 @@
+/*
+*
+* PROMPTS
+*
+* Prompts are divided into two categories, reflective, retrospective. The goal with these is to try and provoke deeper thought into one's life as well as increase awareness of one's everyday life. All the prompts work to try and elicit a positive outlook through the appreciation of everyday events. As well as create a space to facilitate introspection in order to make sense of one's thoughts and emotions. While avoiding negative feelings is impossible and unrealistic, these prompts try to ask questions the user would actually want to answer positively to keep journaling an enjoyable experience.
+*
+*
+*
+*
+*
+*/
 [
 	{"prompt": "Was your mood significantly impacted by something that happened recently?"},
 	{"prompt": "What happened during your last moment of time to yourself?"},
@@ -6,6 +17,7 @@
 	{"prompt": "What's the next thing you're looking forward to?"},
 	{"prompt": "What were you doing this time last year and what's different this year?"},
 	{"prompt": "What did you do this afternoon?"},
+	{"prompt": "What's your morning routine looking like?"},
 	{"prompt": "Listening to any new music?"},
 	{"prompt": "What's an activity you're enjoying right now?"},
 	{"prompt": "How are you feeling right now?"},
