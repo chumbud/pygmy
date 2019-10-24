@@ -56,8 +56,6 @@ const getPrompt = function() {
 		prompt.innerHTML = rPrompt.prompt
 	}
 }
-//updates on-hover comment for entry length
-
 
 //gets prompts from json file
 fetch('json/prompts.json')
@@ -207,6 +205,7 @@ if(sessionStorage.getItem('_id') != null) {
 })
 }
 
+//retrieves journal entry to be placed in
 function getEntry(response) {
 	currentSession = response
 	document.querySelector('textarea').value = response.entry
@@ -222,6 +221,7 @@ function getEntry(response) {
 	}
 }
 
+//opens in expanded view
 function openEntry() {
 	document.querySelector('.expand').click()
 	textarea.classList.add('focused')
@@ -229,6 +229,7 @@ function openEntry() {
 	document.querySelector('button').innerHTML = "save changes"
 }
 
+//opens in expanded view but allows for editing
 function openInViewOnly () {
 	form.classList.add("read-only")
 	document.querySelector('textarea').setAttribute("readonly", true)
@@ -248,6 +249,7 @@ function openInViewOnly () {
 	})
 }
 
+//submission, either new entry or editing
 form.addEventListener("submit", (event) => {
 	event.preventDefault()
 
@@ -295,6 +297,7 @@ form.addEventListener("submit", (event) => {
 sessionStorage.removeItem("date")
 })
 
+//extends comparison to Date object
 Date.prototype.isSameDateAs = function(pDate) {
 	return (
 		this.getFullYear() === pDate.getFullYear() &&
@@ -303,6 +306,7 @@ Date.prototype.isSameDateAs = function(pDate) {
 		)
 }
 
+//gets comment for char on hover
 const getComment = function (entryLength, userLengthAvg) {
 
 	if(entryLength <= (userLengthAvg*.25))
