@@ -145,14 +145,14 @@ function showOptions () {
  document.querySelector('[mode=dark-mode]').addEventListener('click', function (event) {
  	event.preventDefault()
  	setCookie("display-mode", "dark-mode")
- 	document.querySelector("body").id = "dark-mode-enabled"
+ 	document.querySelector("html").id = "dark-mode-enabled"
  })
 
 //turns on light mode
  document.querySelector('[mode=light-mode]').addEventListener('click', function (event) {
  	event.preventDefault()
  	setCookie("display-mode", "light-mode")
- 	document.querySelector("body").id = ""
+ 	document.querySelector("html").id = ""
  })
 
 //turns on light mode
