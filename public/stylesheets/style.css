@@ -2,10 +2,27 @@
   --easeOutCubic: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   --easeInOut: all 0.2s ease-in-out;
   font-size: 10px;
+
+  /*colors*/
+  /*default theme*/
+  --primary: #faf6ee;
+  --primary-hover: #f5efe5;
+  --primary-darker: #cec6af;
+  --primary-even-darker: #cfb9b0;
+  --accent: #b6ffd3;
+
+  /*default fonts and strokes*/
+  --fas: #000;
+  --bg-color: var(--bg-color);
+
+  /*universal colors*/
+  --danger: red;
+  
+  /*dark mode*/
 }
 ::selection {
-  background-color: #b6ffd3;
-  caret-color: #b6ffd3;
+  background-color: var(--accent);
+  caret-color: var(--accent);
 }
 *::before,
 *::after {
@@ -41,18 +58,18 @@ a {
   text-decoration: none;
 }
 a:hover {
-  color: black;
+  color: var(--fas);
   text-decoration: underline;
 }
 select {
-  border: 1px solid #cec6af;
+  border: 1px solid var(--primary-darker);
   padding: 0.8rem;
 }
 select > option {
   padding: 0.8rem;
 }
 select > option:hover {
-  background-color: #b6ffd3;
+  background-color: var(--accent);
 }
 ul {
   padding-left: 0;
@@ -65,17 +82,17 @@ ul {
 }
 .mood-select {
   padding: 1rem 3.2rem 1rem 1.6rem;
-  background-color: #faf6ee;
+  background-color: var(--primary);
   border-radius: 0.8rem;
-  border: 1px solid #cec6af;
+  border: 1px solid var(--primary-darker);
   /*
   padding: .8rem 3.2rem .8rem .8rem;
-  border: 2px solid black; */
+  border: 2px solid var(--fas); */
   display: inline-block;
   transition: background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 .mood-select:hover {
-  background-color: #f5efe5;
+  background-color: var(--primary-hover);
 }
 .mood-select.selected {
   background-color: white;
@@ -90,8 +107,8 @@ ul {
   position: relative;
   display: inline-block;
   bottom: 1px;
-  border-top: .2rem solid #000;
-  border-right: .2rem solid #000;
+  border-top: .2rem solid var(--fas);
+  border-right: .2rem solid var(--fas);
   transition: var(--easeOutCubic);
 }
 .prev:before {
@@ -131,11 +148,11 @@ ul {
   left: -5px;
 }
 .calendar .prev:hover {
-  background-color: #f5efe5;
+  background-color: var(--primary-hover);
   transform: translateX(-0.5rem);
 }
 .calendar .next:hover {
-  background-color: #f5efe5;
+  background-color: var(--primary-hover);
   transform: translateX(0.5rem);
 }
 .calendar .prev:hover:before {
@@ -167,8 +184,8 @@ ul {
   right: 15px;
   top: 50%;
   margin-top: -5px;
-  border-top: .2rem solid #000;
-  border-right: .2rem solid #000;
+  border-top: .2rem solid var(--fas);
+  border-right: .2rem solid var(--fas);
   transition: var(--easeOutCubic);
 }
 
@@ -201,7 +218,7 @@ ul {
   margin-left: -14rem;
   max-width: 28rem;
   border-radius: 0.8rem;
-  border: 1px solid #cec6af;
+  border: 1px solid var(--primary-darker);
   overflow: hidden;
   transition: var(--easeOutCubic);
   position: absolute;
@@ -241,7 +258,7 @@ ul {
 }
 .mood-board ul li:hover {
   cursor: pointer;
-  background-color: #faf6ee;
+  background-color: var(--primary);
 }
 #entry-form {
   height: 100%;
@@ -259,32 +276,32 @@ ul {
   height: 6.5rem;
   border: none;
   border-radius: 0.8rem;
-  background-color: #faf6ee;
+  background-color: var(--primary);
   padding: 2rem 2.4rem;
   font-size: 1.6rem;
   line-height: 1.6;
   resize: none;
   overflow: hidden;
-  border: 2px solid #cec6af;
-  box-shadow: 0px 0px 0px 5px #fff;
+  border: 2px solid var(--primary-darker);
+  box-shadow: 0px 0px 0px 5px var(--bg-color);
   transition: var(--easeOutCubic);
   margin-top: 30vh;
 }
 .journal-input textarea.focused,
 .journal-input textarea:focus {
   outline: none;
-  border: 1px solid #cfb9b0;
-  box-shadow: 0px 0px 0px 5px #faf6ee;
-  background-color: #fff;
+  border: 1px solid var(--primary-even-darker);
+  box-shadow: 0px 0px 0px 5px var(--primary);
+  background-color: var(--bg-color);
   height: 22rem;
   overflow: auto;
   margin-top: 22vh;
 }
 .journal-input textarea.expanded {
   outline: none;
-  border: 2px solid #fff;
-  box-shadow: 0px 0px 0px 5px #fff;
-  background-color: #fff;
+  border: 2px solid var(--bg-color);
+  box-shadow: 0px 0px 0px 5px var(--bg-color);
+  background-color: var(--bg-color);
   overflow: auto;
   margin-top: 3.6rem;
   padding: 0;
@@ -294,7 +311,7 @@ ul {
 }
 
 .journal-section textarea::placeholder {
-  color: #cfb9b0;
+  color: var(--primary-even-darker);
   opacity: 1;
   font-size: 1.8rem;
   line-height: 1.4;
@@ -336,12 +353,12 @@ nav ul li {
   list-style: none;
   text-align: center;
   font-size: 1.2rem;
-  color: #000;
+  color: var(--fas);
   line-height: 2;
   transition: var(--easeInOut);
 }
 nav ul li:hover {
-  color: #000;
+  color: var(--fas);
   line-height: 2;
 }
 nav ul li a {
@@ -380,8 +397,8 @@ nav ul li a::before {
   order: 3;
 }
 .button {
-  border: 2px solid #b6ffd3;
-  background-color: #b6ffd3;
+  border: 2px solid var(--accent);
+  background-color: var(--accent);
   border-radius: 0.8rem;
   text-decoration: none;
   line-height: 1;
@@ -390,9 +407,9 @@ nav ul li a::before {
   transition: var(--easeOutCubic);
 }
 .button:hover {
-  background-color: #fff;
-  border-color: #000;
-  color: #000;
+  background-color: var(--bg-color);
+  border-color: var(--fas);
+  color: var(--fas);
   text-decoration: none;
 }
 .expand {
@@ -429,8 +446,8 @@ nav ul li a::before {
   content: attr(data-length-status);
   top: -100%;
   opacity: 0;
-  background-color: #faf6ee;
-  border: 2px solid #cec6af;
+  background-color: var(--primary);
+  border: 2px solid var(--primary-darker);
   padding: 1rem;
   position: absolute;
   white-space: pre;
@@ -478,11 +495,6 @@ nav ul li a::before {
   content: none;
 }
 
-.dot {
-  fill: #fff;
-  stroke: #d2c8ad;
-}
-
 .sendToBottom {
   animation-duration: 0.4s;
   animation-fill-mode: forwards;
@@ -511,7 +523,7 @@ nav ul li a::before {
   transition: var(--easeOutCubic);
 }
 .helper-prompt-box {
-  background-color: #faf6ee;
+  background-color: var(--primary);
   padding: 1.6rem;
   text-align: center;
   opacity: 0;
@@ -535,7 +547,7 @@ nav ul li a::before {
 .prompt {
   color: grey;
   background-color: white;
-  border: 1px solid #cec6af;
+  border: 1px solid var(--primary-darker);
   font-style: italic;
   padding: 1.6rem;
   display: block;
@@ -572,14 +584,14 @@ nav ul li a::before {
   left: 0;
 }
 #date .edit {
-  color: red;
+  color: var(--danger);
   margin-left: 0.8rem;
   font-weight: 400;
   font-size: 1.4rem;
   cursor: pointer;
 }
 .read-only #date .edit {
-  color: black;
+  color: var(--fas);
 }
 
 [data-show] > * {
@@ -628,7 +640,7 @@ nav ul li a::before {
   font-family: "Inter UI";
   font-size: 2.4rem;
   font-weight: 700;
-  color: black;
+  color: var(--fas);
   padding: 1.6rem;
   transition: var(--easeOutCubic);
 }
@@ -661,7 +673,7 @@ nav ul li a::before {
   grid-template-rows: auto;
 }
 .day-header {
-  color: #cec6af;
+  color: var(--primary-darker);
 }
 .month-year {
   text-transform: lowercase;
@@ -689,22 +701,22 @@ nav ul li a::before {
   background-color: white;
   text-decoration: none;
   text-align: center;
-  color: black;
+  color: var(--fas);
   border: 2px white solid;
   position: relative;
   transition: var(--easeOutCubic);
 }
 .calendar-container .days li:not(.empty) a:hover {
-  background-color: #f5efe5;
+  background-color: var(--primary-hover);
 }
 .calendar-container .days li:not(.empty).today a {
-  border: 2px black solid;
+  border: 2px var(--fas) solid;
 }
 .calendar-container .days li:not(.empty).completed a {
-  background-color: #b6ffd3;
+  background-color: var(--accent);
 }
 .calendar-container .days li:not(.empty).disabled a {
-  color: #cec6af;
+  color: var(--primary-darker);
   pointer-events: none;
 }
 .calendar-container .days li:not(.empty):not(.completed) a:before {
@@ -713,8 +725,8 @@ nav ul li a::before {
   padding: 1rem;
   font-size: 1.2rem;
   font-weight: 400;
-  color: #fff;
-  background-color: #000;
+  color: var(--bg-color);
+  background-color: var(--fas);
   left: -76%;
   top: -95%;
   line-height: 1;
@@ -726,7 +738,7 @@ nav ul li a::before {
   content: "";
   width: 1.6rem;
   height: 1.6rem;
-  background-color: #000;
+  background-color: var(--fas);
   transform: rotate(-45deg);
   position: absolute;
   left: 31%;
@@ -769,8 +781,8 @@ nav ul li a::before {
 #account-settings button {
   margin-bottom: 2.4rem;
   text-transform: lowercase;
-  border: 2px solid #000;
-  background-color: #fff;
+  border: 2px solid var(--fas);
+  background-color: var(--bg-color);
   text-decoration: none;
   line-height: 1;
   border-radius: 0.8rem;
@@ -779,20 +791,20 @@ nav ul li a::before {
   transition: var(--easeOutCubic);
 }
 #account-settings button:hover {
-  background-color: #b6ffd3;
-  border-color: #b6ffd3;
-  color: #000;
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--fas);
   text-decoration: none;
 }
 #account-settings button.small {
   font-size: 1.4rem;
 }
 #account-settings button.danger {
-  border: 2px solid red;
-  color: red;
+  border: 2px solid var(--danger);
+  color: var(--danger);
 }
 #account-settings button.danger:hover {
-  background-color: red;
+  background-color: var(--danger);
   color: white;
 }
 #delete-confirmation {
@@ -805,11 +817,11 @@ nav ul li a::before {
 #account-settings input {
   padding: 1.6rem;
   margin: 1.6rem 0;
-  border: 1px solid #cec6af;
+  border: 1px solid var(--primary-darker);
   transition: var(--easeOutCubic);
 }
 #account-settings input:focus {
-  border: 2px solid #000;
+  border: 2px solid var(--fas);
 }
 #account-settings label {
   display: block;
@@ -872,7 +884,7 @@ nav ul li a::before {
     width: 100%;
     bottom: 0;
     margin: 0;
-    border-top: 1px solid black;
+    border-top: 1px solid var(--fas);
     z-index: 15;
     background-color: white;
   }
@@ -890,7 +902,7 @@ nav ul li a::before {
     display: none;
   }
   nav ul:not(:last-child) li {
-    border-right: 1px solid black;
+    border-right: 1px solid var(--fas);
   }
   nav ul li:hover {
     background-color: #eaeaea;
@@ -956,13 +968,13 @@ nav ul li a::before {
     line-height: 2;
   }
   .to-nav:first-child {
-    border-right: 1px solid black;
+    border-right: 1px solid var(--fas);
   }
   .to-nav:last-child {
     text-align: right;
   }
   .entry-header > c:first-child {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--fas);
   }
   .entry-header .prev,
   .entry-header .next {
@@ -971,7 +983,7 @@ nav ul li a::before {
     width: 50%;
   }
   .entry-header .prev {
-    border-right: 1px solid black;
+    border-right: 1px solid var(--fas);
   }
   .entry-header .next {
     text-align: right;
@@ -1011,7 +1023,7 @@ nav ul li a::before {
       display: none;
     }
     .entry-header {
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid var(--fas);
       z-index: 10;
     }
     .header h2 {
@@ -1061,7 +1073,7 @@ nav ul li a::before {
 }
 #dark-mode-enabled button.button {
   border: 2px solid #212226;
-  background-color: #b6ffd3;
+  background-color: var(--accent);
   color: #212226;
 }
 
@@ -1094,7 +1106,7 @@ nav ul li a::before {
 }
 #dark-mode-enabled .mood-select,
 #dark-mode-enabled .mood-select:hover {
-  color: black;
+  color: var(--fas);
 }
 #dark-mode-enabled .mood-select.selected {
   filter: invert(0);
@@ -1141,8 +1153,8 @@ nav ul li a::before {
   border-color: #212226;
 }
 #dark-mode-enabled .calendar-container .days li.completed a {
-  color: #b6ffd3;
-  border-color: #b6ffd3;
+  color: var(--accent);
+  border-color: var(--accent);
 }
 #dark-mode-enabled .calendar-container .days li.completed:hover a {
   background-color: inherit;
