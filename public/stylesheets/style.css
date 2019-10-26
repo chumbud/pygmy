@@ -13,7 +13,7 @@
 
   /*default fonts and strokes*/
   --fas: #000;
-  --bg-color: var(--bg-color);
+  --bg-color: #fff;
 
   /*universal colors*/
   --danger: red;
@@ -38,7 +38,6 @@ body {
   padding: 0;
 }
 .main-wrapper {
-  /*padding: calc(var(--lineHeight)*2);*/
   height: 100vh;
   margin-bottom: 0;
 }
@@ -85,9 +84,6 @@ ul {
   background-color: var(--primary);
   border-radius: 0.8rem;
   border: 1px solid var(--primary-darker);
-  /*
-  padding: .8rem 3.2rem .8rem .8rem;
-  border: 2px solid var(--fas); */
   display: inline-block;
   transition: background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
