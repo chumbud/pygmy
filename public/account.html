@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>Account</title>
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="stylesheets/_base.css"/>
-	<link rel="stylesheet" href="stylesheets/_fonts.css"/>
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:700&display=swap" rel="stylesheet"> 
-	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="stylesheets/raster.css"/>
 	<link rel="stylesheet" href="stylesheets/style.css"/>
 	<script src="/hoodie/client.js"></script>
@@ -25,12 +21,12 @@
 						</p>
 						<p>
 							<label for="input-signup-email">Email</label>
-							<input id="input-signup-email" name="email" type="email" required="">
+							<input id="input-signup-email" name="email" type="email" required="" enterkeyhint="next">
 						</p>
 
 						<p>
 							<label for="input-signup-password">Password</label>
-							<input id="input-signup-password" name="password" type="password" required="">
+							<input id="input-signup-password" name="password" type="password" required="" enterkeyhint="next">
 						</p>
 
 						<p>
@@ -46,12 +42,12 @@
 						</p>
 						<p>
 							<label for="input-signin-email">Email</label>
-							<input id="input-signin-email" name="email" type="email" required="">
+							<input id="input-signin-email" name="email" type="email" required="" enterkeyhint="next">
 						</p>
 
 						<p>
 							<label for="input-signin-password">Password</label>
-							<input id="input-signin-password" name="password" type="password" required="">
+							<input id="input-signin-password" name="password" type="password" required="" enterkeyhint="next">
 						</p>
 
 						<p>
@@ -73,7 +69,7 @@
 
 						<p>
 							<label for="input-email-reset">Enter your account's email</label>
-							<input id="input-email-reset" name="email" type="email" required="">
+							<input id="input-email-reset" name="email" type="email" required="" enterkeyhint="next">
 						</p>
 
 						<p>
@@ -91,6 +87,8 @@
 							<button class="default" data-action="show-change-appearance">Appearance settings</button>
 							<button class="default" data-action="show-change-email">Change email</button>
 							<button class="default" data-action="show-change-password">Change password</button>
+              <div class="divider">
+              </div>
 							<button class="danger" data-action="show-delete-account">Delete account</button>
 						</div><!-- /.options -->
 
@@ -113,7 +111,7 @@
 						<form class="change-email">
 							<p>
 								<label for="input-change-email">Change email</label>
-								<input id="input-change-email" name="email" type="email" required="">
+								<input id="input-change-email" name="email" type="email" required="" enterkeyhint="next">
 							</p>
 
 							<p>
@@ -127,7 +125,7 @@
 						<form class="change-password">
 							<p>
 								<label for="input-change-password">Set new password</label>
-								<input id="input-change-password" name="password" type="password" required="">
+								<input id="input-change-password" name="password" type="password" required="" enterkeyhint="next">
 							</p>
 
 							<p>
@@ -139,10 +137,9 @@
 						</form><!-- /.change-password -->
 
 						<form class="delete-account">
-							<p>Are you sure you want to delete your account?</p>
-							<p>All your entries will be permanently deleted.</p>
+							<p>Are you sure you want to delete your account? All your entries will be permanently deleted.</p>
 							<label for="delete-confirmation">Write out "delete" as confirmation.</label>
-							<input id="delete-confirmation" type="text" name="rusure" required="">
+							<input id="delete-confirmation" type="text" name="rusure" required="" enterkeyhint="done">
 							<button class="danger" type="submit">Delete account</button>
 							<small>
 								<a href="#" class="btn-link" data-action="show-options">Cancel</a>
@@ -164,7 +161,6 @@
 									<style>
 										.icon-date {
 											font-size: 12px;
-											font-family: InterUI-Medium, Inter UI;
 											font-weight: 500;
 										}
 
@@ -197,4 +193,19 @@
 	</body>
 	<script type="text/javascript" src="./js/common.js"></script>
 	<script type="text/javascript" src="./js/account.js"></script>
+  <script type="text/javascript">
+    
+  if(getCookie("display-mode") == "dark-mode")
+ 	  document.querySelector('[mode=dark-mode]').classList.add("selected")
+  else
+    document.querySelector('[mode=light-mode]').classList.add("selected")
+
+  if(getCookie("text-size") == "15px")
+    document.querySelector('[text-size="15"]').classList.add("selected")
+  else if(getCookie("text-size") == "12.5px")
+    document.querySelector('[text-size="12.5"]').classList.add("selected")
+  else 
+    document.querySelector('[text-size="10"]').classList.add("selected")
+
+  </script>
 	</html>

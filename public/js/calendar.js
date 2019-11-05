@@ -31,7 +31,7 @@ function populateCalendar(year, month) {
   }
 
   //creates days and compares them to the array of existing entries to mark them as completed with accompanied id and date 
-  for (var i = 1; i < lastDay; i++) {
+  for (var i = 1; i <= lastDay; i++) {
   	let newDay = document.createElement("li")
   	newDay.innerHTML = "<a href=\"/\">" + i + "</a>"
 

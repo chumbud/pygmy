@@ -17,7 +17,7 @@
 	transition: var(--easeOutCubic)
 }
 .listEntry:hover {
-	background-color: #faf6ee;
+	background-color: var(--primary);
 	cursor: pointer;
 }
 .listEntry:hover img {
@@ -61,7 +61,7 @@ h3 a.delete {
 .search-container select {
 	margin: 0rem 1.6rem;
   border-radius: .8rem;
-  background-color: #faf6ee;
+  background-color: var(--primary);
 }
 .search-entry-info {
 	margin-left: 2.4rem;
