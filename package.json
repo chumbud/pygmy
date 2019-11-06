@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/de-Mote/pygmy#readme",
   "dependencies": {
-    "hoodie": "^28.2.9"
+    "hoodie": "^28.2.10"
   }
 }
