@@ -142,66 +142,64 @@ function showOptions () {
  })
 
 //turns on dark mode
- document.querySelector('[mode=dark-mode]').addEventListener('click', function (event) {
- 	event.preventDefault()
- 	setCookie("display-mode", "dark-mode")
- 	document.querySelector("html").id = "dark-mode-enabled"
-  
-   document.querySelectorAll('[mode]').forEach(item => {
-    item.classList.remove('selected')
-  })
-   
-  this.classList.toggle("selected")
- })
+document.querySelector('[mode=dark-mode]').addEventListener('click', function (event) {
+	event.preventDefault()
+	setCookie("display-mode", "dark-mode")
+	document.querySelector("html").id = "dark-mode-enabled"
+
+	document.querySelectorAll('[mode]').forEach(item => {
+		item.classList.remove('selected')
+	})
+	this.classList.toggle("selected")
+})
 
 //turns on light mode
- document.querySelector('[mode=light-mode]').addEventListener('click', function (event) {
- 	event.preventDefault()
- 	setCookie("display-mode", "light-mode")
- 	document.querySelector("html").id = ""
-   
-  document.querySelectorAll('[mode]').forEach(item => {
-    item.classList.remove('selected')
-  })
-   
-  this.classList.toggle("selected")
- })
+document.querySelector('[mode=light-mode]').addEventListener('click', function (event) {
+	event.preventDefault()
+	setCookie("display-mode", "light-mode")
+	document.querySelector("html").id = ""
+
+	document.querySelectorAll('[mode]').forEach(item => {
+		item.classList.remove('selected')
+	})
+	this.classList.toggle("selected")
+})
 
 //turns on light mode
- document.querySelector('[text-size="10"]').addEventListener('click', function (event) {
- 	event.preventDefault()
- 	setCookie("text-size", "10px")
- 	document.querySelector(":root").style.fontSize = "10px"
-   
-  document.querySelectorAll('[text-size]').forEach(item => {
-    item.classList.remove('selected')
-  })
-  this.classList.toggle("selected")
- })
-//turns on light mode
- document.querySelector('[text-size="12.5"]').addEventListener('click', function (event) {
- 	event.preventDefault()
- 	setCookie("text-size", "12.5px")
- 	document.querySelector(":root").style.fontSize = "12.5px"
+document.querySelector('[text-size="10"]').addEventListener('click', function (event) {
+	event.preventDefault()
+	setCookie("text-size", "10px")
+	document.querySelector(":root").style.fontSize = "10px"
 
-  document.querySelectorAll('[text-size]').forEach(item => {
-    item.classList.remove('selected')
-  })
-   
-  this.classList.toggle("selected")
- })
+	document.querySelectorAll('[text-size]').forEach(item => {
+		item.classList.remove('selected')
+	})
+	this.classList.toggle("selected")
+})
 //turns on light mode
- document.querySelector('[text-size="15"]').addEventListener('click', function (event) {
- 	event.preventDefault()
- 	setCookie("text-size", "15px")
- 	document.querySelector(":root").style.fontSize = "15px"
-   
-  document.querySelectorAll('[text-size]').forEach(item => {
-    item.classList.remove('selected')
-  })
+document.querySelector('[text-size="12.5"]').addEventListener('click', function (event) {
+	event.preventDefault()
+	setCookie("text-size", "12.5px")
+	document.querySelector(":root").style.fontSize = "12.5px"
 
-  this.classList.toggle("selected")
- })
+	document.querySelectorAll('[text-size]').forEach(item => {
+		item.classList.remove('selected')
+	})
+
+	this.classList.toggle("selected")
+})
+//turns on light mode
+document.querySelector('[text-size="15"]').addEventListener('click', function (event) {
+	event.preventDefault()
+	setCookie("text-size", "15px")
+	document.querySelector(":root").style.fontSize = "15px"
+
+	document.querySelectorAll('[text-size]').forEach(item => {
+		item.classList.remove('selected')
+	})
+
+	this.classList.toggle("selected")
+})
 
 /**
  * handle account destroy click. This will also trigger a "signout" event which
