@@ -183,7 +183,6 @@ if(sessionStorage.getItem('_id') != null) {
 		}
 
 		sessionStorage.removeItem("edit-mode")
-		sessionStorage.removeItem("_id")
 	}).catch(handleError)
 	openEntry()
 //if it's today's entry
