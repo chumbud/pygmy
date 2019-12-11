@@ -6,7 +6,8 @@
 small journal app i'm working on. you can read more here:
 [http://pj.codes/work/pygmy/](http://pj.codes/work/pygmy/)
 
-
+#### Next:
+- Plan tagging, diary by week, rich text features, search by keyword
 #### TODO for the future:
 - Learn and implement HTML accessibility
 - Stricter security check for DB
