@@ -41,6 +41,9 @@ fetch('json/emoji.json')
         console.log('input[value="' + response.selectedEmoji + '"]')
       })
     }
+    //this should be the last call made since the board loads last, i know this is really unintuitive but uh it fixes things
+    //im a designer, not a DeVelOpeR
+    sessionStorage.removeItem("_id")
   })
 	
 

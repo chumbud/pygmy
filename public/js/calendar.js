@@ -86,7 +86,7 @@ hoodie.store.findAll(function(response) {
 
 document.querySelector(".calendar .prev").addEventListener("click", function(e) {
 	e.preventDefault()
-	m==1 ? (y--, m=11) : m--
+	m==0 ? (y--, m=11) : m--
 	populateCalendar(y, m)  
 })
 document.querySelector(".calendar .next").addEventListener("click", function(e) {

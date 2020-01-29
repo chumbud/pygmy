@@ -19,9 +19,9 @@ const getCookie = function(key) {
 let i = new Date()
 document.querySelector(".icon-date").innerHTML = i.getDate()
 if(i.getDate() >= 10)
-document.querySelector(".icon-date").setAttribute("transform", "translate(4.25 19.5)")
+document.querySelector(".icon-date").setAttribute("transform", "translate(9, 29)")
 else
-document.querySelector(".icon-date").setAttribute("transform", "translate(8.5 19.5)")
+document.querySelector(".icon-date").setAttribute("transform", "translate(9, 29)")
 
 //checks for mode
  if(getCookie("display-mode") == "dark-mode")
@@ -30,6 +30,8 @@ document.querySelector(".icon-date").setAttribute("transform", "translate(8.5 19
  if(getCookie("text-size"))
  	document.querySelector(":root").style.fontSize = getCookie("text-size")
 
+if(getCookie("background"))
+ 	document.querySelector("html").classList.add(getCookie("background"))
 
 
 const handleError = function(error) {
