@@ -17,7 +17,7 @@
 
   /*universal colors*/
   --danger: red;
-  
+
   /*dark mode*/
 }
 ::selection {
@@ -28,12 +28,156 @@
 *::after {
   stroke-linecap: round;
 }
+/*to future me: so custom backgrounds maybe possible. just make sure for light-mode to use multiple, and color-burn for dark (at like .5)*/
+/*to past me: just make low opacity transparent backgrounds...lol*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img,
+iframe {
+  vertical-align: bottom;
+  max-width: 100%;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 html,
 body {
   height: 100vh;
 }
 body {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   margin: 0;
   padding: 0;
 }
@@ -42,7 +186,7 @@ body {
   margin-bottom: 0;
 }
 h1 {
-  font-size: 24px;
+  font-size: 2.4rem;
   font-weight: 700;
 }
 h2 {
@@ -55,6 +199,7 @@ h2 {
 }
 h3 {
   font-size: 1.6rem;
+  margin-top: 3.2rem;
   margin-bottom: 1.6rem;
 }
 a {
@@ -102,13 +247,13 @@ ul {
 .prev:before,
 .next:after {
   content: "";
-  width: .5rem;
-  height: .5rem;
+  width: 0.5rem;
+  height: 0.5rem;
   position: relative;
   display: inline-block;
   bottom: 1px;
-  border-top: .2rem solid var(--fas);
-  border-right: .2rem solid var(--fas);
+  border-top: 0.3rem solid var(--fas);
+  border-right: 0.3rem solid var(--fas);
   transition: var(--easeOutCubic);
 }
 .prev:before {
@@ -129,23 +274,24 @@ ul {
 .calendar .next {
   width: 1.6rem;
   height: 1.6rem;
-  padding: 1.6rem;
+  padding: 2.4rem;
   border-radius: 50%;
   position: relative;
   transition: var(--easeOutCubic);
 }
 .calendar .prev:before,
 .calendar .next:after {
-  width: .7rem;
-  height: .7rem;
-  bottom: 8px;
+  width: 0.7rem;
+  height: 0.7rem;
   margin: 0;
 }
 .calendar .prev:before {
-  left: -2px;
+  left: -0.2rem;
+  bottom: 1.1rem;
 }
 .calendar .next:after {
-  left: -5px;
+  left: -0.6rem;
+  bottom: 1.1rem;
 }
 .calendar .prev:hover {
   background-color: var(--primary-hover);
@@ -169,23 +315,25 @@ ul {
 }
 .calendar .prev:after,
 .calendar .next:before {
+  /*
   content: "";
   padding: 3.2rem;
   position: absolute;
   left: -50%;
   top: -50%;
+  */
 }
 .mood-select:before {
   content: "";
-  width: .5rem;
-  height: .5rem;
+  width: 0.5rem;
+  height: 0.5rem;
   transform: rotate(135deg);
   position: absolute;
   right: 15px;
   top: 50%;
   margin-top: -5px;
-  border-top: .2rem solid var(--fas);
-  border-right: .2rem solid var(--fas);
+  border-top: 0.2rem solid var(--fas);
+  border-right: 0.2rem solid var(--fas);
   transition: var(--easeOutCubic);
 }
 
@@ -265,15 +413,14 @@ ul {
 }
 .journal-section {
   font-size: 1.4rem;
-  max-width: 60rem;
+  max-width: 65rem;
   margin: 0 auto;
   display: flex;
   flex-flow: column;
   height: 100%;
 }
 .journal-input textarea {
-  width: 100%;
-  height: 6.5rem;
+  height: 7rem;
   border: none;
   border-radius: 0.8rem;
   background-color: var(--primary);
@@ -352,7 +499,7 @@ nav ul:last-child {
 nav ul li {
   list-style: none;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   color: var(--fas);
   line-height: 2;
   transition: var(--easeInOut);
@@ -363,16 +510,40 @@ nav ul li:hover {
 }
 nav ul li a {
   display: block;
+  padding: 1.6rem 0rem;
 }
 nav ul li a::before {
   content: "";
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 80%;
   display: block;
-  height: 2.4rem;
-  width: 2.4rem;
-  margin: 0 auto -0.5rem;
-  padding: 1rem;
+  height: 3.2rem;
+  width: 3.2rem;
+  margin: 0rem auto;
+  position: relative;
+  bottom: 0;
+  transform-origin: center;
+  transition: all 0.2s ease-in-out;
+}
+nav ul li a svg {
+  transform-origin: center;
+  transition: all 0.2s ease-in-out;
+}
+nav ul li a:hover::before {
+  background-size: 100%;
+}
+nav ul li a:hover svg {
+  transform: scale(1.25) rotate(10deg);
+}
+nav ul li:first-child a:hover:before {
+  transform: rotate(45deg);
+}
+.cls-1 {
+  fill: #1a1818;
+}
+.cls-1.current {
+  fill: var(--primary-darker);
 }
 .input-controls {
   display: flex;
@@ -420,7 +591,7 @@ nav ul li a::before {
   background-repeat: no-repeat;
   background-position: center;
   display: inline-block;
-  height: 1.2rem;
+  height: 1.6rem;
   position: relative;
   top: 2px;
   width: 1rem;
@@ -486,7 +657,7 @@ nav ul li a::before {
 }
 .calendar-page svg {
   display: block;
-  margin: 3.2rem auto 0.6rem;
+  margin: 0.8rem auto;
 }
 .calendar-page:hover svg#cal-icon .icon-date {
   text-decoration: none !important;
@@ -670,6 +841,7 @@ nav ul li a::before {
 }
 .day-header {
   color: var(--primary-darker);
+  margin-bottom: 1.6rem;
 }
 .month-year {
   text-transform: lowercase;
@@ -706,10 +878,14 @@ nav ul li a::before {
   background-color: var(--primary-hover);
 }
 .calendar-container .days li:not(.empty).today a {
-  border: 2px var(--fas) solid;
+  background-color: var(--primary-hover);
 }
 .calendar-container .days li:not(.empty).completed a {
   background-color: var(--accent);
+}
+.calendar-container .days li:not(.empty).completed a:hover {
+  background-color: var(--bg-color);
+  border-color: var(--fas);
 }
 .calendar-container .days li:not(.empty).disabled a {
   color: var(--primary-darker);
@@ -845,7 +1021,7 @@ nav ul li a::before {
 #account-settings button.default.disabled {
   border-color: lightgray;
   color: lightgray;
-  cursor: url("./../assets/img/coming-soon.svg")50 50, not-allowed;
+  cursor: url("./../assets/img/coming-soon.svg") 50 50, not-allowed;
 }
 #account-settings button.default.disabled:hover {
   border-color: lightgray;
@@ -853,7 +1029,7 @@ nav ul li a::before {
   background-color: unset;
 }
 #account-settings > div {
-  max-width: 500px;
+  max-width: 50rem;
   margin-top: 15vh;
 }
 .divider {
@@ -862,11 +1038,11 @@ nav ul li a::before {
 }
 #account-settings .divider:before {
   content: "";
-  border-bottom: 1px solid lightgray;
+  border-bottom: 0.1rem solid lightgray;
   display: block;
   margin: 1.6rem 0 4rem;
   width: 100%;
-  opacity: .75;
+  opacity: 0.75;
 }
 .change-appearance .selected {
   font-weight: 700;
@@ -875,11 +1051,53 @@ nav ul li a::before {
 .change-appearance .selected::before {
   content: "➜";
   display: inline-block;
-  margin-right: .8rem;
+  margin-right: 0.8rem;
 }
 .change-appearance a {
-  margin-right: .8rem;
+  margin-right: 0.8rem;
 }
+.change-appearance button {
+  margin: 3.2rem 0rem;
+}
+#background-select a::before {
+  content: none;
+}
+#background-select {
+  display: block;
+  margin-top: 3.2rem;
+}
+#background-select a {
+  width: 5rem;
+  height: 5rem;
+  background-size: cover;
+  background-color: var(--bg-color);
+  border: 0.2rem solid black;
+  border-radius: 1.6rem;
+  display: inline-block;
+  transition: var(--easeOutCubic);
+}
+#background-select a:hover {
+  transform: scale(1.25);
+}
+#background-select a.selected {
+  border-color: var(--accent);
+}
+[mode="blank"], .blank {
+  background-image: url("");
+}
+[mode="dots"], .dots {
+  background-image: url("./../assets/img/patterns/dots.png");
+}
+[mode="grid"], .grid {
+  background-image: url("./../assets/img/patterns/grid.png");
+}
+[mode="sun"], .sun {
+  background-image: url("./../assets/img/patterns/sun.png");
+}
+[mode="confetti"], .confetti {
+  background-image: url("./../assets/img/patterns/confetti.png");
+}
+
 /*mobile*/
 @media only screen and (max-width: 680px) {
   #entry-form {
@@ -913,8 +1131,8 @@ nav ul li a::before {
     margin: 0;
   }
   nav ul li {
-    padding: 0.8rem 1.6rem;
     margin-bottom: 0;
+    padding: 0rem 4vw;
   }
   nav ul li a::before {
     display: none;
@@ -1075,6 +1293,7 @@ nav ul li a::before {
 /* dark mode */
 #dark-mode-enabled {
   background-color: #212226;
+  background-blend-mode: overlay;
 }
 
 #dark-mode-enabled h2,
@@ -1099,7 +1318,7 @@ nav ul li a::before {
   color: #313139;
 }
 
-#dark-mode-enabled nav ul li, 
+#dark-mode-enabled nav ul li,
 #dark-mode-enabled .prev:before,
 #dark-mode-enabled .next:after,
 #dark-mode-enabled label,
@@ -1115,7 +1334,7 @@ nav ul li a::before {
 #dark-mode-enabled img[src*="./assets/img/empty.png"],
 #dark-mode-enabled img[src*="assets/img/empty.png"],
 #dark-mode-enabled .message img {
-  filter: invert(.8);
+  filter: invert(0.8);
 }
 #dark-mode-enabled a.prev:hover:before,
 #dark-mode-enabled a.next:hover:after,
@@ -1145,7 +1364,7 @@ nav ul li a::before {
   border-color: #4a4e57;
 }
 #dark-mode-enabled .mood-board li:hover {
- background-color: #363940;
+  background-color: #363940;
 }
 #dark-mode-enabled .entry-header,
 #dark-mode-enabled #account-settings a,
@@ -1171,11 +1390,13 @@ nav ul li a::before {
   border-color: #212226;
 }
 #dark-mode-enabled .calendar-container .days li.completed a {
-  color: var(--accent);
+  color: #212226;
   border-color: var(--accent);
+  background-color: var(--accent);
 }
 #dark-mode-enabled .calendar-container .days li.completed:hover a {
   background-color: inherit;
+  color: var(--accent);
 }
 #dark-mode-enabled a.button,
 #dark-mode-enabled a.completed {
@@ -1200,7 +1421,7 @@ nav ul li a::before {
   box-shadow: 0px 0px 0px 5px #212226;
 }
 #dark-mode-enabled .journal-section textarea::placeholder {
- color: #4a4e57;
+  color: #4a4e57;
 }
 #dark-mode-enabled .helper-prompt-box.open {
   background-color: #363940;
@@ -1237,7 +1458,7 @@ nav ul li a::before {
     border-bottom-color: #323232;
   }
   #dark-mode-enabled .entry-header .prev {
-    border-right-color: #323232; 
+    border-right-color: #323232;
   }
   #dark-mode-enabled .filter-dropdown {
     border-bottom-color: #323232;
