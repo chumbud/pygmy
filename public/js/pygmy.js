@@ -208,7 +208,7 @@ if(sessionStorage.getItem('_id') != null) {
 function getEntry(response) {
 	currentSession = response
 	document.querySelector('textarea').value = response.entry
-	document.querySelector('.mood-select').innerHTML = "<img src='assets/img/" + response.selectedEmoji + ".png'>"
+	document.querySelector('.mood-select').innerHTML = "<img src='assets/img/png/" + response.selectedEmoji + ".png'>"
 	document.querySelector('.mood-select').classList.add("selected")
 	document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ' ' + response.year
 	document.querySelector('h2').setAttribute("data-date", response.year + "/" + response.month + "/" + response.day)

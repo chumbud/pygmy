@@ -98,7 +98,7 @@ function renderResults(a) {
 		const item = document.createElement("li")
 		item.setAttribute('data-id', entry._id)
 		item.setAttribute('data-date', entry.year + "-" + entry.month + "-" + entry.day)
-		item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ' ' + entry.year + '<a class="edit">edit</a><a class="delete">delete</a></h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
+		item.innerHTML = '<img src=\"./assets/img/png/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ' ' + entry.year + '<a class="edit">edit</a><a class="delete">delete</a></h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
 		item.classList.add("listEntry")
 			//for sorting after
 			resultNodes.push(item)
@@ -125,7 +125,7 @@ function renderResults(a) {
 		DOMresults.appendChild(resultNodes[i])
 	}
 	if(DOMresults.innerHTML == '')
-		DOMresults.innerHTML = '<div id="no-results"><img src="/assets/img/sad-scrap.png"><p>no results</p></div>'
+		DOMresults.innerHTML = '<div id="no-results"><img src="/assets/img/png/sad-scrap.png"><p>no results</p></div>'
 }
 
 document.querySelector(".filter-dropdown").addEventListener("click", function () {
