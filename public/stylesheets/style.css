@@ -1075,6 +1075,7 @@ nav ul li:first-child a:hover:before {
   border-radius: 1.6rem;
   display: inline-block;
   transition: var(--easeOutCubic);
+  background-blend-mode: difference;
 }
 #background-select a:hover {
   transform: scale(1.25);
@@ -1445,6 +1446,9 @@ nav ul li:first-child a:hover:before {
   background-color: #363940;
   border-color: #4a4e57;
   color: #ddd;
+}
+#dark-mode-enabled #background-select a {
+  background-color: #212226
 }
 @media only screen and (max-width: 680px) {
   #dark-mode-enabled nav {
