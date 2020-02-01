@@ -81,7 +81,7 @@ let today = realDate.getFullYear() + "/" + (realDate.getMonth()+1) + "/" + realD
 const setDate = function() {
 	if(sessionStorage.getItem("date") == null) {
 		dateHeader.setAttribute("data-date", today)
-		today = months[(realDate.getMonth())] + " " + realDate.getDate() + " " + realDate.getFullYear()
+		today = months[(realDate.getMonth())] + " " + realDate.getDate() + ", " + realDate.getFullYear()
 		dateHeader.innerHTML = today
 	} else {
 		dateHeader.setAttribute("data-date", sessionStorage.getItem("date"))
@@ -210,7 +210,7 @@ function getEntry(response) {
 	document.querySelector('textarea').value = response.entry
 	document.querySelector('.mood-select').innerHTML = "<img src='assets/img/png/" + response.selectedEmoji + ".png'>"
 	document.querySelector('.mood-select').classList.add("selected")
-	document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ' ' + response.year
+	document.querySelector('h2').innerHTML = months[response.month-1] + ' ' + response.day + ', ' + response.year
 	document.querySelector('h2').setAttribute("data-date", response.year + "/" + response.month + "/" + response.day)
 	document.querySelector('.length-tracker').innerHTML = response.length
 	document.querySelector('.length-tracker').setAttribute('data-length-status', getComment(response.length, sessionStorage.getItem("avg")))
