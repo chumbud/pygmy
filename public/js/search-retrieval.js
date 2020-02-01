@@ -15,7 +15,7 @@ function renderItems () {
 		generateSearchConstraints(resultsArray)
 	})
 	document.querySelector(".clear").addEventListener("click", function() {
-		mood_board_switch.innerHTML = "add icon"
+		mood_board_switch.innerHTML = "mood"
     mood_board_switch.classList.remove('selected')
 		document.querySelectorAll('.mood-board ul li input').forEach(emoji => {
 			emoji.checked = false
@@ -98,7 +98,7 @@ function renderResults(a) {
 		const item = document.createElement("li")
 		item.setAttribute('data-id', entry._id)
 		item.setAttribute('data-date', entry.year + "-" + entry.month + "-" + entry.day)
-		item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ' ' + entry.year + '<a class="edit">edit</a><a class="delete">delete</a></h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
+		item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ', ' + entry.year + '<a class="edit">edit</a><a class="delete">delete</a></h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
 		item.classList.add("listEntry")
 			//for sorting after
 			resultNodes.push(item)
