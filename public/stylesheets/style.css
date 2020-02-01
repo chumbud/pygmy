@@ -597,7 +597,7 @@ nav ul li:first-child a:hover:before {
   width: 1rem;
   padding: 0rem 1rem;
   transition: var(--easeOutCubic);
-  background-image: url("../assets/img/expand.svg");
+  background-image: url("../assets/img/svg/expand.svg");
 }
 .expand:hover::before {
   transform: translateY(5px);
@@ -641,19 +641,19 @@ nav ul li:first-child a:hover:before {
 .text-settings {
 }
 .latest-entry::before {
-  background-image: url("../assets/img/latest-entry.svg");
+  background-image: url("../assets/img/svg/latest-entry.svg");
 }
 .calendar-page::before {
-  /*background-image: url('../assets/img/calendar.svg');*/
+  /*background-image: url('../assets/img/svg/calendar.svg');*/
 }
 .search::before {
-  background-image: url("../assets/img/search.svg");
+  background-image: url("../assets/img/svg/search.svg");
 }
 .account::before {
-  background-image: url("../assets/img/account.svg");
+  background-image: url("../assets/img/svg/account.svg");
 }
 .text-settings::before {
-  background-image: url("../assets/img/text-settings.svg");
+  background-image: url("../assets/img/svg/text-settings.svg");
 }
 .calendar-page svg {
   display: block;
@@ -1024,7 +1024,7 @@ nav ul li:first-child a:hover:before {
 #account-settings button.default.disabled {
   border-color: lightgray;
   color: lightgray;
-  cursor: url("./../assets/img/coming-soon.svg") 50 50, not-allowed;
+  cursor: url("./../assets/img/svg/coming-soon.svg") 50 50, not-allowed;
 }
 #account-settings button.default.disabled:hover {
   border-color: lightgray;
@@ -1078,6 +1078,7 @@ nav ul li:first-child a:hover:before {
   border-radius: 1.6rem;
   display: inline-block;
   transition: var(--easeOutCubic);
+  background-blend-mode: difference;
 }
 #background-select a:hover {
   transform: scale(1.25);
@@ -1334,8 +1335,8 @@ nav ul li:first-child a:hover:before {
 #dark-mode-enabled .mood-select.selected:before,
 #dark-mode-enabled .search-container span,
 #dark-mode-enabled p.entry,
-#dark-mode-enabled img[src*="./assets/img/empty.png"],
-#dark-mode-enabled img[src*="assets/img/empty.png"],
+#dark-mode-enabled img[src*="./assets/img/png/empty.png"],
+#dark-mode-enabled img[src*="assets/img/png/empty.png"],
 #dark-mode-enabled .message img {
   filter: invert(0.8);
 }
@@ -1446,6 +1447,9 @@ nav ul li:first-child a:hover:before {
   background-color: #363940;
   border-color: #4a4e57;
   color: #ddd;
+}
+#dark-mode-enabled #background-select a {
+  background-color: #212226
 }
 @media only screen and (max-width: 680px) {
   #dark-mode-enabled nav {

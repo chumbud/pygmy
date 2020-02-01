@@ -77,9 +77,9 @@ hoodie.store.findAll(function(response) {
 }
 }).then(function() {
   if(found) {
-   document.querySelector(".message").innerHTML = "<img src=\"./assets/img/happy-scrap.png\"><p>you're all set! <br><br> come back tomorrow to write some more.</p><a class=\"button\" href=\"/\">see today's entry</a>"
+   document.querySelector(".message").innerHTML = "<img src=\"./assets/img/png/happy-scrap.png\"><p>you're all set! <br><br> come back tomorrow to write some more.</p><a class=\"button\" href=\"/\">see today's entry</a>"
  } else {
-  document.querySelector(".message").innerHTML = "<img style=\"width:10rem\" src=\"./assets/img/proud-scrap.png\"><p>today's a new day!</p><a class=\"button\" href=\"/\">write a new entry</a>"
+  document.querySelector(".message").innerHTML = "<img style=\"width:10rem\" src=\"./assets/img/png/proud-scrap.png\"><p>today's a new day!</p><a class=\"button\" href=\"/\">write a new entry</a>"
 }
 })
 

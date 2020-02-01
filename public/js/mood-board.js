@@ -9,7 +9,7 @@ fetch('json/emoji.json')
     emojiRoster.forEach(emoji => {
       //creates emoji in list element and adds it to the ul
       const option = document.createElement("li")
-      option.innerHTML = "<input name=\"emoji\" type=\"radio\" value=\"" + emoji.value + "\"/><img src=\"assets/img/" + emoji.value + ".png\">"
+      option.innerHTML = "<input name=\"emoji\" type=\"radio\" value=\"" + emoji.value + "\"/><img src=\"assets/img/png/" + emoji.value + ".png\">"
       mood_board.querySelector("ul").appendChild(option)
     })
   })
@@ -18,7 +18,7 @@ fetch('json/emoji.json')
       if(event.target.closest("li")) {
       let inputEmoji = event.target.closest("li").firstChild
 
-      mood_board_switch.innerHTML = "<img src='assets/img/"+ inputEmoji.value +".png'>"
+      mood_board_switch.innerHTML = "<img src='assets/img/png/"+ inputEmoji.value +".png'>"
       mood_board_switch.classList.add('selected')
       //checks the emoji for submission and unchecks all others if changed
       document.querySelectorAll('.mood-board ul li').forEach(emoji => {
