@@ -45,7 +45,7 @@ const handleError = function(error) {
 function showSignedIn (username) {
 	username = username.split('@')[0]
 	document.body.setAttribute('data-account-state', 'signed-in')
-	document.querySelector('[data-value=username]').textContent = username
+	document.querySelector('[data-value=username] span').textContent = username
 }
 
 function hideSignedIn () {
@@ -64,3 +64,13 @@ hoodie.account.get(['session', 'username'], {local: true})
 	else
 		hideSignedIn()
 }).catch(handleError)
+
+var nav = document.querySelector("nav")
+nav.addEventListener("mouseover", function() {
+  if(window.innerWidth > 680)
+  nav.style.width = nav.querySelector("ul:first-child li:first-child").offsetWidth + "px"
+})
+nav.addEventListener("mouseleave", function() {
+    if(window.innerWidth > 680)
+  nav.style.width = ""
+})

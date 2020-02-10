@@ -5,8 +5,8 @@
 
   /*colors*/
   /*default theme*/
-  --primary: #faf6ee;
-  --primary-hover: #f5efe5;
+  --primary: #f4f1eb; /* was #faf6ee; */
+  --primary-hover: #f0ebe2; /* was #f5efe5; */
   --primary-darker: #cec6af;
   --primary-even-darker: #cfb9b0;
   --accent: #b6ffd3;
@@ -480,26 +480,28 @@ ul {
 }
 nav {
   height: 100%;
-  display: flex;
-  flex-flow: column;
+  display: inline-block;
   position: fixed;
-  right: 0;
+  left: 0;
+  background-color: var(--primary);
+  transition: var(--easeOutCubic);
+  overflow: hidden;
+  width: 6.4rem;
 }
 nav ul {
   padding: 0;
-  margin-left: auto;
-  margin-right: 3.6rem;
+  left: 0; 
+  position: absolute;
 }
 nav ul:first-child {
   flex: 1;
-  margin-top: 3.6rem;
 }
 nav ul:last-child {
-  margin-bottom: 3.6rem;
+  bottom: 0;
 }
 nav ul li {
   list-style: none;
-  text-align: center;
+  text-align: left;
   font-size: 1.6rem;
   color: var(--fas);
   line-height: 2;
@@ -511,34 +513,61 @@ nav ul li:hover {
 }
 nav ul li a {
   display: block;
-  padding: 1.6rem 0rem;
+  padding: 1.6rem 1.6rem;
+  max-height: 6.4rem;
+  display: flex;
+  justify-content: left;
 }
 nav ul li a::before {
   content: "";
   background-repeat: no-repeat;
   background-position: center;
   background-size: 80%;
-  display: block;
+  display: inline-block;
   height: 3.2rem;
   width: 3.2rem;
-  margin: 0rem auto;
   position: relative;
   bottom: 0;
   transform-origin: center;
-  transition: all 0.2s ease-in-out;
+  transition: var(--easeInOut);
 }
-nav ul li a svg {
-  transform-origin: center;
-  transition: all 0.2s ease-in-out;
+nav ul li a span {
+  display: inline-block;
 }
 nav ul li a:hover::before {
   background-size: 100%;
 }
+nav ul li a:hover {
+  background-color: var(--primary-hover);
+}
 nav ul li a:hover svg {
   transform: scale(1.25) rotate(10deg);
 }
+nav ul li a::before {
+  margin-right: 1.6rem;
+}
+nav ul li a svg {
+  transform-origin: center;
+  transition: all 0.2s ease-in-out;
+  width: 3.2rem;
+  margin-left: 0.4rem;
+  margin-right: 2rem;
+}
+
 nav ul li:first-child a:hover:before {
   transform: rotate(45deg);
+}
+.calendar-page svg {
+  display: inline-block;
+}
+.calendar-page:hover svg#cal-icon .icon-date {
+  text-decoration: none !important;
+  position: relative;
+  left: 1rem;
+  bottom: 1rem;
+}
+.calendar-page::before {
+  content: none;
 }
 .cls-1 {
   fill: #1a1818;
@@ -597,7 +626,7 @@ nav ul li:first-child a:hover:before {
   width: 1rem;
   padding: 0rem 1rem;
   transition: var(--easeOutCubic);
-  background-image: url("../assets/img/svg/expand.svg");
+  background-image: url("../assets/img/expand.svg");
 }
 .expand:hover::before {
   transform: translateY(5px);
@@ -641,32 +670,19 @@ nav ul li:first-child a:hover:before {
 .text-settings {
 }
 .latest-entry::before {
-  background-image: url("../assets/img/svg/latest-entry.svg");
+  background-image: url("../assets/img/latest-entry.svg");
 }
 .calendar-page::before {
-  /*background-image: url('../assets/img/svg/calendar.svg');*/
+  /*background-image: url('../assets/img/calendar.svg');*/
 }
 .search::before {
-  background-image: url("../assets/img/svg/search.svg");
+  background-image: url("../assets/img/search.svg");
 }
 .account::before {
-  background-image: url("../assets/img/svg/account.svg");
+  background-image: url("../assets/img/account.svg");
 }
 .text-settings::before {
-  background-image: url("../assets/img/svg/text-settings.svg");
-}
-.calendar-page svg {
-  display: block;
-  margin: 0.8rem auto;
-}
-.calendar-page:hover svg#cal-icon .icon-date { 
-  text-decoration: none !important;
-  position: relative;
-  left: 1rem;
-  bottom: 1rem;
-}
-.calendar-page::before {
-  content: none;
+  background-image: url("../assets/img/text-settings.svg");
 }
 
 .sendToBottom {
@@ -1024,7 +1040,7 @@ nav ul li:first-child a:hover:before {
 #account-settings button.default.disabled {
   border-color: lightgray;
   color: lightgray;
-  cursor: url("./../assets/img/svg/coming-soon.svg") 50 50, not-allowed;
+  cursor: url("./../assets/img/coming-soon.svg") 50 50, not-allowed;
 }
 #account-settings button.default.disabled:hover {
   border-color: lightgray;
@@ -1078,7 +1094,6 @@ nav ul li:first-child a:hover:before {
   border-radius: 1.6rem;
   display: inline-block;
   transition: var(--easeOutCubic);
-  background-blend-mode: difference;
 }
 #background-select a:hover {
   transform: scale(1.25);
@@ -1086,19 +1101,24 @@ nav ul li:first-child a:hover:before {
 #background-select a.selected {
   border-color: var(--accent);
 }
-[mode="blank"], .blank {
+[mode="blank"],
+.blank {
   background-image: url("");
 }
-[mode="dots"], .dots {
+[mode="dots"],
+.dots {
   background-image: url("./../assets/img/patterns/dots.png");
 }
-[mode="grid"], .grid {
+[mode="grid"],
+.grid {
   background-image: url("./../assets/img/patterns/grid.png");
 }
-[mode="sun"], .sun {
+[mode="sun"],
+.sun {
   background-image: url("./../assets/img/patterns/sun.png");
 }
-[mode="confetti"], .confetti {
+[mode="confetti"],
+.confetti {
   background-image: url("./../assets/img/patterns/confetti.png");
 }
 
@@ -1118,6 +1138,7 @@ nav ul li:first-child a:hover:before {
     line-height: 1.75;
   }
   nav {
+    display: flex;
     flex-flow: row;
     right: unset;
     height: auto;
@@ -1133,10 +1154,10 @@ nav ul li:first-child a:hover:before {
   nav ul:last-child {
     display: flex;
     margin: 0;
+    position: relative;
   }
   nav ul li {
     margin-bottom: 0;
-    padding: 0rem 4vw;
   }
   nav ul li a::before {
     display: none;
@@ -1321,7 +1342,12 @@ nav ul li:first-child a:hover:before {
 #dark-mode-enabled::selection {
   color: #313139;
 }
-
+#dark-mode-enabled nav {
+  background-color: #363940;
+}
+#dark-mode-enabled nav ul li a:hover {
+  background-color: #c6c4b9;
+}
 #dark-mode-enabled nav ul li,
 #dark-mode-enabled .prev:before,
 #dark-mode-enabled .next:after,
@@ -1335,8 +1361,8 @@ nav ul li:first-child a:hover:before {
 #dark-mode-enabled .mood-select.selected:before,
 #dark-mode-enabled .search-container span,
 #dark-mode-enabled p.entry,
-#dark-mode-enabled img[src*="./assets/img/png/empty.png"],
-#dark-mode-enabled img[src*="assets/img/png/empty.png"],
+#dark-mode-enabled img[src*="./assets/img/empty.png"],
+#dark-mode-enabled img[src*="assets/img/empty.png"],
 #dark-mode-enabled .message img {
   filter: invert(0.8);
 }
@@ -1447,9 +1473,6 @@ nav ul li:first-child a:hover:before {
   background-color: #363940;
   border-color: #4a4e57;
   color: #ddd;
-}
-#dark-mode-enabled #background-select a {
-  background-color: #212226
 }
 @media only screen and (max-width: 680px) {
   #dark-mode-enabled nav {
