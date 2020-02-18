@@ -67,10 +67,8 @@ hoodie.account.get(['session', 'username'], {local: true})
 
 var nav = document.querySelector("nav")
 nav.addEventListener("mouseover", function() {
-  if(window.innerWidth > 680)
   nav.style.width = nav.querySelector("ul:first-child li:first-child").offsetWidth + "px"
 })
 nav.addEventListener("mouseleave", function() {
-    if(window.innerWidth > 680)
-  nav.style.width = ""
+  nav.style.width = "6.4rem"
 })
