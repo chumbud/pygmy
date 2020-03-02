@@ -2,41 +2,46 @@
 <html lang="en">
 
 <head>
-	<title>📅 Calendar</title>
+	<title>✨ Looks</title>
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="stylesheets/_base.css" />
 	<link rel="stylesheet" href="stylesheets/raster.css" />
 	<link rel="stylesheet" href="stylesheets/style.css" />
 	<script src="/hoodie/client.js"></script>
 </head>
 
-<body data-account-state="" data-store-state="">
+<body data-account-state="">
 
 	<body>
 		<grid class="main-wrapper" columns=7>
-			<c span=2-6 span-s=row
-				style="display: flex;align-content: center;justify-content: center;flex-flow: column;">
-				<div class="message">
-				</div>
-				<div class="calendar">
-					<a class="prev" href=""></a>
-					<div class="calendar-container">
-						<div class="month-year"></div>
-						<ul class="day-header">
-							<li>S</li>
-							<li>M</li>
-							<li>T</li>
-							<li>W</li>
-							<li>T</li>
-							<li>F</li>
-							<li>S</li>
-						</ul>
-						<ul class="days"></ul>
-					</div>
-					<a class="next" href=""></a>
-				</div>
+			<c span=2-6 id="account-settings" span-s=row>
+				<div>
+					<form class="change-appearance">
+						<a href="account.html" >🠤 back</a><br><br>
+						<h2>change appearance ✨</h2>
+						<p>
+							<h3>text size:</h3>
+							<a href="" text-size="10">1x</a>
+							<a href="" text-size="12.5">1.25x</a>
+							<a href="" text-size="15">1.5x</a>
+						</p>
+						<p>
+							<h3>display mode:</h3>
+							<a href="" mode="light-mode">light</a>
+							<a href="" mode="dark-mode">dark</a>
+						</p>
+						<div id="background-select">
+							<h3>background:</h3>
+							<a href="" mode="blank"></a>
+							<a href="" mode="dots"></a>
+							<a href="" mode="grid"></a>
+							<a href="" mode="confetti"></a>
+							<!--<a href="" mode="sun"></a>
+							<a href="" mode="paper"></a>
+							<a href="" mode="squiggle"></a>-->
+						</div>
+					</form><!-- /.change-appearance -->
 				</div>
 			</c>
 			<c span=7.. span-s=row>
@@ -81,8 +86,23 @@
 				</nav>
 			</c>
 		</grid>
-		<script type="text/javascript" src="./js/common.js"></script>
-		<script src="./js/calendar.js"></script>
 	</body>
+	<script type="text/javascript" src="./js/common.js"></script>
+	<script type="text/javascript" src="./js/looks.js"></script>
+	<script type="text/javascript">
+
+		if (getCookie("display-mode") == "dark-mode")
+			document.querySelector('[mode=dark-mode]').classList.add("selected")
+		else
+			document.querySelector('[mode=light-mode]').classList.add("selected")
+
+		if (getCookie("text-size") == "15px")
+			document.querySelector('[text-size="15"]').classList.add("selected")
+		else if (getCookie("text-size") == "12.5px")
+			document.querySelector('[text-size="12.5"]').classList.add("selected")
+		else
+			document.querySelector('[text-size="10"]').classList.add("selected")
+
+	</script>
 
 </html>
