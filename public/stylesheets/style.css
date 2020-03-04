@@ -446,6 +446,7 @@ nav {
   transition: var(--easeOutCubic);
   overflow: hidden;
   width: 6.4rem;
+  border-right: 1px solid var(--primary-hover);
 }
 
 nav ul {
@@ -1248,6 +1249,7 @@ nav ul li:first-child a:hover:before {
     border-top: 1px solid var(--fas);
     z-index: 15;
     background-color: white;
+    border-right: none !important;
   }
   nav ul, nav ul:first-child, nav ul:last-child {
     display: flex;
@@ -1441,16 +1443,19 @@ nav ul li:first-child a:hover:before {
 
 #dark-mode-enabled nav {
   background-color: #313139;
+  border-right: 1px solid #41444b;
 }
 
 #dark-mode-enabled #account-settings button:hover {
   background-color: #41444b;
   color: #ddd;
 }
+
 #dark-mode-enabled #account-settings button.danger:hover {
   background-color: var(--danger);
   color: var(--bg-color);
-} 
+}
+
 #dark-mode-enabled nav ul li, #dark-mode-enabled .prev:before, #dark-mode-enabled .next:after, #dark-mode-enabled label, #dark-mode-enabled select, #dark-mode-enabled option, #dark-mode-enabled #no-results, #dark-mode-enabled .month-year, #dark-mode-enabled .mood-select, #dark-mode-enabled .journal-input a:before, #dark-mode-enabled .mood-select.selected:before, #dark-mode-enabled .search-container span, #dark-mode-enabled p.entry, #dark-mode-enabled img[src*="./assets/img/empty.png"], #dark-mode-enabled img[src*="assets/img/empty.png"], #dark-mode-enabled .message img {
   filter: invert(0.8);
 }
