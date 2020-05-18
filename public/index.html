@@ -1,40 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<title>📓 Entry</title>
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-	<meta property="og:url" content="pygmy.glitch.me">
-	<meta property="og:image" content="https://cdn.glitch.com/17d1098d-6f16-4cd8-9891-fe4564337222%2Fog-scrap.jpg?v=1589246923731">
-	<meta property="og:description" content="write anything">
-	<meta property="og:title" content="pygmy">
-	<meta property="og:site_name" content="pygmy">
-	<meta property="og:see_also" content="pygmy.glitch.me">
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:url" content="pygmy.glitch.me">
-	<meta name="twitter:title" content="pygmy">
-	<meta name="twitter:description" content="write anything">
-	<meta name="twitter:image" content="https://cdn.glitch.com/17d1098d-6f16-4cd8-9891-fe4564337222%2Fog-scrap.jpg?v=1589246923731">
-  
-	<link rel="stylesheet" href="stylesheets/_base.css" />
-	<link rel="stylesheet" href="stylesheets/raster.css" />
-	<link rel="stylesheet" href="stylesheets/style.css" />
+	<link rel="stylesheet" href="stylesheets/_base.css"/>
+	<link rel="stylesheet" href="stylesheets/raster.css"/>
+	<link rel="stylesheet" href="stylesheets/style.css"/>
 	<script src="/hoodie/client.js"></script>
 </head>
-
 <body data-account-state="" data-store-state="">
+	<body> 
 		<grid class="main-wrapper" columns=7>
 			<c span=2-6 span-s=row>
 				<form id="entry-form" action="/search.html" method="POST">
 					<div class="journal-section">
 						<grid columns=7 class="entry-header">
 							<c span=1 span-s=row><a class="prev" href="#">prev</a></c>
-							<c class="header" span=2-6 span-s=row>
-								<h2 id="date">...</h2>
+							<c class="header" span=2-6 span-s=row><h2 id="date">...</h2>
 								<a class="mood-select" href="#">add a mood</a>
 								<div class="mood-board">
 									<ul>
@@ -44,8 +28,7 @@
 							<c span=7.. span-s=row><a class="next" href="#">next</a></c>
 						</grid>
 						<div class="journal-input">
-							<textarea name="entry" placeholder="What happened today?" enterkeyhint="enter"
-								autofocus></textarea>
+							<textarea name="entry" placeholder="What happened today?" enterkeyhint="enter" autofocus></textarea>
 							<div class="input-controls">
 								<span class="length-tracker" data-length-status="">
 								</span>
@@ -56,74 +39,65 @@
 							<div class="helper-prompt-box">
 								try out this prompt:
 								<a href="" class="exit">
-									<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-										xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="11.71px"
-										height="11.71px" viewBox="0 0 11.71 11.71"
-										style="enable-background:new 0 0 11.71 11.71;" xml:space="preserve">
-										<style type="text/css">
-											.st0 {
-												fill: none;
-												stroke: #000000;
-											}
-										</style>
-										<defs>
-										</defs>
-										<path class="st0" d="M11.35,0.35l-11,11" />
-										<path class="st0" d="M0.35,0.35l11,11" />
-									</svg>
-								</a>
-								<span class="prompt">...</span>
-								<a href="#" class="new-prompt">new prompt</a>
-							</div>
+									<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="11.71px"
+									height="11.71px" viewBox="0 0 11.71 11.71" style="enable-background:new 0 0 11.71 11.71;" xml:space="preserve">
+									<style type="text/css">
+										.st0{fill:none;stroke:#000000;}
+									</style>
+									<defs>
+									</defs>
+									<path class="st0" d="M11.35,0.35l-11,11"/>
+									<path class="st0" d="M0.35,0.35l11,11"/>
+								</svg>
+							</a>
+							<span class="prompt">...</span>
+							<a href="#" class="new-prompt">new prompt</a>
 						</div>
 					</div>
-				</form>
-			</c>
-			<c span=7.. span-s=row>
-				<nav>
-					<ul>
-						<li><a class="latest-entry" href="/"><span>today's entry</span></a></li>
-						<li><a class="calendar-page" href="calendar.html">
-								<svg id="cal-icon" data-name="cal-icon" xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 36.65 36.65" style="max-width: 2.4rem">
-									<defs>
-										<style>
-											.cls-1 {
-												fill: #1a1818;
-											}
+				</div>
+			</form>
+		</c>
+		<c span=7.. span-s=row>
+			<nav>
+				<ul>
+          <li><a class="latest-entry" href="/"><span>today's entry</span></a></li>
+					<li><a class="calendar-page" href="calendar.html">
+<svg id="cal-icon" data-name="cal-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.65 36.65" style="max-width: 2.4rem">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #1a1818;
+      }
 
-											.icon-date {
-												font-size: 1.6rem;
-												fill: #fff;
-												font-family: InterUI-Bold, Inter UI;
-												font-weight: 700;
-											}
-										</style>
-									</defs>
-									<title>calendar</title>
-									<g id="Layer_2" data-name="Layer 2">
-										<g id="Layer_1-2" data-name="Layer 1">
-											<path class="cls-1"
-												d="M27.87,0H8.77A8.77,8.77,0,0,0,0,8.77v19.1a8.78,8.78,0,0,0,8.77,8.78h19.1a8.78,8.78,0,0,0,8.78-8.78V8.77A8.78,8.78,0,0,0,27.87,0ZM12.81,10.56a3.18,3.18,0,1,1,0-4.5A3.17,3.17,0,0,1,12.81,10.56Zm15.53,0a3.19,3.19,0,1,1,0-4.5A3.18,3.18,0,0,1,28.34,10.56Z" />
-											<text class="icon-date">22</text>
-										</g>
-									</g>
-								</svg>
+      .icon-date {
+        font-size: 1.6rem;
+        fill: #fff;
+        font-family: InterUI-Bold, Inter UI;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <title>calendar</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M27.87,0H8.77A8.77,8.77,0,0,0,0,8.77v19.1a8.78,8.78,0,0,0,8.77,8.78h19.1a8.78,8.78,0,0,0,8.78-8.78V8.77A8.78,8.78,0,0,0,27.87,0ZM12.81,10.56a3.18,3.18,0,1,1,0-4.5A3.17,3.17,0,0,1,12.81,10.56Zm15.53,0a3.19,3.19,0,1,1,0-4.5A3.18,3.18,0,0,1,28.34,10.56Z"/>
+      <text class="icon-date">22</text>
+    </g>
+  </g>
+</svg>
 
-								<span>calendar</span></a>
-						</li>
-						<li><a class="search" href="search.html"><span>archive</span></a></li>
-					</ul>
-					<ul>
-						<li><a class="account" href="looks.html" data-value="username"><span>settings</span></a>
-						</li>
-					</ul>
-				</nav>
-			</c>
-		</grid>
-	</body>
-	<script type="text/javascript" src="./js/common.js"></script>
-	<script type="text/javascript" src="./js/pygmy.js"></script>
-	<script type="text/javascript" src="./js/mood-board.js"></script>
-
+            <span>calendar</span></a>
+				</li>
+          <li><a class="search" href="search.html"><span>archive</span></a></li>
+			</ul>
+			<ul>
+        <li><a class="account" href="account.html" data-value="username"><span>login/signup</span></a></li>
+			</ul>
+		</nav>
+	</c>
+</grid>
+</body>
+<script type="text/javascript" src="./js/common.js"></script>
+<script type="text/javascript" src="./js/pygmy.js"></script>
+<script type="text/javascript" src="./js/mood-board.js"></script>
 </html>

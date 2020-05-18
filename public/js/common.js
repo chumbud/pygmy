@@ -1,16 +1,16 @@
-const setCookie = function (key, value) {
-	document.cookie = key + "=" + value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT"
+const setCookie = function(key, value) {
+    document.cookie = key + "=" + value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT"
 }
 
-const getCookie = function (key) {
+const getCookie = function(key) {
 	var keyEQ = key + "=";
 	var ca = document.cookie.split(';');
-	for (var i = 0; i < ca.length; i++) {
+	for(var i=0;i < ca.length;i++) {
 		var c = ca[i];
-		while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-		if (c.indexOf(keyEQ) == 0) {
-			return c.substring(keyEQ.length, c.length);
-		}
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(keyEQ) == 0) { 
+			return c.substring(keyEQ.length,c.length); 
+		} 
 	}
 	return null;
 }
@@ -18,37 +18,37 @@ const getCookie = function (key) {
 //sets calendar icon position and day
 let i = new Date()
 document.querySelector(".icon-date").innerHTML = i.getDate()
-if (i.getDate() >= 10)
-	document.querySelector(".icon-date").setAttribute("transform", "translate(9, 29)")
+if(i.getDate() >= 10)
+document.querySelector(".icon-date").setAttribute("transform", "translate(9, 29)")
 else
-	document.querySelector(".icon-date").setAttribute("transform", "translate(14, 29)")
+document.querySelector(".icon-date").setAttribute("transform", "translate(9, 29)")
 
 //checks for mode
-if (getCookie("display-mode") == "dark-mode")
-	document.querySelector("html").id = "dark-mode-enabled"
+ if(getCookie("display-mode") == "dark-mode")
+ 	document.querySelector("html").id = "dark-mode-enabled"
 
-if (getCookie("text-size"))
-	document.querySelector(":root").style.fontSize = getCookie("text-size")
+ if(getCookie("text-size"))
+ 	document.querySelector(":root").style.fontSize = getCookie("text-size")
 
-if (getCookie("background"))
-	document.querySelector("html").classList.add(getCookie("background"))
+if(getCookie("background"))
+ 	document.querySelector("html").classList.add(getCookie("background"))
 
 
-const handleError = function (error) {
+const handleError = function(error) {
 	console.log(error)
-	if (error.status == 500)
+	if(error.status == 500)
 		window.location.replace("500.html")
-	else if (error.status == 404)
+  else if (error.status == 404)
 		window.location.replace("404.html")
 }
 
-function showSignedIn(username) {
+function showSignedIn (username) {
 	username = username.split('@')[0]
 	document.body.setAttribute('data-account-state', 'signed-in')
 	document.querySelector('[data-value=username] span').textContent = username
 }
 
-function hideSignedIn() {
+function hideSignedIn () {
 	document.body.setAttribute('data-account-state', 'signed-out')
 }
 
@@ -57,20 +57,18 @@ hoodie.account.on('signin', function (account) {
 })
 
 hoodie.account.on('signout', hideSignedIn)
-hoodie.account.get(['session', 'username'], { local: true })
-	.then(function (properties) {
-		if (properties.session)
-			showSignedIn(properties.username)
-		else
-			hideSignedIn()
-	}).catch(handleError)
+hoodie.account.get(['session', 'username'], {local: true})
+.then(function (properties) {
+	if (properties.session)
+		showSignedIn(properties.username)
+	else
+		hideSignedIn()
+}).catch(handleError)
 
 var nav = document.querySelector("nav")
-nav.addEventListener("mouseover", function () {
-	if (window.innerWidth > 680)
-		nav.style.width = nav.querySelector("ul:first-child li:first-child").offsetWidth + "px"
+nav.addEventListener("mouseover", function() {
+  nav.style.width = nav.querySelector("ul:first-child li:first-child").offsetWidth + "px"
 })
-nav.addEventListener("mouseleave", function () {
-	if (window.innerWidth > 680)
-		nav.style.width = ""
+nav.addEventListener("mouseleave", function() {
+  nav.style.width = "6.4rem"
 })

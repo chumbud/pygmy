@@ -1,22 +1,22 @@
 //results DOM object
 const DOMresults = document.querySelector('#results ul')
 let months = ["January", "February", "March", "April", "May", "June",
-	"July", "August", "September", "October", "November", "December"
+"July", "August", "September", "October", "November", "December"
 ];
 //original object array returned by hoodie
 let resultsArray = []
 
 renderItems()
-function renderItems() {
+function renderItems () {
 	hoodie.store.findAll().then(list => {
 		resultsArray = [...list]
 		renderResults(resultsArray)
 		sessionStorage.setItem('avg', getAvgEntryLength(resultsArray))
 		generateSearchConstraints(resultsArray)
 	})
-	document.querySelector(".clear").addEventListener("click", function () {
+	document.querySelector(".clear").addEventListener("click", function() {
 		mood_board_switch.innerHTML = "mood"
-		mood_board_switch.classList.remove('selected')
+    mood_board_switch.classList.remove('selected')
 		document.querySelectorAll('.mood-board ul li input').forEach(emoji => {
 			emoji.checked = false
 		})
@@ -30,7 +30,7 @@ function renderItems() {
 function sortEntries(el) {
 	let fragment = document.createDocumentFragment();
 
-	let sorted = el.sort(function (a, b) {
+	let sorted = el.sort(function(a, b) {
 		var dateA = new Date(a.getAttribute("data-date")), dateB = new Date(b.getAttribute("data-date"))
 		return dateA - dateB
 	})
@@ -43,11 +43,11 @@ function sortEntries(el) {
 
 function generateSearchConstraints(entries) {
 	let years = []
-	document.querySelector("#year-select").innerHTML = '<option value=""></option>'
+  document.querySelector("#year-select").innerHTML = '<option value=""></option>'
 
-
+  
 	entries.forEach(entry => {
-		if (!years.includes(entry.year)) {
+		if(!years.includes(entry.year)) {
 			years.push(entry.year)
 			const option = document.createElement("option")
 			option.setAttribute('value', entry.year)
@@ -58,7 +58,7 @@ function generateSearchConstraints(entries) {
 }
 
 //search & sort
-document.addEventListener('input', function (event) {
+document.addEventListener('input', function(event) {
 	let filteredResults = []
 
 	resultsArray.forEach(entry => {
@@ -68,10 +68,10 @@ document.addEventListener('input', function (event) {
 		let emojis = document.querySelectorAll('.mood-board ul li input')
 		let selectedEmoji = ''
 		emojis.forEach(emoji => {
-			if (emoji.checked)
+			if(emoji.checked)
 				selectedEmoji = emoji.value
 		})
-		if ((entry.year == year || year == '')
+		if((entry.year == year || year == '') 
 			&& (entry.month == month || month == '')
 			&& (entry.day == day || day == '')
 			&& (entry.selectedEmoji == selectedEmoji || selectedEmoji == ''))
@@ -98,24 +98,24 @@ function renderResults(a) {
 		const item = document.createElement("li")
 		item.setAttribute('data-id', entry._id)
 		item.setAttribute('data-date', entry.year + "-" + entry.month + "-" + entry.day)
-		item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month - 1] + ' ' + entry.day + ', ' + entry.year + '<a class="edit">edit</a><a class="delete">delete</a></h3>' + "<p class=\"entry\">" + entry.entry + "</p></div>"
+		item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month-1] + ' ' + entry.day + ', ' + entry.year + '<a class="edit">edit</a><a class="delete">delete</a></h3>' + "<p class=\"entry\">" + entry.entry +"</p></div>"
 		item.classList.add("listEntry")
-		//for sorting after
-		resultNodes.push(item)
-	})
+			//for sorting after
+			resultNodes.push(item)
+		})
 	resultNodes = sortEntries(resultNodes)
 	//adding event listeners for entry retrieval
 	for (var i = resultNodes.length - 1; i >= 0; i--) {
 		resultNodes[i].addEventListener("click", function (event) {
 			sessionStorage.setItem('_id', this.getAttribute("data-id"))
-			if (event.target.innerHTML == 'delete') {
-				event.target.innerHTML = 'confirm deletion'
-			} else if (event.target.innerHTML == 'confirm deletion') {
-				hoodie.store.remove(sessionStorage.getItem('_id')).then(function () {
+			if(event.target.innerHTML == 'delete') {
+        event.target.innerHTML = 'confirm deletion'
+      } else if(event.target.innerHTML == 'confirm deletion') {
+          hoodie.store.remove(sessionStorage.getItem('_id')).then(function() {
 					sessionStorage.removeItem("_id")
 					renderItems()
-				})
-			} else if (event.target.innerHTML == 'edit') {
+				  })
+			} else if(event.target.innerHTML == 'edit') {
 				sessionStorage.setItem('edit-mode', true)
 				window.location.replace("/")
 			} else {
@@ -124,10 +124,10 @@ function renderResults(a) {
 		})
 		DOMresults.appendChild(resultNodes[i])
 	}
-	if (DOMresults.innerHTML == '')
+	if(DOMresults.innerHTML == '')
 		DOMresults.innerHTML = '<div id="no-results"><img src="/assets/img/sad-scrap.png"><p>no results</p></div>'
 }
 
 document.querySelector(".filter-dropdown").addEventListener("click", function () {
-	document.querySelector(".search-container").classList.toggle("show")
+  document.querySelector(".search-container").classList.toggle("show")
 })
