@@ -338,10 +338,12 @@ window.onload = function () {
 	if (window.innerWidth <= mobile) { done = false }
 	if (window.innerWidth > mobile) { done = true }
 	mobileAdjust()
+	navRestructure()
 }
 
 window.onresize = function () {
 	mobileAdjust()
+	navRestructure()
 }
 
 function mobileAdjust() {
@@ -362,6 +364,15 @@ function mobileAdjust() {
 		document.querySelector('.expand').style.display = "block"
 
 		done = false
+	}
+}
+function navRestructure() {
+	if (window.innerWidth < 680) {
+		document.querySelector('nav ul:first-child li:last-child a').style.display = 'flex'
+		document.querySelector('nav ul:last-child').style.display = 'none'
+	} else {
+		document.querySelector('nav ul:last-child').style.display = 'block'
+		document.querySelector('nav ul:first-child li:last-child a').style.display = 'none'
 	}
 }
 
