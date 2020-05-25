@@ -68,9 +68,29 @@ hoodie.account.get(['session', 'username'], { local: true })
 var nav = document.querySelector("nav")
 nav.addEventListener("mouseover", function () {
 	if (window.innerWidth > 680)
+		{
 		nav.style.width = nav.querySelector("ul:first-child li:first-child").offsetWidth + "px"
+		}
 })
 nav.addEventListener("mouseleave", function () {
 	if (window.innerWidth > 680)
+		{
 		nav.style.width = ""
+		}
 })
+window.onload = function () { navRestructure() }
+window.onresize = function () { navRestructure() }
+
+
+function navRestructure() {
+	if (window.innerWidth < 680) {
+		document.querySelector('nav ul:first-child li:last-child a').style.display = 'flex'
+		document.querySelector('nav ul:last-child').style.display = 'none'
+	} else {
+		document.querySelector('nav ul:last-child').style.display = 'block'
+		document.querySelector('nav ul:first-child li:last-child a').style.display = 'none'
+	}
+}
+function insertAfter(el, referenceNode) {
+	referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+}

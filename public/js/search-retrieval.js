@@ -7,6 +7,49 @@ let months = ["January", "February", "March", "April", "May", "June",
 let resultsArray = []
 
 renderItems()
+//search & sort
+
+document.querySelector(".filter-dropdown").addEventListener("click", function () {
+	document.querySelector(".search-container").classList.toggle("show")
+})
+
+document.addEventListener('input', function () {narrowSelection()})
+
+function narrowSelection() {
+	let filteredResults = []
+	resultsArray.forEach(entry => {
+		let year = document.getElementById("year-select").options[document.getElementById("year-select").selectedIndex].value
+		let month = document.getElementById("month-select").options[document.getElementById("month-select").selectedIndex].value
+		let day = document.getElementById("day-select").options[document.getElementById("day-select").selectedIndex].value
+		let emojis = document.querySelectorAll('.mood-board ul li input')
+		let tag = document.getElementById("tag-select").options[document.getElementById("tag-select").selectedIndex].value
+		let selectedEmoji = ''
+		emojis.forEach(emoji => {
+			if (emoji.checked)
+				selectedEmoji = emoji.value
+		})
+		if ((entry.year == year || year == '')
+			&& (entry.month == month || month == '')
+			&& (entry.day == day || day == '')
+			&& (entry.selectedEmoji == selectedEmoji || selectedEmoji == '')
+			&& (entry.tags.includes(tag) || tag == ''))
+			filteredResults.push(entry)
+	})
+	document.querySelector(".clear").style.display = 'block'
+	renderResults(filteredResults)
+}
+
+function clearResults() {
+	mood_board_switch.innerHTML = "mood"
+	mood_board_switch.classList.remove('selected')
+	document.querySelectorAll('.mood-board ul li input').forEach(emoji => {
+		emoji.checked = false
+	})
+	document.querySelectorAll('select').forEach(select => {
+		select.options[0].selected = true
+	})
+	renderResults(resultsArray)
+}
 function renderItems() {
 	hoodie.store.findAll().then(list => {
 		resultsArray = [...list]
@@ -14,19 +57,11 @@ function renderItems() {
 		sessionStorage.setItem('avg', getAvgEntryLength(resultsArray))
 		generateSearchConstraints(resultsArray)
 	})
-	document.querySelector(".clear").addEventListener("click", function () {
-		mood_board_switch.innerHTML = "mood"
-		mood_board_switch.classList.remove('selected')
-		document.querySelectorAll('.mood-board ul li input').forEach(emoji => {
-			emoji.checked = false
-		})
-		document.querySelectorAll('select').forEach(select => {
-			select.options[0].selected = true
-		})
-		renderResults(resultsArray)
+	document.querySelector(".clear").addEventListener("click", function() {
+		clearResults()
+		this.style.display = 'none'
 	})
 }
-
 function sortEntries(el) {
 	let fragment = document.createDocumentFragment();
 
@@ -43,43 +78,38 @@ function sortEntries(el) {
 
 function generateSearchConstraints(entries) {
 	let years = []
-	document.querySelector("#year-select").innerHTML = '<option value=""></option>'
+	let tags = []
+	document.querySelector("#year-select").innerHTML = '<option value="">year</option>'
 
 
 	entries.forEach(entry => {
 		if (!years.includes(entry.year)) {
 			years.push(entry.year)
-			const option = document.createElement("option")
-			option.setAttribute('value', entry.year)
-			option.innerHTML = entry.year
-			document.querySelector("#year-select").appendChild(option)
+			const year_option = document.createElement("option")
+
+			year_option.setAttribute('value', entry.year)
+			year_option.innerHTML = entry.year
+
+			document.querySelector("#year-select").appendChild(year_option)
+		}
+		if (entry.tags) {
+			entry.tags.forEach(tag => {
+				if (!tags.includes(tag)) {
+					tags.push(tag)
+					const tag_option = document.createElement("option")
+
+					tag_option.setAttribute('value', tag)
+					if (tag.length > 10)
+						tag_option.innerHTML = tag.substr(0, 23) + '...'
+					else
+						tag_option.innerHTML = tag
+
+					document.querySelector("#tag-select").appendChild(tag_option)
+				}
+			})
 		}
 	})
 }
-
-//search & sort
-document.addEventListener('input', function (event) {
-	let filteredResults = []
-
-	resultsArray.forEach(entry => {
-		let year = document.getElementById("year-select").options[document.getElementById("year-select").selectedIndex].value
-		let month = document.getElementById("month-select").options[document.getElementById("month-select").selectedIndex].value
-		let day = document.getElementById("day-select").options[document.getElementById("day-select").selectedIndex].value
-		let emojis = document.querySelectorAll('.mood-board ul li input')
-		let selectedEmoji = ''
-		emojis.forEach(emoji => {
-			if (emoji.checked)
-				selectedEmoji = emoji.value
-		})
-		if ((entry.year == year || year == '')
-			&& (entry.month == month || month == '')
-			&& (entry.day == day || day == '')
-			&& (entry.selectedEmoji == selectedEmoji || selectedEmoji == ''))
-			filteredResults.push(entry)
-	})
-	renderResults(filteredResults)
-})
-
 function getAvgEntryLength(ar) {
 	let avg = 0
 	let i
@@ -95,11 +125,32 @@ function renderResults(a) {
 	DOMresults.innerHTML = ''
 
 	a.forEach(entry => {
+
+		let tagListFragment = ''
+		if (entry.tags) {
+			entry.tags.forEach(tag => {
+				tagListFragment +=
+					"<li class='tag'><span class='tag-text' tabindex='-1'>#" +
+					tag +
+					"</span><input class='tag-value' type='hidden' value='" +
+					tag +
+					"'></li>"
+			})
+		}
+
 		const item = document.createElement("li")
 		item.setAttribute('data-id', entry._id)
 		item.setAttribute('data-date', entry.year + "-" + entry.month + "-" + entry.day)
-		item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month - 1] + ' ' + entry.day + ', ' + entry.year + '<a class="edit">edit</a><a class="delete">delete</a></h3>' + "<p class=\"entry\">" + entry.entry + "</p></div>"
+		item.innerHTML = '<img src=\"./assets/img/' + entry.selectedEmoji + '.png\"> ' + '<div class=\'search-entry-info\'>' + "<h3>" + months[entry.month - 1] + ' ' + entry.day + ', ' + entry.year + '<a class="edit">edit</a><a class="delete">delete</a></h3>' + "<p class=\"entry\">" + entry.entry + "</p>" + tagListFragment + "</div>"
 		item.classList.add("listEntry")
+
+		let tagList = item.querySelectorAll('.tag')
+		for(var i = 0; i < tagList.length; i++) {
+			tagList[i].addEventListener('click', function (e) {
+				e.preventDefault()
+				narrowSelection()
+			})
+		}
 		//for sorting after
 		resultNodes.push(item)
 	})
@@ -107,6 +158,13 @@ function renderResults(a) {
 	//adding event listeners for entry retrieval
 	for (var i = resultNodes.length - 1; i >= 0; i--) {
 		resultNodes[i].addEventListener("click", function (event) {
+			if (event.target.classList.contains('tag-text')) {
+				clearResults()
+				let tag_select = document.querySelector('#tag-select')
+				tag_select.querySelector("option[value='" + event.target.nextElementSibling.value + "']").selected = true
+				narrowSelection()
+				return
+			}
 			sessionStorage.setItem('_id', this.getAttribute("data-id"))
 			if (event.target.innerHTML == 'delete') {
 				event.target.innerHTML = 'confirm deletion'
@@ -128,6 +186,3 @@ function renderResults(a) {
 		DOMresults.innerHTML = '<div id="no-results"><img src="/assets/img/sad-scrap.png"><p>no results</p></div>'
 }
 
-document.querySelector(".filter-dropdown").addEventListener("click", function () {
-	document.querySelector(".search-container").classList.toggle("show")
-})

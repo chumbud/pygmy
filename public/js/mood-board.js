@@ -9,7 +9,7 @@ fetch('json/emoji.json')
     emojiRoster.forEach(emoji => {
       //creates emoji in list element and adds it to the ul
       const option = document.createElement("li")
-      option.innerHTML = "<input name=\"emoji\" type=\"radio\" value=\"" + emoji.value + "\"/><img src=\"assets/img/" + emoji.value + ".png\">"
+      option.innerHTML = "<input class=\"emoji-option\" name=\"emoji\" type=\"radio\" value=\"" + emoji.value + "\"/><img src=\"assets/img/" + emoji.value + ".png\">"
       mood_board.querySelector("ul").appendChild(option)
     })
   })

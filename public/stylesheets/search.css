@@ -77,6 +77,15 @@ h3 a.delete {
   background-color: var(--primary);
 }
 
+.search-container #day-select {
+  margin-right: 4rem;
+}
+
+.search-container #tag-select option {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .search-entry-info {
   margin-left: 2.4rem;
   min-width: 0;
@@ -94,6 +103,7 @@ h3 a.delete {
 .clear {
   text-align: center;
   cursor: pointer;
+  display: none;
 }
 
 .mood-select {
@@ -134,6 +144,10 @@ h3 a.delete {
 
 .filter-dropdown:hover:after {
   top: 1px;
+}
+
+.listEntry .tag>span {
+  display: block;
 }
 
 @media only screen and (max-width: 680px) {

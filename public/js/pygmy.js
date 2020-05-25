@@ -157,7 +157,6 @@ const getAdjacentEntry = function () {
 //ensure today's entry is actually today
 document.querySelector(".latest-entry").addEventListener("click", function (e) {
 	e.preventDefault()
-	//THIS IS BAD, FIGURE OUT BETTER IMPLEMENTATION
 	hoodie.store.findAll(function (response) {
 		if (response.year == realDate.getFullYear() &&
 			response.month - 1 == realDate.getMonth() &&
@@ -203,6 +202,8 @@ if (sessionStorage.getItem('_id') != null) {
 		}
 	})
 }
+var tagEditor = document.querySelector(".tagEditor")
+var lastTag = document.querySelector("#lastTag")
 
 //retrieves journal entry to be placed in
 function getEntry(response) {
@@ -214,6 +215,12 @@ function getEntry(response) {
 	document.querySelector('h2').setAttribute("data-date", response.year + "/" + response.month + "/" + response.day)
 	document.querySelector('.length-tracker').innerHTML = response.length
 	document.querySelector('.length-tracker').setAttribute('data-length-status', getComment(response.length, sessionStorage.getItem("avg")))
+	
+	if(response.tags) {
+		response.tags.forEach(tag => {
+			addTag(tag)
+		})
+	}
 
 	if (document.querySelector(".prev") != null || document.querySelector(".next") != null) {
 		getAdjacentEntry()
@@ -248,24 +255,29 @@ function openInViewOnly() {
 	})
 }
 
+
 //submission, either new entry or editing
 form.addEventListener("submit", (event) => {
 	event.preventDefault()
 
 	let entry = textarea.value
 	let length = textarea.value.length
-
 	let journalDate = document.querySelector("#date").getAttribute("data-date").split("/")
 	let year = journalDate[0]
 	let month = journalDate[1]
 	let day = journalDate[2]
-
 	let selectedEmoji = ''
-	let emojis = form.querySelectorAll('input')
+	let emojis = form.querySelectorAll('.emoji-option')
+	let tags = []
+
 	emojis.forEach(emoji => {
 		if (emoji.checked)
 			selectedEmoji = emoji.value
 	})
+	form.querySelectorAll('.tag-value').forEach(tag => {
+		tags.push(tag.value)
+	})
+
 	//new session
 	if (currentSession == null) {
 		entry = textarea.value
@@ -278,7 +290,7 @@ form.addEventListener("submit", (event) => {
 		let submittedJournalDate = new Date(document.querySelector("#date").getAttribute("data-date"))
 		if (!entry) return
 		hoodie.store.on("add", function () { window.location.replace("/calendar.html") })
-		hoodie.store.add({ selectedEmoji, entry, length, month, day, year })
+		hoodie.store.add({ selectedEmoji, entry, length, month, day, year, tags })
 
 	} else {
 		//editing session
@@ -289,9 +301,10 @@ form.addEventListener("submit", (event) => {
 			if (emoji.checked)
 				selectedEmoji = emoji.value
 		})
+
 		if (!entry) return
 		hoodie.store.on("update", function () { window.location.replace("/search.html") })
-		hoodie.store.update(currentSession._id, { selectedEmoji, entry, length, month, day, year })
+		hoodie.store.update(currentSession._id, { selectedEmoji, entry, length, month, day, year, tags })
 	}
 	sessionStorage.removeItem("date")
 })
@@ -364,4 +377,65 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function () {
 			this[i].parentElement.removeChild(this[i]);
 		}
 	}
+}
+
+tagEditor.addEventListener("click", function () {
+	lastTag.focus();
+});
+lastTag.addEventListener("keypress", function (event) {
+	if (event.which == "13") event.preventDefault();
+});
+//adds tags
+lastTag.addEventListener("keyup", function (event) {
+	if (event.which == "13" || event.which == "188" || event.which == "51") {
+		//removes ;"''" and extra spaces as well as deliniates using enter, "#", and ","
+		if (this.value.replace(/[, ;"'#]+/g, "") != "") {
+			addTag(this.value);
+		}
+		lastTag.value = "";
+	}
+	//deletes last tag when backspaced, implicitly prompts for confirmation
+	var prevTag = document.querySelector(".tag:nth-last-child(2)");
+	if (event.which == "8" && this.value == "") {
+		if (prevTag.classList.contains("targeted")) {
+			prevTag.remove();
+		} else {
+			prevTag.classList.add("targeted");
+		}
+	}
+});
+//deselects when clicked anywhere else
+document.addEventListener("click", function (event) {
+	var removeTarget = document.querySelector(".targeted");
+
+	if (!event.target.classList.contains("tag-text") && removeTarget) {
+		removeTarget.classList.remove("targeted");
+	}
+});
+//adds tag to tag list with functionality
+function addTag(tag) {
+	let newNode = document.createElement("li");
+	let newValue = tag.replace(/[,;"'#]/g, "");
+
+	newNode.classList.add("tag");
+	newNode.innerHTML =
+		"<span class='tag-text' tabindex='-1'>#" +
+		newValue +
+		"</span><input class='tag-value' type='hidden' value='" +
+		newValue +
+		"'>";
+	//todo figure out why this aint adding the class
+	newNode.addEventListener("click", function (event) {
+		//removes targeted off anything else first
+		var removeTarget = document.querySelector(".targeted");
+		if (!this.classList.contains("targeted") && removeTarget) {
+			removeTarget.classList.remove("targeted");
+			this.classList.add("targeted");
+		} else if (!this.classList.contains("targeted")) {
+			this.classList.add("targeted");
+		} else {
+			this.remove();
+		}
+	});
+	tagEditor.insertBefore(newNode, lastTag.parentElement);
 }
