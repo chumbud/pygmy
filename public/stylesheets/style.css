@@ -1402,7 +1402,7 @@ textarea.focused.expanded+.tagEditor:focus-within {
     height: 100vh;
   }
   .journal-input {
-    margin-bottom: 4rem;
+    margin-bottom: 4.4rem;
   }
   .journal-input textarea.expanded.focused, .journal-input textarea+.input-controls {
     padding: 0 3.6rem;
@@ -1413,6 +1413,9 @@ textarea.focused.expanded+.tagEditor:focus-within {
   }
   .journal-input>.helper-prompt {
     display: none;
+  }
+  .input-controls.focused {
+    margin: 1.6rem;
   }
   .calendar-container .day-header, .calendar-container .days {
     grid-template-columns: auto auto auto auto auto auto auto;
