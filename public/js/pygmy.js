@@ -1,6 +1,6 @@
 const journal_input = document.querySelector('textarea')
 const helper_prompt = document.querySelector('.helper-prompt')
-const input_controls = document.querySelector('.input-controls')
+const footer = document.querySelector('.footer')
 const input_comment = document.querySelector('.comment')
 const sayings = ['short', 'medium', 'typical', 'above average']
 const mobile = 680
@@ -10,10 +10,10 @@ const keyActions = function () {
 		if (journal_input.value.length != 0) {
 			journal_input.classList.add('focused')
 			helper_prompt.classList.add('sendToBottom')
-			input_controls.classList.add('focused')
+			footer.classList.add('focused')
 		} else {
 		}
-		input_controls.querySelector('.length-tracker').innerHTML = journal_input.value.length
+		footer.querySelector('.length-tracker').innerHTML = journal_input.value.length
 		document.querySelector('.length-tracker').setAttribute('data-length-status', getComment(journal_input.value.length, sessionStorage.getItem("avg")))
 	}
 }
@@ -23,9 +23,11 @@ journal_input.addEventListener('click', keyActions())
 const helper_prompt_box = document.getElementsByClassName('helper-prompt-box')[0]
 const showPrompt = function () {
 	helper_prompt.onmousedown = function (e) {
+		helper_prompt.style.display = 'none'
 		helper_prompt_box.classList.toggle('open')
 	}
 	document.getElementsByClassName('exit')[0].onmousedown = function (e) {
+		helper_prompt.style.display = 'block'
 		helper_prompt_box.classList.toggle('open')
 	}
 }
@@ -38,9 +40,11 @@ const expand_switch = document.getElementsByClassName('expand')[0]
 expand_switch.addEventListener('click', function () {
 	if (!journal_input.classList.contains('expanded')) {
 		journal_input.classList.toggle('expanded')
+		helper_prompt.classList.toggle('sendToBottom')
 		expand_switch.innerHTML = 'minimize'
 	} else {
 		journal_input.classList.toggle('expanded')
+		helper_prompt.classList.toggle('sendToBottom')
 		expand_switch.innerHTML = 'expand'
 	}
 })
@@ -178,7 +182,7 @@ if (sessionStorage.getItem('_id') != null) {
 		if (sessionStorage.getItem("edit-mode") == null) {
 			openInViewOnly()
 		} else {
-			document.querySelector('.input-controls').classList.add('focused')
+			document.querySelector('.footer').classList.add('focused')
 		}
 
 		sessionStorage.removeItem("edit-mode")
@@ -243,10 +247,10 @@ function openInViewOnly() {
 	document.querySelector('h2 a.edit').addEventListener("click", function () {
 		form.classList.toggle("read-only")
 		if (this.innerHTML == "edit") {
-			document.querySelector('.input-controls').classList.add('focused')
+			document.querySelector('.footer').classList.add('focused')
 			this.innerHTML = "cancel"
 		} else {
-			document.querySelector('.input-controls').classList.remove('focused')
+			document.querySelector('.footer').classList.remove('focused')
 			this.innerHTML = "edit"
 		}
 		document.querySelector('.expand').style.display = "none"
@@ -354,6 +358,8 @@ function mobileAdjust() {
 		document.querySelector('.expand').style.display = "none"
 		textarea.classList.add('focused')
 		textarea.classList.add('expanded')
+		helper_prompt.classList.remove('sendToBottom')
+
 
 		done = true
 	} else if (window.innerWidth > mobile && done) {
