@@ -32,7 +32,7 @@ function narrowSelection() {
 			&& (entry.month == month || month == '')
 			&& (entry.day == day || day == '')
 			&& (entry.selectedEmoji == selectedEmoji || selectedEmoji == '')
-			&& (entry.tags.includes(tag) || tag == ''))
+			&& ((entry.tags && entry.tags.includes(tag)) || tag == ''))
 			filteredResults.push(entry)
 	})
 	document.querySelector(".clear").style.display = 'block'
